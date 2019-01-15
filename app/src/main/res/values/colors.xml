@@ -11,4 +11,6 @@
 
     <color name="colorText">#717171</color>
     <color name="colorTextLink">#92C3FC</color>
+
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
