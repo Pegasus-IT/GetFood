@@ -7,10 +7,11 @@ import android.view.Menu;
 import android.view.View;
 
 import getfood.io.R;
-import getfood.io.ui.createlist.CreateListActivity;
+import getfood.io.models.ShoppingList;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
+    private ShoppingList selectedShoppingList;
     private Toolbar toolbar;
 
     @Override
@@ -18,9 +19,11 @@ public class ShoppingListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list);
 
+        selectedShoppingList = (ShoppingList) getIntent().getSerializableExtra("selectedShoppingListItem");
+
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Feest");
-        toolbar.setSubtitle("Created on 15 Jan");
+        toolbar.setTitle(selectedShoppingList.getListName());
+        toolbar.setSubtitle(selectedShoppingList.getDate());
         toolbar.setNavigationIcon(R.drawable.ic_arrow_left);
         toolbar.setTitleTextAppearance(this, R.style.ToolbarTextAppearance_Title_White);
         toolbar.setSubtitleTextAppearance(this, R.style.ToolbarTextAppearance_Subtitle_White);
