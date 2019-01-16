@@ -17,29 +17,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.home.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.HOME" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".ui.shoppinglist.ShoppingListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SHOPPINGLIST" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".ui.createlist.CreateListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.CREATELIST" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity android:name=".ui.shoppinglist.ShoppingListActivity"></activity>
+        <activity android:name=".ui.createlist.CreateListActivity"></activity>
     </application>
 
 </manifest>

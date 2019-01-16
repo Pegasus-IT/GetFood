@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/getfood_main_blue">
 
     <include
         layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/default_card" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/shopping_list_create_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="false"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/ic_add_black_24dp"
+        android:tint="@color/colorWhite"
+        app:backgroundTint="@color/colorBlack" />
 
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/shopping_list_camera_fab"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="false"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="110dp"
+        android:src="@drawable/ic_camera_18"
+        android:tint="@color/colorWhite"
+        app:backgroundTint="@color/colorBlack" />
+
+</RelativeLayout>
