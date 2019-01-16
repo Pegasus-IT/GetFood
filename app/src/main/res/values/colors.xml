@@ -13,4 +13,7 @@
     <color name="colorTextLink">#92C3FC</color>
 
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000</color>
+
+    <color name="getfood_main_blue">#427CFB</color>
 </resources>

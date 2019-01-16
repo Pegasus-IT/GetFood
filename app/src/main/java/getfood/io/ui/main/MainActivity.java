@@ -1,5 +1,6 @@
 package getfood.io.ui.main;
 
+import android.content.Intent;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 
 import getfood.io.R;
+import getfood.io.ui.home.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
