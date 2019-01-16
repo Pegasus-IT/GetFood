@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/shopping_list_menu_action_edit"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="@string/shopping_list_edit_menu_button"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/shopping_list_menu_action_delete"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="@string/shopping_list_remove_menu_button"
+        android:visible="true" />
+
+</menu>

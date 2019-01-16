@@ -5,4 +5,12 @@
     <string name="home">Home</string>
     <string name="add_list">Add list</string>
     <string name="account">Account</string>
+
+    <string name="home_title">My Lists</string>
+    
+    <string name="shopping_list_edit_menu_button">Edit</string>
+    <string name="shopping_list_remove_menu_button">Delete</string>
+
+    <string name="create_list_title">Create list</string>
+
 </resources>
