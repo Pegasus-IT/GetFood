@@ -46,6 +46,9 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
         TextView dateText = listItem.findViewById(R.id.text_home_list_date);
         dateText.setText(shoppingList.getDate());
 
+        TextView itemCountText = listItem.findViewById(R.id.text_home_list_count);
+        itemCountText.setText(shoppingList.getCount());
+
         ((GradientDrawable) background.mutate()).setColor(shoppingList.getColor());
 
         return listItem;
