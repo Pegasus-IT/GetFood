@@ -55,12 +55,12 @@ public class HomeActivity extends AppCompatActivity {
 
         //TODO: Replace with real data
         ArrayList<ShoppingList> shoppingList = new ArrayList<>();
-        shoppingList.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB")));
-        shoppingList.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157")));
-        shoppingList.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00")));
-        shoppingList.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB")));
-        shoppingList.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157")));
-        shoppingList.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00")));
+        shoppingList.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 8, 2));
+        shoppingList.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 18, 6));
+        shoppingList.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 3, 1));
+        shoppingList.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 12, 7));
+        shoppingList.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 9, 4));
+        shoppingList.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 22, 16));
 
 
         homeListAdapter = new HomeListAdapter(this, shoppingList);
