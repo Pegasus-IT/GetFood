@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,8 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import getfood.io.R;
@@ -30,11 +31,16 @@ public class HomeActivity extends AppCompatActivity {
     private ListView listView;
     private HomeListAdapter homeListAdapter;
 
+    public DrawerLayout menuDrawerLayout;
+    public RelativeLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        menuDrawerLayout = findViewById(R.id.home_drawer_layout);
+        drawerLayout = findViewById(R.id.left_menu_drawer);
         createListButton = findViewById(R.id.home_create_list_fab);
         toolbar = findViewById(R.id.toolbar);
         listView = findViewById(R.id.home_listview);
@@ -81,6 +87,13 @@ public class HomeActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMenu();
+            }
+        });
     }
 
     @Override
@@ -101,9 +114,27 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if(menuDrawerLayout.isDrawerOpen(drawerLayout)) {
+            menuDrawerLayout.closeDrawer(drawerLayout);
+            return;
+        }
+
+        super.onBackPressed();
+    }
+
+    private void openMenu() {
+        if(menuDrawerLayout.isDrawerOpen(drawerLayout)) {
+            menuDrawerLayout.closeDrawer(drawerLayout);
+        } else {
+            menuDrawerLayout.openDrawer(drawerLayout);
+        }
+    }
+
     private void openShoppingListItem(ShoppingList item) {
         Intent intent = new Intent(HomeActivity.this, ShoppingListActivity.class);
-        intent.putExtra("selectedShoppingListItem", (Serializable) item);
+        intent.putExtra("selectedShoppingListItem", item);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
