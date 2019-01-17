@@ -8,8 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
-
     <style name="MainToolbar">
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
     </style>

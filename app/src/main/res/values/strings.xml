@@ -14,5 +14,8 @@
     <string name="shopping_list_remove_menu_button">Delete</string>
 
     <string name="create_list_title">Create list</string>
+    <string name="login_title">Login</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
 
 </resources>

@@ -9,8 +9,9 @@
     <color name="colorDefaultIcon">#CCCCCC</color>
     <color name="colorBorders">#F8F8F8</color>
 
-    <color name="colorText">#717171</color>
+    <color name="colorText">#080808</color>
     <color name="colorTextLink">#92C3FC</color>
+    <color name="colorTextDark">#313A4B</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000</color>

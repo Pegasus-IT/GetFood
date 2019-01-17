@@ -19,6 +19,7 @@ import getfood.io.R;
 import getfood.io.adapters.HomeListAdapter;
 import getfood.io.models.ShoppingList;
 import getfood.io.ui.createlist.CreateListActivity;
+import getfood.io.ui.login.LoginActivity;
 import getfood.io.ui.shoppinglist.ShoppingListActivity;
 
 public class HomeActivity extends AppCompatActivity {
@@ -73,6 +74,11 @@ public class HomeActivity extends AppCompatActivity {
                 openShoppingListItem(selectedShoppingList);
             }
         });
+
+
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         setSupportActionBar(toolbar);
     }
