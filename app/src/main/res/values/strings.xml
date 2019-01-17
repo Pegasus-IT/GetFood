@@ -4,7 +4,7 @@
     <!--Navigation-->
     <string name="home">Home</string>
     <string name="add_list">Add list</string>
-    <string name="account">Account</string>
+    <string name="profile">Profile</string>
     <string name="family">Family</string>
     <string name="logout">Logout</string>
 
@@ -27,5 +27,5 @@
     <string name="login_last_name">Lastname</string>
     <string name="login_register">Register</string>
     <string name="login_to_title">To Login</string>
-
+    <string name="profile_update_account">Update account</string>
 </resources>
