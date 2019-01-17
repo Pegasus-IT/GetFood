@@ -5,6 +5,8 @@
     <string name="home">Home</string>
     <string name="add_list">Add list</string>
     <string name="account">Account</string>
+    <string name="family">Family</string>
+    <string name="logout">Logout</string>
 
     <string name="home_title">My Lists</string>
     <string name="home_list_item_date">Created on</string>
