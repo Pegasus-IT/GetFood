@@ -15,14 +15,23 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import getfood.io.R;
 import getfood.io.adapters.HomeListAdapter;
+import getfood.io.data.network.ApiCallback;
+import getfood.io.data.network.ApiClient;
+import getfood.io.data.network.ApiException;
+import getfood.io.data.network.api.UserControllerApi;
 import getfood.io.models.ShoppingList;
+import getfood.io.models.User;
+import getfood.io.models.UserCreateModel;
 import getfood.io.ui.createlist.CreateListActivity;
 import getfood.io.ui.login.LoginActivity;
 import getfood.io.ui.shoppinglist.ShoppingListActivity;
 import getfood.io.ui.sign_up.SignUpActivity;
+import getfood.io.util.PreferenceHelper;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -82,10 +91,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-//        Intent intent = new Intent(HomeActivity.this, SignUpActivity.class);
-//        startActivity(intent);
-//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
 
         setSupportActionBar(toolbar);
 

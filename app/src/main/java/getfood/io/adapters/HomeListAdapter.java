@@ -35,7 +35,7 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
         View listItem = itemView;
 
         if(listItem == null)
-            listItem = LayoutInflater.from(context).inflate(R.layout.item_home_list, parent,false);
+            listItem = LayoutInflater.from(context).inflate(R.layout.item_home_list, parent, false);
 
         ShoppingList shoppingList = shoppingLists.get(position);
         Drawable background = listItem.getBackground();
@@ -50,6 +50,11 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
         itemCountText.setText(shoppingList.getCount());
 
         ((GradientDrawable) background.mutate()).setColor(shoppingList.getColor());
+
+
+
+//        if(listItem == null)
+//            listItem = LayoutInflater.from(context).inflate(R.layout.item_shopping_list, parent,false);
 
         return listItem;
     }
