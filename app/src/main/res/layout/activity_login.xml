@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="40dp"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/username-text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:labelFor="@id/username"
+            android:text="@string/login_username"
+            android:textColor="@color/colorWhite" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:background="@drawable/default_card"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="15dp" />
+
+        <TextView
+            android:id="@+id/password-text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:labelFor="@id/password"
+            android:text="@string/login_password"
+            android:textColor="@color/colorWhite" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:background="@drawable/default_card"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingHorizontal="15dp" />
+
+        <Button
+            android:layout_gravity="center"
+            android:background="@drawable/default_card_25"
+            android:text="@string/login_title"
+            android:textColor="@color/colorTextDark"
+            android:textAllCaps="false"
+            android:layout_marginTop="35dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+</LinearLayout>
