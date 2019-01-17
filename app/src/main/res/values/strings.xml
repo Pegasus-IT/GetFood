@@ -17,7 +17,15 @@
 
     <string name="create_list_title">Create list</string>
     <string name="login_title">Login</string>
-    <string name="login_username">Username</string>
+    <string name="login_username">Email</string>
     <string name="login_password">Password</string>
+    <string name="logo">Logo</string>
+    <string name="login_welcome">Welcome to GetFood!</string>
+    <string name="login_punchline">\"Getting food should be simple\"</string>
+    <string name="login_sign_up">No account? Sign up!</string>
+    <string name="login_first_name">Firstname</string>
+    <string name="login_last_name">Lastname</string>
+    <string name="login_register">Register</string>
+    <string name="login_to_title">To Login</string>
 
 </resources>
