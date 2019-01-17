@@ -21,6 +21,10 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         selectedShoppingList = (ShoppingList) getIntent().getSerializableExtra("selectedShoppingListItem");
 
+        // Set view background base on Color
+        View view = findViewById(R.id.shopping_list_container);
+        view.setBackgroundColor(selectedShoppingList.getColor());
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(selectedShoppingList.getListName());
         toolbar.setSubtitle(selectedShoppingList.getDate());
