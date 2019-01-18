@@ -157,12 +157,8 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onSuccessWithManualPassword(@NotNull String password) {
-                try {
-                    passwordInput.setText(password);
-                    login(usernameInput.getText().toString(), password);
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
+                passwordInput.setText(password);
+                login(usernameInput.getText().toString(), password);
             }
 
             @Override
