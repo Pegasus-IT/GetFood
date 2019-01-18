@@ -17,6 +17,7 @@ import com.squareup.okhttp.internal.http.HttpMethod;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 
+import getfood.io.data.local.Globals;
 import getfood.io.ui.main.MainActivity;
 import getfood.io.util.PreferenceHelper;
 import okio.BufferedSink;
@@ -54,7 +55,7 @@ import getfood.io.data.network.auth.OAuth;
 
 public class ApiClient {
 
-    private String basePath = "https://api.getfood.io";
+    private String basePath = Globals.API_BASEURL;
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
@@ -90,10 +91,10 @@ public class ApiClient {
         // Set default User-Agent.
         setUserAgent("Swagger-Codegen/1.0.0/java");
 
-        authentications = new HashMap<String, Authentication>();
+        authentications = new HashMap<>();
         auth = new ApiKeyAuth("header", "X-User-Token");
 
-        auth.setApiKey(PreferenceHelper.read(MainActivity.getAppContext(), "utoken"));
+        auth.setApiKey(PreferenceHelper.read(MainActivity.getAppContext(), Globals.PrefKeys.UTOKEN, "nil"));
         authentications.put("token", auth);
 
         authentications = Collections.unmodifiableMap(authentications);

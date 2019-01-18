@@ -1,5 +1,7 @@
 <resources>
+    <!-- General -->
     <string name="app_name">GetFood</string>
+    <string name="logo">Logo</string>
 
     <!--Navigation-->
     <string name="home">Home</string>
@@ -8,18 +10,10 @@
     <string name="family">Family</string>
     <string name="logout">Logout</string>
 
-    <string name="home_title">My Lists</string>
-    <string name="home_list_item_date">Created on</string>
-    <string name="home_list_item_sharing_message">You are not sharing this list.</string>
-
-    <string name="shopping_list_edit_menu_button">Edit</string>
-    <string name="shopping_list_remove_menu_button">Delete</string>
-
-    <string name="create_list_title">Create list</string>
+    <!-- Login Page -->
     <string name="login_title">Login</string>
     <string name="login_username">Email</string>
     <string name="login_password">Password</string>
-    <string name="logo">Logo</string>
     <string name="login_welcome">Welcome to GetFood!</string>
     <string name="login_punchline">\"Getting food should be simple\"</string>
     <string name="login_sign_up">No account? Sign up!</string>
@@ -27,6 +21,22 @@
     <string name="login_last_name">Lastname</string>
     <string name="login_register">Register</string>
     <string name="login_to_title">To Login</string>
+
+    <!-- Home Page -->
+    <string name="home_title">My Lists</string>
+    <string name="home_list_item_date">Created on</string>
+    <string name="home_list_item_sharing_message">You are not sharing this list.</string>
+
+    <!-- Shoppping List Page -->
+    <string name="shopping_list_title">My Shopping List</string>
+    <string name="shopping_list_edit_menu_button">Edit</string>
+    <string name="shopping_list_remove_menu_button">Delete</string>
+
+    <!-- Create List Page -->
+    <string name="create_list_title">Create list</string>
+
+    <!-- Profile  Page -->
     <string name="profile_update_account">Update account</string>
     <string name="profile_delete_account">Done with GetFood? Delete your account!</string>
+
 </resources>
