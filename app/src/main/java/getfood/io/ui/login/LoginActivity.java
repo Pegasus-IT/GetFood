@@ -66,7 +66,6 @@ public class LoginActivity extends BaseActivity {
         usernameInput.setText(PreferenceHelper.read(this, Globals.PrefKeys.LOGIN_USERNAME, ""));
         fingerprintButton.setEnabled(false);
 
-        loginButton.setEnabled(false);
         usernameInput.addTextChangedListener(requiredTextWatcher);
         passwordInput.addTextChangedListener(requiredTextWatcher);
 
