@@ -2,10 +2,16 @@ package getfood.io.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.jesusm.kfingerprintmanager.KFingerprintManager;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +32,7 @@ public class LoginActivity extends BaseActivity {
 
     private EditText usernameInput, passwordInput;
     private Button loginButton;
+    private ImageButton fingerprintButton;
     private TextView signupText;
 
     private UserControllerApi api;
@@ -38,9 +45,12 @@ public class LoginActivity extends BaseActivity {
         passwordInput = findViewById(R.id.password);
         loginButton = findViewById(R.id.button_login);
         signupText = findViewById(R.id.no_account);
+        fingerprintButton = findViewById(R.id.button_fingerprint);
+
+        usernameInput.setText(PreferenceHelper.read(this, Globals.PrefKeys.LOGIN_USERNAME, ""));
+        fingerprintButton.setEnabled(false);
 
         api = new UserControllerApi();
-
         loginButton.setOnClickListener((View v) -> {
             try {
                 login(usernameInput.getText().toString(), passwordInput.getText().toString());
@@ -49,6 +59,13 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
+        if(PreferenceHelper.read(this, Globals.PrefKeys.LOGIN_STATUS, false)) {
+            fingerprintButton.setAlpha(1f);
+            fingerprintButton.setEnabled(true);
+            showFingerAuth();
+        }
+
+        fingerprintButton.setOnClickListener(view -> showFingerAuth());
         signupText.setOnClickListener(view -> openAcitivity(new Intent(this, SignUpActivity.class), true));
     }
 
@@ -90,6 +107,7 @@ public class LoginActivity extends BaseActivity {
 
                 PreferenceHelper.save(LoginActivity.this, Globals.PrefKeys.UTOKEN, result.getToken());
                 PreferenceHelper.save(LoginActivity.this, Globals.PrefKeys.LOGIN_STATUS, true);
+                PreferenceHelper.save(LoginActivity.this, Globals.PrefKeys.LOGIN_USERNAME, request.getEmail());
 
                 openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
@@ -104,5 +122,40 @@ public class LoginActivity extends BaseActivity {
                 System.out.println("download");
             }
         });
+    }
+
+    private void showFingerAuth() {
+        createFingerprintManagerInstance().authenticate(new KFingerprintManager.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationSuccess() {
+                openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
+            }
+
+            @Override
+            public void onSuccessWithManualPassword(@NotNull String password) {
+                try {
+                    passwordInput.setText(password);
+                    login(usernameInput.getText().toString(), password);
+                } catch (ApiException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFingerprintNotRecognized() { }
+
+            @Override
+            public void onAuthenticationFailedWithHelp(@Nullable String help) { }
+
+            @Override
+            public void onFingerprintNotAvailable() { }
+
+            @Override
+            public void onCancelled() { }
+        }, getSupportFragmentManager());
+    }
+
+    private KFingerprintManager createFingerprintManagerInstance() {
+        return new KFingerprintManager(this, Globals.BIOMETRIC_KEY);
     }
 }
