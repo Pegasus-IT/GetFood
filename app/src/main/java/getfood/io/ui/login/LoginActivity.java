@@ -71,13 +71,7 @@ public class LoginActivity extends BaseActivity {
         passwordInput.addTextChangedListener(requiredTextWatcher);
 
         api = new UserControllerApi();
-        loginButton.setOnClickListener((View v) -> {
-            try {
-                login(usernameInput.getText().toString(), passwordInput.getText().toString());
-            } catch (ApiException e) {
-                e.printStackTrace();
-            }
-        });
+        loginButton.setOnClickListener((View v) -> login(usernameInput.getText().toString(), passwordInput.getText().toString()));
 
         if (PreferenceHelper.read(this, Globals.PrefKeys.LOGIN_STATUS, false)) {
             fingerprintButton.setAlpha(1f);
@@ -115,7 +109,7 @@ public class LoginActivity extends BaseActivity {
         return 0;
     }
 
-    private void login(String username, String password) throws ApiException {
+    private void login(String username, String password) {
         UserAuthenticationRequest request = new UserAuthenticationRequest();
         request.setEmail(username);
         request.setPassword(password);
