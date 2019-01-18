@@ -11,12 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 import getfood.io.R;
+import getfood.io.data.local.Globals;
 import getfood.io.data.network.ApiCallback;
 import getfood.io.data.network.ApiException;
 import getfood.io.data.network.api.UserControllerApi;
 import getfood.io.models.User;
 import getfood.io.models.UserAuthenticationRequest;
 import getfood.io.ui.BaseActivity;
+import getfood.io.ui.home.HomeActivity;
 import getfood.io.ui.sign_up.SignUpActivity;
 import getfood.io.util.PreferenceHelper;
 
@@ -86,7 +88,10 @@ public class LoginActivity extends BaseActivity {
                 System.out.println("Loggin Success!");
                 System.out.println("Token: " + result.getToken());
 
-                PreferenceHelper.save(LoginActivity.this, "utoken", result.getToken());
+                PreferenceHelper.save(LoginActivity.this, Globals.PrefKeys.UTOKEN, result.getToken());
+                PreferenceHelper.save(LoginActivity.this, Globals.PrefKeys.LOGIN_STATUS, true);
+
+                openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
 
             @Override
