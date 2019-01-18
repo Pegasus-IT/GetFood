@@ -58,11 +58,6 @@ public class HomeActivity extends BaseActivity {
             ShoppingList selectedShoppingList = (ShoppingList) adapterView.getItemAtPosition(i);
             openShoppingListItem(selectedShoppingList);
         });
-
-        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finish();
     }
 
     @Override
