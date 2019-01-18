@@ -38,5 +38,7 @@
     <!-- Profile  Page -->
     <string name="profile_update_account">Update account</string>
     <string name="profile_delete_account">Done with GetFood? Delete your account!</string>
+    <string name="family_members">Members</string>
+    <string name="family_leave">Don’t enjoy being in this family? Leave it!</string>
 
 </resources>

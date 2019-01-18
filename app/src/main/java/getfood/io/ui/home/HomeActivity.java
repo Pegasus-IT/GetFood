@@ -14,7 +14,6 @@ import getfood.io.adapters.HomeListAdapter;
 import getfood.io.models.ShoppingList;
 import getfood.io.ui.BaseActivity;
 import getfood.io.ui.createlist.CreateListActivity;
-import getfood.io.ui.login.LoginActivity;
 import getfood.io.ui.shoppinglist.ShoppingListActivity;
 
 public class HomeActivity extends BaseActivity {
