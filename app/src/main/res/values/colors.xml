@@ -15,6 +15,7 @@
     <color name="colorTextDark">#313A4B</color>
 
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteOpacity">#99FFFFFF</color>
     <color name="colorBlack">#000</color>
 
     <color name="getfood_main_blue">#427CFB</color>
