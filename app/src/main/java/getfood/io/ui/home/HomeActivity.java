@@ -4,66 +4,36 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import getfood.io.R;
 import getfood.io.adapters.HomeListAdapter;
-import getfood.io.data.network.ApiCallback;
-import getfood.io.data.network.ApiClient;
-import getfood.io.data.network.ApiException;
-import getfood.io.data.network.api.UserControllerApi;
 import getfood.io.models.ShoppingList;
-import getfood.io.models.User;
-import getfood.io.models.UserCreateModel;
+import getfood.io.ui.BaseActivity;
 import getfood.io.ui.createlist.CreateListActivity;
-import getfood.io.ui.login.LoginActivity;
 import getfood.io.ui.shoppinglist.ShoppingListActivity;
-import getfood.io.ui.sign_up.SignUpActivity;
-import getfood.io.util.PreferenceHelper;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
-    private Toolbar toolbar;
     private FloatingActionButton createListButton;
 
     private ListView listView;
     private HomeListAdapter homeListAdapter;
 
-    public DrawerLayout menuDrawerLayout;
-    public RelativeLayout drawerLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
 
-        menuDrawerLayout = findViewById(R.id.home_drawer_layout);
-        drawerLayout = findViewById(R.id.left_menu_drawer);
         createListButton = findViewById(R.id.home_create_list_fab);
-        toolbar = findViewById(R.id.toolbar);
         listView = findViewById(R.id.home_listview);
 
-        toolbar.setTitle(R.string.home_title);
         toolbar.setNavigationIcon(R.drawable.ic_menu_34);
 
-        createListButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, CreateListActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
+        createListButton.setOnClickListener(v -> {
+            openAcitivity(new Intent(HomeActivity.this, CreateListActivity.class), true);
         });
 
         View topPadding = new View(this);
@@ -83,69 +53,36 @@ public class HomeActivity extends AppCompatActivity {
         homeListAdapter = new HomeListAdapter(this, shoppingList);
         listView.setAdapter(homeListAdapter);
         listView.addHeaderView(topPadding);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ShoppingList selectedShoppingList = (ShoppingList) adapterView.getItemAtPosition(i);
-                openShoppingListItem(selectedShoppingList);
-            }
-        });
-
-        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finish();
-
-        setSupportActionBar(toolbar);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMenu();
-            }
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            ShoppingList selectedShoppingList = (ShoppingList) adapterView.getItemAtPosition(i);
+            openShoppingListItem(selectedShoppingList);
         });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_home_menu, menu);
-        return true;
+    protected int getLayoutResourceId() {
+        return R.layout.activity_home;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.home_menu_action_search:
-                Intent intent = new Intent(HomeActivity.this, ShoppingListActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                break;
-        }
-        return true;
+    protected int getToolbarTitle() {
+        return R.string.home_title;
     }
 
     @Override
-    public void onBackPressed() {
-        if(menuDrawerLayout.isDrawerOpen(drawerLayout)) {
-            menuDrawerLayout.closeDrawer(drawerLayout);
-            return;
-        }
-
-        super.onBackPressed();
+    protected int getToolbarNavigationIcon() {
+        return R.drawable.ic_menu_34;
     }
 
-    private void openMenu() {
-        if(menuDrawerLayout.isDrawerOpen(drawerLayout)) {
-            menuDrawerLayout.closeDrawer(drawerLayout);
-        } else {
-            menuDrawerLayout.openDrawer(drawerLayout);
-        }
+    @Override
+    protected int getOptionsMenu() {
+        return R.menu.toolbar_home_menu;
     }
+
 
     private void openShoppingListItem(ShoppingList item) {
         Intent intent = new Intent(HomeActivity.this, ShoppingListActivity.class);
         intent.putExtra("selectedShoppingListItem", item);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        openAcitivity(intent, true);
     }
 }
