@@ -17,6 +17,7 @@ import com.jesusm.kfingerprintmanager.KFingerprintManager;
 import org.jetbrains.annotations.NotNull;
 
 import getfood.io.R;
+import getfood.io.adapters.HomeListAdapter;
 import getfood.io.data.local.Globals;
 import getfood.io.data.network.ApiException;
 import getfood.io.data.network.api.UserControllerApi;
@@ -71,6 +72,7 @@ public class LoginActivity extends BaseActivity {
 
         api = new UserControllerApi();
         loginButton.setOnClickListener((View v) -> login(usernameInput.getText().toString(), passwordInput.getText().toString()));
+        loginButton.setEnabled(false);
 
         if (PreferenceHelper.read(this, Globals.PrefKeys.LOGIN_STATUS, false)) {
             fingerprintButton.setAlpha(1f);
@@ -117,9 +119,10 @@ public class LoginActivity extends BaseActivity {
             try {
                 this.onLogin(api.userControllerAuthenticate(request));
             } catch (ApiException err) {
+                System.out.println(err.getResponseBody());
                 this.onError(err);
             }
-        });
+        }).start();
     }
 
     private void showSnackbar(String text, int color) {
@@ -145,6 +148,7 @@ public class LoginActivity extends BaseActivity {
         PreferenceHelper.save(LoginActivity.this, Globals.PrefKeys.LOGIN_STATUS, true);
         PreferenceHelper.save(LoginActivity.this, Globals.PrefKeys.LOGIN_USERNAME, userControllerAuthenticate.getEmail());
         System.out.println(userControllerAuthenticate);
+        openAcitivity(new Intent(this, HomeActivity.class), true);
     }
 
     private void showFingerAuth() {
