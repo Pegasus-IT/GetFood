@@ -16,7 +16,6 @@ import java.util.List;
 import getfood.io.R;
 import getfood.io.models.ShoppingList;
 
-
 public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
 
     private Context context;
