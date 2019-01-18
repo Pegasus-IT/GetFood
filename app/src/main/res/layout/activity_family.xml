@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/getfood_background"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/family-name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="John Doe"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="35dp">
+
+            <TextView
+                android:id="@+id/profile-username-text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/family_members"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="@drawable/default_card"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/family-user-initials-block"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/initials_circle_medium"
+                        android:elevation="4dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="JD"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/family-username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="John"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/leave-family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/family_leave"
+                android:textColor="@color/colorText" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/sidemenu" />
+
+</android.support.v4.widget.DrawerLayout>
