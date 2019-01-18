@@ -1,22 +1,23 @@
 package getfood.io.ui.login;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.List;
-import java.util.Map;
+import com.google.gson.Gson;
 
 import getfood.io.R;
-import getfood.io.data.network.ApiCallback;
 import getfood.io.data.network.ApiException;
 import getfood.io.data.network.api.UserControllerApi;
+import getfood.io.models.SwaggerApiError;
 import getfood.io.models.User;
 import getfood.io.models.UserAuthenticationRequest;
-import getfood.io.models.UserCreateModel;
 import getfood.io.util.PreferenceHelper;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,6 +25,21 @@ public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText usernameInput, passwordInput;
     private Button loginButton;
+    private TextWatcher requiredTextWatcher = new TextWatcher() {
+        @Override
+        public void afterTextChanged(Editable s) {}
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start,
+                                      int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start,
+                                  int before, int count) {
+            loginButton.setEnabled(usernameInput.getText().length() != 0 && passwordInput.getText().length() != 0);
+        }
+    };
 
     private UserControllerApi api;
 
@@ -38,14 +54,16 @@ public class LoginActivity extends AppCompatActivity {
 
         api = new UserControllerApi();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    login(usernameInput.getText().toString(), passwordInput.getText().toString());
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
+        loginButton.setEnabled(false);
+        usernameInput.addTextChangedListener(requiredTextWatcher);
+        passwordInput.addTextChangedListener(requiredTextWatcher);
+
+        loginButton.setOnClickListener(clickEvent -> {
+            try {
+                login(usernameInput.getText().toString(), passwordInput.getText().toString());
+            } catch (ApiException e) {
+
+                e.printStackTrace();
             }
         });
     }
@@ -63,30 +81,32 @@ public class LoginActivity extends AppCompatActivity {
 
         System.out.println(username);
         System.out.println(password);
-
-        api.userControllerAuthenticateAsync(request, new ApiCallback<User>() {
-            @Override
-            public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
-                System.out.println(e.getResponseBody());
+        new Thread(() -> {
+            try {
+                this.onLogin(api.userControllerAuthenticate(request));
+            } catch(ApiException err) {
+                this.onError(err);
             }
+        }).start();
+    }
 
-            @Override
-            public void onSuccess(User result, int statusCode, Map<String, List<String>> responseHeaders) {
-                System.out.println("Loggin Success!");
-                System.out.println("Token: " + result.getToken());
+    public void showToast(String text, int color) {
+        View parentLayout = findViewById(android.R.id.content);
+        Snackbar.make(parentLayout, text, Snackbar.LENGTH_LONG)
+                .setAction("CLOSE", view -> {
 
-                PreferenceHelper.save(LoginActivity.this, "utoken", result.getToken());
-            }
+                })
+                .setActionTextColor(getResources().getColor(color))
+                .show();
+    }
 
-            @Override
-            public void onUploadProgress(long bytesWritten, long contentLength, boolean done) {
-                System.out.println("upload");
-            }
+    private void onError(ApiException err) {
+        SwaggerApiError swaggerApiError = SwaggerApiError.parse(err.getResponseBody());
+        this.showToast(swaggerApiError.getMessage(), android.R.color.holo_red_dark);
+    }
 
-            @Override
-            public void onDownloadProgress(long bytesRead, long contentLength, boolean done) {
-                System.out.println("download");
-            }
-        });
+    private void onLogin(User userControllerAuthenticate) {
+        PreferenceHelper.save(LoginActivity.this, "utoken", userControllerAuthenticate.getToken());
+        System.out.println(userControllerAuthenticate);
     }
 }
