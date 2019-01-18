@@ -40,5 +40,12 @@
     <string name="profile_delete_account">Done with GetFood? Delete your account!</string>
     <string name="family_members">Members</string>
     <string name="family_leave">Don’t enjoy being in this family? Leave it!</string>
+    <string name="not_ready_yet_go_back_to_login">Not ready yet? Go back to Login!</string>
+    <string name="getting_started_title">Let\'s get started!</string>
+    <string name="getting_started_punchline">\"Join a family or create one\"</string>
+    <string name="getting_started_or">Or</string>
+    <string name="getting_started_create_family">Create Family</string>
+    <string name="getting_started_join_family">Join family</string>
+    <string name="description_camera">Camera</string>
 
 </resources>
