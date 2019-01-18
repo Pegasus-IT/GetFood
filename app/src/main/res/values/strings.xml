@@ -47,5 +47,7 @@
     <string name="getting_started_create_family">Create Family</string>
     <string name="getting_started_join_family">Join family</string>
     <string name="description_camera">Camera</string>
+    <string name="general_title">Title</string>
+    <string name="create_list_prompt">Enter your recipe title:</string>
 
 </resources>
