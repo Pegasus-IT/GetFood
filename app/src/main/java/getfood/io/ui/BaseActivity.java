@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import getfood.io.R;
-import getfood.io.ui.createlist.CreateListActivity;
 import getfood.io.ui.family.FamilyActivity;
 import getfood.io.ui.home.HomeActivity;
 import getfood.io.ui.main.MainActivity;
@@ -96,7 +95,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 openAcitivity(new Intent(this, FamilyActivity.class));
                 break;
             case R.id.nav_new_list:
-                openAcitivity(new Intent(this, CreateListActivity.class));
                 break;
             case R.id.nav_logout:
                 logoutUser();

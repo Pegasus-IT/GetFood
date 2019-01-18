@@ -13,7 +13,6 @@ import getfood.io.R;
 import getfood.io.adapters.HomeListAdapter;
 import getfood.io.models.ShoppingList;
 import getfood.io.ui.BaseActivity;
-import getfood.io.ui.createlist.CreateListActivity;
 import getfood.io.ui.shoppinglist.ShoppingListActivity;
 
 public class HomeActivity extends BaseActivity {
@@ -33,7 +32,7 @@ public class HomeActivity extends BaseActivity {
         toolbar.setNavigationIcon(R.drawable.ic_menu_34);
 
         createListButton.setOnClickListener(v -> {
-            openAcitivity(new Intent(HomeActivity.this, CreateListActivity.class), true);
+            
         });
 
         View topPadding = new View(this);
