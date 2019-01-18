@@ -1,32 +1,39 @@
 package getfood.io.ui.sign_up;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import getfood.io.R;
-import getfood.io.ui.home.HomeActivity;
-import getfood.io.ui.login.LoginActivity;
+import getfood.io.ui.BaseActivity;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
 
         View toLoginButton = findViewById(R.id.to_login);
+        toLoginButton.setOnClickListener(v -> onBackPressed());
+    }
 
-        toLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_sign_up;
+    }
+
+    @Override
+    protected int getToolbarTitle() {
+        return 0;
+    }
+
+    @Override
+    protected int getToolbarNavigationIcon() {
+        return 0;
+    }
+
+    @Override
+    protected int getOptionsMenu() {
+        return 0;
     }
 
     @Override

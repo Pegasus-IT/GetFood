@@ -1,36 +1,35 @@
 package getfood.io.ui.createlist;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import getfood.io.R;
+import getfood.io.ui.BaseActivity;
 
-public class CreateListActivity extends AppCompatActivity {
-
-    private Toolbar toolbar;
+public class CreateListActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_list);
+    }
 
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.create_list_title);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_left_black);
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_create_list;
+    }
 
-        setSupportActionBar(toolbar);
+    @Override
+    protected int getToolbarTitle() {
+        return R.string.create_list_title;
+    }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    @Override
+    protected int getToolbarNavigationIcon() {
+        return R.drawable.ic_arrow_left_black;
+    }
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+    @Override
+    protected int getOptionsMenu() {
+        return 0;
     }
 
     @Override
