@@ -164,12 +164,11 @@
                     android:textColor="@color/colorWhite" />
 
                 <TextView
-                    android:id="@+id/no-account"
+                    android:id="@+id/delete-account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:labelFor="@id/password"
                     android:text="@string/profile_delete_account"
                     android:textColor="@color/colorText" />
             </LinearLayout>

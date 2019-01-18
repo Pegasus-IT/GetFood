@@ -9,6 +9,7 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
@@ -21,10 +22,12 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/profile-full-name"
+                android:id="@+id/family-name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -32,6 +35,65 @@
                 android:gravity="center"
                 android:text="John Doe"
                 android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:padding="35dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/profile-username-text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/family_members"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+            <ScrollView
+                android:layout_height="350dp"
+                android:layout_width="match_parent"
+                android:padding="12dp"
+                android:background="@drawable/default_card">
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/family-user-initials-block"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/initials_circle_medium"
+                        android:elevation="4dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="JD"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/family-username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="John"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/leave-family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:text="@string/family_leave"
+                android:textColor="@color/colorText" />
         </LinearLayout>
     </LinearLayout>
 
