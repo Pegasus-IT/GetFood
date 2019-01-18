@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import getfood.io.R;
-import getfood.io.data.local.Globals;
 import getfood.io.data.network.ApiException;
 import getfood.io.data.network.api.UserControllerApi;
 import getfood.io.models.SwaggerApiError;
@@ -18,7 +17,6 @@ import getfood.io.models.User;
 import getfood.io.models.UserCreateModel;
 import getfood.io.ui.BaseActivity;
 import getfood.io.ui.login.LoginActivity;
-import getfood.io.util.PreferenceHelper;
 
 public class SignUpActivity extends BaseActivity {
 
@@ -142,5 +140,7 @@ public class SignUpActivity extends BaseActivity {
     private void onRegister(User userControllerAuthenticate) {
         System.out.println("Account Created!");
         this.showSnackbar("Account Created!", android.R.color.holo_green_light);
+
+        openAcitivity(new Intent(this, LoginActivity.class), true);
     }
 }
