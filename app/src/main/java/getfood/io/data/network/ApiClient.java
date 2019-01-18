@@ -94,7 +94,7 @@ public class ApiClient {
         authentications = new HashMap<>();
         auth = new ApiKeyAuth("header", "X-User-Token");
 
-        auth.setApiKey(PreferenceHelper.read(MainActivity.getAppContext(), Globals.PrefKeys.UTOKEN, "nil"));
+//        auth.setApiKey(PreferenceHelper.read(MainActivity.getAppContext(), Globals.PrefKeys.UTOKEN, "nil"));
         authentications.put("token", auth);
 
         authentications = Collections.unmodifiableMap(authentications);

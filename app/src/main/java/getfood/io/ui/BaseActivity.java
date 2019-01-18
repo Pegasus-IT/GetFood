@@ -14,7 +14,9 @@ import getfood.io.R;
 import getfood.io.ui.createlist.CreateListActivity;
 import getfood.io.ui.family.FamilyActivity;
 import getfood.io.ui.home.HomeActivity;
+import getfood.io.ui.main.MainActivity;
 import getfood.io.ui.profile.ProfileActivity;
+import getfood.io.util.PreferenceHelper;
 
 public abstract class BaseActivity extends AppCompatActivity implements
         View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -97,6 +99,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 openAcitivity(new Intent(this, CreateListActivity.class));
                 break;
             case R.id.nav_logout:
+                logoutUser();
                 break;
         }
 
@@ -115,7 +118,12 @@ public abstract class BaseActivity extends AppCompatActivity implements
         if(animated)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-    
+
+
+    private void logoutUser() {
+        PreferenceHelper.clearAll(this);
+        openAcitivity(new Intent(this, MainActivity.class));
+    }
 
     private void openMenu() {
         if(menuDrawerLayout.isDrawerOpen(menuNavigationView)) {

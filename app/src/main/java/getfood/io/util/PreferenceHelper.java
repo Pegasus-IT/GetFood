@@ -31,6 +31,12 @@ public class PreferenceHelper {
         return preferences.getBoolean(key, defaultReturn);
     }
 
+    public static void clearAll(Context context) {
+        SharedPreferences.Editor editor = getEditor(context);
+        editor.clear();
+        editor.commit();
+    }
+
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE);
