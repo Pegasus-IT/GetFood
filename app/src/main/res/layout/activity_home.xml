@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/getfood_background">
 
-    <include layout="@layout/sidemenu" />
-
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
@@ -44,5 +42,7 @@
             app:backgroundTint="@color/colorBlack" />
 
     </RelativeLayout>
+
+    <include layout="@layout/sidemenu" />
 
 </android.support.v4.widget.DrawerLayout>

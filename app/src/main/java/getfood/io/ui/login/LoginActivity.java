@@ -1,11 +1,11 @@
 package getfood.io.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Map;
@@ -16,53 +16,64 @@ import getfood.io.data.network.ApiException;
 import getfood.io.data.network.api.UserControllerApi;
 import getfood.io.models.User;
 import getfood.io.models.UserAuthenticationRequest;
-import getfood.io.models.UserCreateModel;
+import getfood.io.ui.BaseActivity;
+import getfood.io.ui.sign_up.SignUpActivity;
 import getfood.io.util.PreferenceHelper;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
-    private Toolbar toolbar;
     private EditText usernameInput, passwordInput;
     private Button loginButton;
+    private TextView signupText;
 
     private UserControllerApi api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         usernameInput = findViewById(R.id.username);
         passwordInput = findViewById(R.id.password);
         loginButton = findViewById(R.id.button_login);
+        signupText = findViewById(R.id.no_account);
 
         api = new UserControllerApi();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    login(usernameInput.getText().toString(), passwordInput.getText().toString());
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
+        loginButton.setOnClickListener((View v) -> {
+            try {
+                login(usernameInput.getText().toString(), passwordInput.getText().toString());
+            } catch (ApiException e) {
+                e.printStackTrace();
             }
         });
+
+        signupText.setOnClickListener(view -> openAcitivity(new Intent(this, SignUpActivity.class), true));
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
-        LoginActivity.this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    protected int getLayoutResourceId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    protected int getToolbarTitle() {
+        return 0;
+    }
+
+    @Override
+    protected int getToolbarNavigationIcon() {
+        return 0;
+    }
+
+    @Override
+    protected int getOptionsMenu() {
+        return 0;
     }
 
     private void login(String username, String password) throws ApiException {
         UserAuthenticationRequest request = new UserAuthenticationRequest();
         request.setEmail(username);
         request.setPassword(password);
-
-        System.out.println(username);
-        System.out.println(password);
 
         api.userControllerAuthenticateAsync(request, new ApiCallback<User>() {
             @Override
