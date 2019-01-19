@@ -1,11 +1,11 @@
-package io.getfood.ui.shoppinglist;
+package io.getfood.modules.home;
 
 import android.os.Bundle;
 import android.view.View;
 
 import io.getfood.R;
 import io.getfood.models.ShoppingList;
-import io.getfood.ui.BaseActivity;
+import io.getfood.modules.BaseActivity;
 
 public class ShoppingListActivity extends BaseActivity {
 

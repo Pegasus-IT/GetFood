@@ -1,4 +1,4 @@
-package io.getfood.ui;
+package io.getfood.modules;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import butterknife.ButterKnife;
 import io.getfood.R;
-import io.getfood.ui.family.FamilyActivity;
-import io.getfood.ui.home.HomeActivity;
-import io.getfood.ui.main.MainActivity;
-import io.getfood.ui.profile.ProfileActivity;
+import io.getfood.modules.family.FamilyActivity;
+import io.getfood.modules.home.HomeActivity;
+import io.getfood.modules.auth.ProfileActivity;
 import io.getfood.util.PreferenceHelper;
 
 public abstract class BaseActivity extends AppCompatActivity implements
@@ -29,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
+        ButterKnife.bind(this);
 
         toolbar = findViewById(R.id.toolbar);
         menuDrawerLayout = findViewById(R.id.home_drawer_layout);

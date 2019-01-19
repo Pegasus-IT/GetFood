@@ -1,4 +1,4 @@
-package io.getfood.ui.main;
+package io.getfood.modules;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import io.getfood.R;
-import io.getfood.ui.login.LoginActivity;
+import io.getfood.modules.auth.LoginActivity;
 
 public class MainActivity extends Activity {
 

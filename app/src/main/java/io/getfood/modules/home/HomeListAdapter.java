@@ -1,4 +1,4 @@
-package io.getfood.adapters;
+package io.getfood.modules.home;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

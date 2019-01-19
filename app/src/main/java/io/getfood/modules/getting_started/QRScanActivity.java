@@ -1,4 +1,4 @@
-package io.getfood.ui.getting_started;
+package io.getfood.modules.getting_started;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +11,8 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import io.getfood.R;
 import io.getfood.data.swagger.api.FamilyControllerApi;
 import io.getfood.data.swagger.models.Family;
-import io.getfood.models.SwaggerApiError;
-import io.getfood.ui.BaseActivity;
-import io.getfood.ui.home.HomeActivity;
+import io.getfood.modules.BaseActivity;
+import io.getfood.modules.home.HomeActivity;
 
 public class QRScanActivity extends BaseActivity {
 

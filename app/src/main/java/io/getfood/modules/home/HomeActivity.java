@@ -1,4 +1,4 @@
-package io.getfood.ui.home;
+package io.getfood.modules.home;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,10 +10,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import io.getfood.R;
-import io.getfood.adapters.HomeListAdapter;
 import io.getfood.models.ShoppingList;
-import io.getfood.ui.BaseActivity;
-import io.getfood.ui.shoppinglist.ShoppingListActivity;
+import io.getfood.modules.BaseActivity;
 
 public class HomeActivity extends BaseActivity {
 
