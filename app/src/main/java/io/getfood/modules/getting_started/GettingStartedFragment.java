@@ -1,5 +1,6 @@
 package io.getfood.modules.getting_started;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.getfood.R;
 import io.getfood.modules.BaseFragment;
+import io.getfood.modules.auth.login.LoginActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -23,8 +25,8 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
     }
 
     @OnClick(R.id.not_ready)
-    public void onNotReadyYetClick() {
-
+    void onNotReadyYetClick() {
+        openActivity(new Intent(getContext(), LoginActivity.class), R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
