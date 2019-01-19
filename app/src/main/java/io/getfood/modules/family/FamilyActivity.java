@@ -6,7 +6,6 @@ import io.getfood.R;
 import io.getfood.modules.BaseActivity;
 
 public class FamilyActivity extends BaseActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

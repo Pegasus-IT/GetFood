@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import io.getfood.R;
-import io.getfood.modules.auth.LoginActivity;
+import io.getfood.modules.auth.login.LoginActivity;
 
 public class MainActivity extends Activity {
 
