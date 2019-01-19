@@ -12,8 +12,8 @@ public interface LoginContract {
 
     interface View extends BaseView<Presenter> {
 
-        void onError(ApiException err);
-        void onLogin(User userControllerAuthenticate);
+        void onLogin(User user);
+        void onTokenValidated(User user);
 
         void setUsernameText(String text);
 
@@ -28,6 +28,8 @@ public interface LoginContract {
 
         void login(String username, String password);
         void checkValid(String username, String password);
+
+        void validateStoredToken();
     }
 
 }
