@@ -1,8 +1,11 @@
 package getfood.io.ui.shoppinglist;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,7 +21,10 @@ public class ShoppingListActivity extends BaseActivity {
 
     private ShoppingList selectedShoppingList;
     private ListView listView;
+    private FloatingActionButton createItem, cameraButton;
     private ShoppingListAdapter shoppingListAdapter;
+
+    private ArrayList<ListItem> shoppingList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,8 @@ public class ShoppingListActivity extends BaseActivity {
 
         View view = findViewById(R.id.shopping_list_container);
         listView = findViewById(R.id.shopping_listview);
+        createItem = findViewById(R.id.shopping_list_create_fab);
+        cameraButton = findViewById(R.id.shopping_list_camera_fab);
 
         // Set view background base on Color
         view.setBackgroundColor(selectedShoppingList.getColor());
@@ -38,18 +46,18 @@ public class ShoppingListActivity extends BaseActivity {
         toolbar.setSubtitleTextAppearance(this, R.style.ToolbarTextAppearance_Subtitle_White);
 
         //TODO: Replace with real data
-        ArrayList<ListItem> shoppingList = new ArrayList<>();
         shoppingList.add(new ListItem("Item 01", false));
         shoppingList.add(new ListItem("Item 02", false));
         shoppingList.add(new ListItem("Item 03", true));
         shoppingList.add(new ListItem("Item 04", false));
         shoppingList.add(new ListItem("Item 05", false));
-        shoppingList.add(new ListItem("Item 06", false));
-
+        shoppingList.add(new ListItem("Item 06", true));
 
         shoppingListAdapter = new ShoppingListAdapter(this, shoppingList);
         listView.setAdapter(shoppingListAdapter);
+
         listView.setOnItemClickListener((adapterView, view1, i, l) -> System.out.println(i));
+        createItem.setOnClickListener(view12 -> createItemInput());
     }
 
     @Override
@@ -76,5 +84,29 @@ public class ShoppingListActivity extends BaseActivity {
     public void onBackPressed() {
         finish();
         ShoppingListActivity.this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    private void createItemInput() {
+        final EditText itemName = new EditText(this);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.shopping_list_create_item_title)
+                .setMessage(R.string.shopping_list_create_item_description)
+                .setView(itemName)
+                .setPositiveButton("Add", (dialog, whichButton) -> {
+                    if(!itemName.getText().toString().isEmpty()) {
+                        createNewListItem(itemName.getText().toString());
+                    } else {
+                        createItemInput();
+                    }
+                })
+                .setNegativeButton("Cancel", (dialog, whichButton) -> {})
+                .show();
+    }
+
+    private void createNewListItem(String itemName) {
+        shoppingList.add(0, new ListItem(itemName, false));
+        shoppingListAdapter.notifyDataSetChanged();
+
+        //TODO: Add item to list in API logic
     }
 }

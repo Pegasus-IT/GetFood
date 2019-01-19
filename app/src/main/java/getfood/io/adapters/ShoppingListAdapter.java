@@ -86,5 +86,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
             valueText.setTextColor(mainItemColor);
             titleText.setPaintFlags(0);
         }
+
+        //TODO: Update item in API logic
     }
 }

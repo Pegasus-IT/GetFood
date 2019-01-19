@@ -41,6 +41,8 @@
     <string name="shopping_list_title">My Shopping List</string>
     <string name="shopping_list_edit_menu_button">Edit</string>
     <string name="shopping_list_remove_menu_button">Delete</string>
+    <string name="shopping_list_create_item_title">Add new item</string>
+    <string name="shopping_list_create_item_description">Please fill in the name of the listitem.</string>
 
     <!-- Create List Page -->
     <string name="create_list_title">Create list</string>
