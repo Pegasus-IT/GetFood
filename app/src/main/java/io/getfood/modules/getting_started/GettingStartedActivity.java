@@ -5,13 +5,14 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.core.app.ActivityCompat;
 import io.getfood.R;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.FamilyControllerApi;

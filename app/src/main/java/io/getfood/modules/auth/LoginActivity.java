@@ -2,8 +2,6 @@ package io.getfood.modules.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,10 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.jesusm.kfingerprintmanager.KFingerprintManager;
 
 import org.jetbrains.annotations.NotNull;
 
+import androidx.annotation.Nullable;
 import io.getfood.R;
 import io.getfood.data.local.Globals;
 import io.getfood.data.swagger.ApiException;
