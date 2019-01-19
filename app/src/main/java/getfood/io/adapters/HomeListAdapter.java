@@ -16,7 +16,6 @@ import java.util.List;
 import getfood.io.R;
 import getfood.io.models.ShoppingList;
 
-
 public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
 
     private Context context;
@@ -35,7 +34,7 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
         View listItem = itemView;
 
         if(listItem == null)
-            listItem = LayoutInflater.from(context).inflate(R.layout.item_home_list, parent,false);
+            listItem = LayoutInflater.from(context).inflate(R.layout.item_home_list, parent, false);
 
         ShoppingList shoppingList = shoppingLists.get(position);
         Drawable background = listItem.getBackground();
@@ -46,7 +45,15 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
         TextView dateText = listItem.findViewById(R.id.text_home_list_date);
         dateText.setText(shoppingList.getDate());
 
+        TextView itemCountText = listItem.findViewById(R.id.text_home_list_count);
+        itemCountText.setText(shoppingList.getCount());
+
         ((GradientDrawable) background.mutate()).setColor(shoppingList.getColor());
+
+
+
+//        if(listItem == null)
+//            listItem = LayoutInflater.from(context).inflate(R.layout.item_shopping_list, parent,false);
 
         return listItem;
     }
