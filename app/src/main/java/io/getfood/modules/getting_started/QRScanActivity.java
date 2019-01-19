@@ -9,9 +9,11 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import io.getfood.R;
+import io.getfood.data.local.Globals;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.FamilyControllerApi;
 import io.getfood.data.swagger.models.Family;
+import io.getfood.models.ApiManager;
 import io.getfood.models.SwaggerApiError;
 import io.getfood.modules.BaseActivity;
 import io.getfood.modules.home.HomeActivity;
@@ -31,7 +33,7 @@ public class QRScanActivity extends BaseActivity {
         scannerView = findViewById(R.id.scanner_view);
 
         api = new FamilyControllerApi();
-        api.getApiClient().setBasePath(API_BASEURL);
+        ApiManager.add(api.getApiClient(), getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
         codeScanner = new CodeScanner(this, scannerView);
         
         codeScanner.setDecodeCallback(result -> {

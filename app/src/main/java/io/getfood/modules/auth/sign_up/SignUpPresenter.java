@@ -7,6 +7,7 @@ import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.UserControllerApi;
 import io.getfood.data.swagger.models.User;
 import io.getfood.data.swagger.models.UserCreateUpdateModel;
+import io.getfood.models.ApiManager;
 import io.getfood.util.UserUtil;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -24,7 +25,7 @@ public class SignUpPresenter implements SignUpContract.Presenter {
         this.sharedPreferences = checkNotNull(preferences, "sharedPreferences cannot be null");
 
         api = new UserControllerApi();
-        api.getApiClient().setBasePath(API_BASEURL);
+        ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
     @Override
