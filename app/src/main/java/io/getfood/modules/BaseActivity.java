@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.ButterKnife;
 import io.getfood.R;
-import io.getfood.modules.auth.ProfileActivity;
+import io.getfood.modules.auth.profile.ProfileActivity;
 import io.getfood.modules.family.FamilyActivity;
 import io.getfood.modules.home.HomeActivity;
 import io.getfood.util.PreferenceHelper;
