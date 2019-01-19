@@ -20,7 +20,7 @@
     <string name="login_first_name">Firstname</string>
     <string name="login_last_name">Lastname</string>
     <string name="login_register">Register</string>
-    <string name="login_to_title">To Login</string>
+    <string name="login_to_title">Back</string>
 
     <!-- Getting Started Page -->
     <string name="getting_started_title">Let\'s get started!</string>
