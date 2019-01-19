@@ -49,10 +49,18 @@ public class BaseFragment extends Fragment {
     }
 
     public void openActivity(Intent intent, boolean animated) {
+        openActivity(intent, animated, R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    public void openActivity(Intent intent, int enterAnimation, int exitAnimation) {
+        openActivity(intent, true, enterAnimation, exitAnimation);
+    }
+
+    public void openActivity(Intent intent, boolean animated, int enterAnimation, int exitAnimation) {
         startActivity(intent);
 
         if (animated)
-            checkNotNull(getActivity(), "Cannot find active activity").overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            checkNotNull(getActivity(), "Cannot find active activity").overridePendingTransition(enterAnimation, exitAnimation);
     }
 
 }
