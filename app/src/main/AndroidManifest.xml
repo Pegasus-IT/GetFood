@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="io.getfood.ui.main.MainActivity">
+        <activity android:name="io.getfood.modules.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,14 +27,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="io.getfood.ui.home.HomeActivity" />
-        <activity android:name="io.getfood.ui.shoppinglist.ShoppingListActivity" />
-        <activity android:name="io.getfood.ui.login.LoginActivity" />
-        <activity android:name="io.getfood.ui.getting_started.GettingStartedActivity" />
-        <activity android:name="io.getfood.ui.getting_started.QRScanActivity" />
-        <activity android:name="io.getfood.ui.sign_up.SignUpActivity" />
-        <activity android:name="io.getfood.ui.profile.ProfileActivity" />
-        <activity android:name="io.getfood.ui.family.FamilyActivity" />
+        <activity android:name="io.getfood.modules.home.HomeActivity" />
+        <activity android:name="io.getfood.modules.home.ShoppingListActivity" />
+        <activity android:name="io.getfood.modules.auth.LoginActivity" />
+        <activity android:name="io.getfood.modules.getting_started.GettingStartedActivity" />
+        <activity android:name="io.getfood.modules.getting_started.QRScanActivity" />
+        <activity android:name="io.getfood.modules.auth.SignUpActivity" />
+        <activity android:name="io.getfood.modules.auth.ProfileActivity" />
+        <activity android:name="io.getfood.modules.family.FamilyActivity" />
     </application>
 
 </manifest>

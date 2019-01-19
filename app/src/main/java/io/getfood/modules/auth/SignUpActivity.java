@@ -1,4 +1,4 @@
-package io.getfood.ui.sign_up;
+package io.getfood.modules.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +15,7 @@ import io.getfood.data.swagger.api.UserControllerApi;
 import io.getfood.data.swagger.models.User;
 import io.getfood.data.swagger.models.UserCreateUpdateModel;
 import io.getfood.models.SwaggerApiError;
-import io.getfood.ui.BaseActivity;
-import io.getfood.ui.login.LoginActivity;
+import io.getfood.modules.BaseActivity;
 
 import static io.getfood.data.local.Globals.API_BASEURL;
 

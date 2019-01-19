@@ -1,9 +1,9 @@
-package io.getfood.ui.family;
+package io.getfood.modules.family;
 
 import android.os.Bundle;
 
 import io.getfood.R;
-import io.getfood.ui.BaseActivity;
+import io.getfood.modules.BaseActivity;
 
 public class FamilyActivity extends BaseActivity {
 
