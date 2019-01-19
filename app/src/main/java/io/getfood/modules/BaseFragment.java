@@ -1,5 +1,6 @@
 package io.getfood.modules;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -8,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.steamcrafted.loadtoast.LoadToast;
 
 import androidx.fragment.app.Fragment;
+import io.getfood.R;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.models.SwaggerApiError;
 
@@ -40,4 +42,17 @@ public class BaseFragment extends Fragment {
 
         return toast;
     }
+
+
+    public void openActivity(Intent intent) {
+        startActivity(intent);
+    }
+
+    public void openActivity(Intent intent, boolean animated) {
+        startActivity(intent);
+
+        if (animated)
+            checkNotNull(getActivity(), "Cannot find active activity").overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
 }

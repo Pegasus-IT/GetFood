@@ -1,4 +1,4 @@
-package io.getfood.modules.home;
+package io.getfood.modules.shopping_list;
 
 import android.os.Bundle;
 import android.view.View;
