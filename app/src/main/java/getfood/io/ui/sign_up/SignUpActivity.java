@@ -74,9 +74,7 @@ public class SignUpActivity extends BaseActivity {
 
         View toLoginButton = findViewById(R.id.to_login);
         toLoginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            onBackPressed();
         });
     }
 
