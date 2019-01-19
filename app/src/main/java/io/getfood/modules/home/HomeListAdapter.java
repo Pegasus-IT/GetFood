@@ -50,11 +50,6 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
 
         ((GradientDrawable) background.mutate()).setColor(shoppingList.getColor());
 
-
-
-//        if(listItem == null)
-//            listItem = LayoutInflater.from(context).inflate(R.layout.item_shopping_list, parent,false);
-
         return listItem;
     }
 }

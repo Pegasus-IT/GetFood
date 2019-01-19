@@ -43,6 +43,11 @@ public class ListItem {
     return this;
   }
 
+  // Temp constructor
+  public ListItem(String name, Boolean checked) {
+    this.name = name;
+    this.checked = checked;
+  }
   
 
   /**
