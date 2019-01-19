@@ -43,8 +43,8 @@ dependencies {
     repositories {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
-    implementation 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
     api 'com.github.JesusM:FingerprintManager:2.0.2'
     api 'com.budiyev.android:code-scanner:2.1.0'

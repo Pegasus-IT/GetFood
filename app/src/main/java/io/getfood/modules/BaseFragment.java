@@ -1,8 +1,10 @@
 package io.getfood.modules;
 
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.fragment.app.Fragment;
 
 public class BaseFragment extends Fragment {
     public void showSnackbar(String text, int color) {

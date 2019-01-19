@@ -2,19 +2,20 @@ package io.getfood.modules;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.ButterKnife;
 import io.getfood.R;
+import io.getfood.modules.auth.ProfileActivity;
 import io.getfood.modules.family.FamilyActivity;
 import io.getfood.modules.home.HomeActivity;
-import io.getfood.modules.auth.ProfileActivity;
 import io.getfood.util.PreferenceHelper;
 
 public abstract class BaseActivity extends AppCompatActivity implements
@@ -35,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
         menuDrawerLayout = findViewById(R.id.home_drawer_layout);
         menuNavigationView = findViewById(R.id.nav_view);
 
-        if(toolbar != null) {
+        if (toolbar != null) {
             toolbar.setTitle(getToolbarTitle());
             toolbar.setNavigationIcon(getToolbarNavigationIcon());
 
@@ -43,19 +44,22 @@ public abstract class BaseActivity extends AppCompatActivity implements
             toolbar.setNavigationOnClickListener(this);
         }
 
-        if(menuNavigationView != null)
+        if (menuNavigationView != null)
             menuNavigationView.setNavigationItemSelectedListener(this);
 
     }
 
     protected abstract int getLayoutResourceId();
+
     protected abstract int getToolbarTitle();
+
     protected abstract int getToolbarNavigationIcon();
+
     protected abstract int getOptionsMenu();
 
     @Override
     public void onBackPressed() {
-        if(toolbar != null && menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
+        if (toolbar != null && menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
             menuDrawerLayout.closeDrawer(menuNavigationView);
             return;
         }
@@ -65,7 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        if(getOptionsMenu() != 0)
+        if (getOptionsMenu() != 0)
             getMenuInflater().inflate(getOptionsMenu(), menu);
 
         return true;
@@ -114,7 +118,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void openAcitivity(Intent intent, boolean animated) {
         startActivity(intent);
 
-        if(animated)
+        if (animated)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
@@ -125,7 +129,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     private void openMenu() {
-        if(menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
+        if (menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
             menuDrawerLayout.closeDrawer(menuNavigationView);
         } else {
             menuDrawerLayout.openDrawer(menuNavigationView);

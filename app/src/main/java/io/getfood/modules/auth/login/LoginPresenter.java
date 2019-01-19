@@ -1,8 +1,8 @@
 package io.getfood.modules.auth.login;
 
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import io.getfood.data.local.Globals;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.UserControllerApi;
