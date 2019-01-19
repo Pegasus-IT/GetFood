@@ -16,6 +16,7 @@ import io.getfood.data.swagger.models.User;
 import io.getfood.data.swagger.models.UserCreateUpdateModel;
 import io.getfood.models.SwaggerApiError;
 import io.getfood.modules.BaseActivity;
+import io.getfood.modules.auth.login.LoginActivity;
 
 import static io.getfood.data.local.Globals.API_BASEURL;
 

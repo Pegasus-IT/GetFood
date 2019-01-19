@@ -29,7 +29,7 @@
 
         <activity android:name="io.getfood.modules.home.HomeActivity" />
         <activity android:name="io.getfood.modules.home.ShoppingListActivity" />
-        <activity android:name="io.getfood.modules.auth.LoginActivity" />
+        <activity android:name="io.getfood.modules.auth.login.LoginActivity" />
         <activity android:name="io.getfood.modules.getting_started.GettingStartedActivity" />
         <activity android:name="io.getfood.modules.getting_started.QRScanActivity" />
         <activity android:name="io.getfood.modules.auth.SignUpActivity" />
