@@ -39,6 +39,9 @@ dependencies {
     api 'io.gsonfire:gson-fire:1.8.3'
     api 'org.threeten:threetenbp:1.3.5'
 
+    api 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
     api 'com.github.JesusM:FingerprintManager:2.0.2'
     api 'com.budiyev.android:code-scanner:2.1.0'
 }
