@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import io.getfood.data.local.Globals;
 import io.getfood.data.swagger.models.User;
+import io.getfood.models.ApiManager;
 
 public class UserUtil {
     public static void saveUser(User user, SharedPreferences preferences) {
@@ -17,6 +18,8 @@ public class UserUtil {
             PreferenceHelper.save(preferences, Globals.PrefKeys.LOGIN_STATUS, true);
             PreferenceHelper.save(preferences, Globals.PrefKeys.LOGIN_USERNAME, user.getEmail());
             PreferenceHelper.save(preferences, Globals.PrefKeys.LOGIN_USER, new Gson().toJson(user));
+
+            ApiManager.setToken(user.getToken());
         }
     }
 
@@ -41,5 +44,13 @@ public class UserUtil {
         }
 
         return null;
+    }
+
+    public static boolean isLoggedIn(SharedPreferences preferences) {
+        return PreferenceHelper.read(preferences, Globals.PrefKeys.LOGIN_STATUS, false);
+    }
+
+    public static String getToken(SharedPreferences preferences) {
+        return PreferenceHelper.read(preferences, Globals.PrefKeys.UTOKEN, "");
     }
 }

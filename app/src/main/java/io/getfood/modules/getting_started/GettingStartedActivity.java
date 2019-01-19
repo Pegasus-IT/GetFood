@@ -14,10 +14,12 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.core.app.ActivityCompat;
 import io.getfood.R;
+import io.getfood.data.local.Globals;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.FamilyControllerApi;
 import io.getfood.data.swagger.models.Family;
 import io.getfood.data.swagger.models.FamilyCreateUpdate;
+import io.getfood.models.ApiManager;
 import io.getfood.models.SwaggerApiError;
 import io.getfood.modules.BaseActivity;
 import io.getfood.modules.home.HomeActivity;
@@ -39,7 +41,7 @@ public class GettingStartedActivity extends BaseActivity {
         createFamilyButton = findViewById(R.id.create_family_button);
 
         api = new FamilyControllerApi();
-        api.getApiClient().setBasePath(API_BASEURL);
+        ApiManager.add(api.getApiClient(), getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
 
         bottomText.setOnClickListener(view -> onBackPressed());
 
