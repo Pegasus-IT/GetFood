@@ -1,6 +1,8 @@
 package io.getfood.modules.auth.login;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 
 import io.getfood.R;
 import io.getfood.data.local.Globals;
@@ -22,7 +24,8 @@ public class LoginActivity extends BaseActivity {
                     getSupportFragmentManager(), loginFragment, R.id.contentFrame);
         }
 
-        new LoginPresenter(loginFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
+        Looper looper = getApplicationContext().getMainLooper();
+        new LoginPresenter(loginFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE), looper);
     }
 
     @Override
