@@ -8,35 +8,33 @@
     android:orientation="horizontal">
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkbox_shopping_list"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0"
         android:button="@drawable/default_checkbox"
-        android:buttonTint="@color/getfood_main_blue"
         android:checked="false"
         android:clickable="true"
         android:duplicateParentState="false"
         android:textColor="@color/getfood_main_blue" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_shopping_list_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginLeft="20dp"
         android:layout_weight="2"
-        android:text="TomatenTomatenTomatenTomatenTomatenTomatenTomaten"
+        android:gravity="center_vertical"
         android:textAlignment="viewStart"
         android:textColor="@color/getfood_main_blue"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_shopping_list_value"
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center_vertical"
-        android:text="100gr"
         android:textAlignment="textEnd"
         android:textColor="@color/getfood_main_blue" />
 
