@@ -1,4 +1,4 @@
-package io.getfood.modules.auth.login;
+package io.getfood.modules.auth.sign_up;
 
 import android.os.Bundle;
 
@@ -7,22 +7,22 @@ import io.getfood.data.local.Globals;
 import io.getfood.modules.BaseActivity;
 import io.getfood.util.ActivityUtils;
 
-public class LoginActivity extends BaseActivity {
+public class SignUpActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LoginFragment loginFragment =
-                (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if (loginFragment == null) {
+        SignUpFragment signUpFragment =
+                (SignUpFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (signUpFragment == null) {
             // Create the fragment
-            loginFragment = LoginFragment.newInstance();
+            signUpFragment = SignUpFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), loginFragment, R.id.contentFrame);
+                    getSupportFragmentManager(), signUpFragment, R.id.contentFrame);
         }
 
-        new LoginPresenter(loginFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
+        new SignUpPresenter(signUpFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.login_activity;
+        return R.layout.sign_up_activity;
     }
 
     @Override

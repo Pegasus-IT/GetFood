@@ -2,8 +2,6 @@ package io.getfood.modules.auth.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,19 +21,15 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import io.getfood.R;
 import io.getfood.data.local.Globals;
-import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.models.User;
-import io.getfood.models.SwaggerApiError;
 import io.getfood.modules.BaseFragment;
-import io.getfood.modules.auth.SignUpActivity;
+import io.getfood.modules.auth.sign_up.SignUpActivity;
+import io.getfood.modules.getting_started.GettingStartedActivity;
 import io.getfood.modules.home.HomeActivity;
-import io.getfood.util.PreferenceHelper;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class LoginFragment extends BaseFragment implements LoginContract.View {
-
-    private LoginContract.Presenter loginPresenter;
 
     @BindView(R.id.username)
     EditText usernameInput;
@@ -45,6 +39,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     Button loginButton;
     @BindView(R.id.button_fingerprint)
     ImageButton fingerprintButton;
+    private LoginContract.Presenter loginPresenter;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -95,7 +90,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         createFingerprintManagerInstance().authenticate(new KFingerprintManager.AuthenticationCallback() {
             @Override
             public void onAuthenticationSuccess() {
-                startActivity(new Intent(getActivity(), HomeActivity.class));
+                startActivity(new Intent(getActivity(), GettingStartedActivity.class));
             }
 
             @Override
@@ -133,19 +128,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
     @Override
-    public void onError(ApiException err) {
-        SwaggerApiError swaggerApiError = SwaggerApiError.parse(err.getResponseBody());
-        showSnackbar(swaggerApiError.getMessage(), android.R.color.holo_red_dark);
-    }
-
-    @Override
     public void onLogin(User userControllerAuthenticate) {
-        System.out.println("Login Success!");
-        System.out.println("Token: " + userControllerAuthenticate.getToken());
-
-        PreferenceHelper.save(getContext(), Globals.PrefKeys.UTOKEN, userControllerAuthenticate.getToken());
-        PreferenceHelper.save(getContext(), Globals.PrefKeys.LOGIN_STATUS, true);
-        PreferenceHelper.save(getContext(), Globals.PrefKeys.LOGIN_USERNAME, userControllerAuthenticate.getEmail());
         System.out.println(userControllerAuthenticate);
         startActivity(new Intent(getContext(), HomeActivity.class));
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

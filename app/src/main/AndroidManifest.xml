@@ -32,9 +32,9 @@
         <activity android:name="io.getfood.modules.auth.login.LoginActivity" />
         <activity android:name="io.getfood.modules.getting_started.GettingStartedActivity" />
         <activity android:name="io.getfood.modules.getting_started.QRScanActivity" />
-        <activity android:name="io.getfood.modules.auth.SignUpActivity" />
         <activity android:name="io.getfood.modules.auth.ProfileActivity" />
         <activity android:name="io.getfood.modules.family.FamilyActivity" />
+        <activity android:name=".modules.auth.sign_up.SignUpActivity" />
     </application>
 
 </manifest>

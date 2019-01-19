@@ -50,6 +50,18 @@ public class PreferenceHelper {
         return preferences.getBoolean(key, defaultReturn);
     }
 
+    public static void remove(SharedPreferences preferences, String key) {
+        SharedPreferences.Editor editor = getEditor(preferences);
+        editor.remove(key);
+        editor.commit();
+    }
+
+    public static void remove(Context context, String key) {
+        SharedPreferences.Editor editor = getEditor(context);
+        editor.remove(key);
+        editor.commit();
+    }
+
     public static void clearAll(SharedPreferences preferences) {
         SharedPreferences.Editor editor = getEditor(preferences);
         editor.clear();

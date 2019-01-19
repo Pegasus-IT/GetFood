@@ -9,10 +9,14 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import io.getfood.R;
+import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.FamilyControllerApi;
 import io.getfood.data.swagger.models.Family;
+import io.getfood.models.SwaggerApiError;
 import io.getfood.modules.BaseActivity;
 import io.getfood.modules.home.HomeActivity;
+
+import static io.getfood.data.local.Globals.API_BASEURL;
 
 public class QRScanActivity extends BaseActivity {
 
@@ -26,7 +30,8 @@ public class QRScanActivity extends BaseActivity {
 
         scannerView = findViewById(R.id.scanner_view);
 
-//        api = new FamilyControllerApi();
+        api = new FamilyControllerApi();
+        api.getApiClient().setBasePath(API_BASEURL);
         codeScanner = new CodeScanner(this, scannerView);
         
         codeScanner.setDecodeCallback(result -> {
@@ -77,20 +82,20 @@ public class QRScanActivity extends BaseActivity {
     }
 
     private void validateCode(String code) {
-//        new Thread(() -> {
-//            try {
-//                this.onFamilyJoined(api.familyControllerJoinFamily(code));
-//            } catch (ApiException err) {
-//                System.out.println(err.getResponseBody());
-//                this.onError(err);
-//            }
-//        }).start();
+        new Thread(() -> {
+            try {
+                this.onFamilyJoined(api.familyControllerJoinFamily(code));
+            } catch (ApiException err) {
+                System.out.println(err.getResponseBody());
+                this.onError(err);
+            }
+        }).start();
     }
 
-//    private void onError(ApiException err) {
-//        SwaggerApiError swaggerApiError = SwaggerApiError.parse(err.getResponseBody());
-//        this.showSnackbar(swaggerApiError.getMessage(), android.R.color.holo_red_dark);
-//    }
+    private void onError(ApiException err) {
+        SwaggerApiError swaggerApiError = SwaggerApiError.parse(err.getResponseBody());
+        this.showSnackbar(swaggerApiError.getMessage(), android.R.color.holo_red_dark);
+    }
 
     private void onFamilyJoined(Family family) {
         this.showSnackbar(String.valueOf(R.string.getting_started_join_successful), R.color.getfood_main_blue);
