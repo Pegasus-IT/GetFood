@@ -30,11 +30,12 @@
         <activity android:name="io.getfood.modules.home.HomeActivity" />
         <activity android:name="io.getfood.modules.home.ShoppingListActivity" />
         <activity android:name="io.getfood.modules.auth.login.LoginActivity" />
-        <activity android:name="io.getfood.modules.getting_started.GettingStartedActivity" />
+        <activity android:name="io.getfood.modules.getting_started.OldGettingStartedActivity" />
         <activity android:name="io.getfood.modules.getting_started.QRScanActivity" />
         <activity android:name="io.getfood.modules.auth.profile.ProfileActivity" />
         <activity android:name="io.getfood.modules.family.FamilyActivity" />
         <activity android:name=".modules.auth.sign_up.SignUpActivity" />
+        <activity android:name=".modules.getting_started.GettingStartedActivity" />
     </application>
 
 </manifest>
