@@ -1,5 +1,6 @@
 package io.getfood.modules.auth.login;
 
+import android.content.SharedPreferences;
 import android.text.Editable;
 
 import io.getfood.data.swagger.ApiException;

@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import io.getfood.data.local.Globals;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.UserControllerApi;
+import io.getfood.data.swagger.models.User;
 import io.getfood.data.swagger.models.UserAuthenticationRequest;
 import io.getfood.util.PreferenceHelper;
+import io.getfood.util.UserUtil;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static io.getfood.data.local.Globals.API_BASEURL;
@@ -53,7 +55,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         new Thread(() -> {
             try {
-                loginView.onLogin(api.userControllerAuthenticate(request));
+                User user = api.userControllerAuthenticate(request);
+                loginView.onLogin(user);
+                UserUtil.saveUser(user, sharedPreferences);
             } catch (ApiException err) {
                 System.out.println(err.getResponseBody());
                 loginView.onError(err);
