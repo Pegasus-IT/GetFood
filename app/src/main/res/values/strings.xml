@@ -22,6 +22,16 @@
     <string name="login_register">Register</string>
     <string name="login_to_title">To Login</string>
 
+    <!-- Getting Started Page -->
+    <string name="getting_started_title">Let\'s get started!</string>
+    <string name="getting_started_punchline">\"Join a family or create one\"</string>
+    <string name="getting_started_or">Or</string>
+    <string name="getting_started_create_family">Create Family</string>
+    <string name="getting_started_create_family_description">Please fill in the name of your family.</string>
+    <string name="getting_started_join_family">Join family</string>
+    <string name="getting_started_join_successful">Congrats! You have joined the family!</string>
+    <string name="description_camera">Camera</string>
+
     <!-- Home Page -->
     <string name="home_title">My Lists</string>
     <string name="home_list_item_date">Created on</string>
@@ -41,12 +51,7 @@
     <string name="family_members">Members</string>
     <string name="family_leave">Don’t enjoy being in this family? Leave it!</string>
     <string name="not_ready_yet_go_back_to_login">Not ready yet? Go back to Login!</string>
-    <string name="getting_started_title">Let\'s get started!</string>
-    <string name="getting_started_punchline">\"Join a family or create one\"</string>
-    <string name="getting_started_or">Or</string>
-    <string name="getting_started_create_family">Create Family</string>
-    <string name="getting_started_join_family">Join family</string>
-    <string name="description_camera">Camera</string>
+
     <string name="general_title">Title</string>
     <string name="create_list_prompt">Enter your recipe title:</string>
 

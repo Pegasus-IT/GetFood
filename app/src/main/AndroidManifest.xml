@@ -31,6 +31,7 @@
         <activity android:name=".ui.shoppinglist.ShoppingListActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.getting_started.GettingStartedActivity" />
+        <activity android:name=".ui.getting_started.QRScanActivity" />
         <activity android:name=".ui.sign_up.SignUpActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.family.FamilyActivity" />

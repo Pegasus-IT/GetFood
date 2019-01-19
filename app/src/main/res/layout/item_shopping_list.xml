@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0"
         android:button="@drawable/default_checkbox"
-        android:buttonTint="@color/colorBlack"
+        android:buttonTint="@color/getfood_main_blue"
         android:checked="false"
         android:clickable="true"
         android:duplicateParentState="false"
