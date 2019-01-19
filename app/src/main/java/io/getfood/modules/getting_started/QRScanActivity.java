@@ -2,11 +2,11 @@ package io.getfood.modules.getting_started;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
+import com.google.android.material.snackbar.Snackbar;
 
 import io.getfood.R;
 import io.getfood.data.swagger.api.FamilyControllerApi;
