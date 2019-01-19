@@ -3,16 +3,19 @@
     <color name="colorPrimary">#70B2FC</color>
     <color name="colorPrimaryDark">#419bff</color>
     <color name="colorPrimaryLight">#B6D8FD</color>
-    <color name="colorAccent">#FFE066</color>
+    <color name="colorAccent">@color/getfood_main_blue</color>
+    <color name="mainBackgroundColor">#004F7DF7</color>
 
     <color name="colorBackground">#F9F9F9</color>
     <color name="colorDefaultIcon">#CCCCCC</color>
     <color name="colorBorders">#F8F8F8</color>
 
-    <color name="colorText">#717171</color>
+    <color name="colorText">#080808</color>
     <color name="colorTextLink">#92C3FC</color>
+    <color name="colorTextDark">#313A4B</color>
 
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteOpacity">#99FFFFFF</color>
     <color name="colorBlack">#000</color>
 
     <color name="getfood_main_blue">#427CFB</color>
