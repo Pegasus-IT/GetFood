@@ -21,7 +21,7 @@ public class QRScanPresenter implements QRScanContract.Presenter {
      * terms, Presenter does the job of querying your Model, updating the View while responding to
      * the user's interactions.
      *
-     * @param homeView the given view
+     * @param homeView    the given view
      * @param preferences SharedPreferences
      */
     QRScanPresenter(@NonNull QRScanContract.View homeView, SharedPreferences preferences) {
@@ -33,12 +33,19 @@ public class QRScanPresenter implements QRScanContract.Presenter {
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Home Presenter");
 
     }
 
+    /**
+     * @param code
+     * @inheritDoc
+     */
     @Override
     public void validateCode(String code) {
         new Thread(() -> {

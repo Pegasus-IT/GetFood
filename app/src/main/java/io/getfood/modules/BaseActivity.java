@@ -52,6 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     /**
      * Creating the activity
+     *
      * @param savedInstanceState bundle of information of the activity it started in
      */
     @Override
@@ -95,12 +96,32 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     }
 
+    /**
+     * Gets the toolbar title
+     * For example:
+     * R.string.home_title
+     */
     protected abstract int getLayoutResourceId();
 
+    /**
+     * Gets the toolbar title
+     * For example:
+     * R.string.home_title
+     */
     protected abstract int getToolbarTitle();
 
+    /**
+     * Gets the toolbar navigation icon
+     * For example:
+     * R.drawable.ic_menu_34
+     */
     protected abstract int getToolbarNavigationIcon();
 
+    /**
+     * Gets the toolbar menu options
+     * For example:
+     * R.menu.toolbar_shopping_list_menu
+     */
     protected abstract int getOptionsMenu();
 
     /**
@@ -117,6 +138,11 @@ public abstract class BaseActivity extends AppCompatActivity implements
         super.onBackPressed();
     }
 
+    /**
+     * @param menu
+     * @return
+     * @inheritDoc
+     */
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         if (getOptionsMenu() != 0)
@@ -125,6 +151,10 @@ public abstract class BaseActivity extends AppCompatActivity implements
         return true;
     }
 
+    /**
+     * @param view
+     * @inheritDoc
+     */
     @Override
     public void onClick(View view) {
         switch (getToolbarNavigationIcon()) {
@@ -137,6 +167,11 @@ public abstract class BaseActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * @param item
+     * @return
+     * @inheritDoc
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -163,11 +198,22 @@ public abstract class BaseActivity extends AppCompatActivity implements
         return true;
     }
 
+    /**
+     * Open given activity
+     *
+     * @param intent intent
+     */
     public void openAcitivity(Intent intent) {
         startActivity(intent);
         finish();
     }
 
+    /**
+     * Open the given activity
+     *
+     * @param intent
+     * @param animated
+     */
     public void openAcitivity(Intent intent, boolean animated) {
         startActivity(intent);
 
@@ -175,12 +221,17 @@ public abstract class BaseActivity extends AppCompatActivity implements
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
-
+    /**
+     * Logout the current user
+     */
     private void logoutUser() {
         PreferenceHelper.clearAll(this);
         openAcitivity(new Intent(this, MainActivity.class));
     }
 
+    /**
+     * Open the menu drawer
+     */
     private void openMenu() {
         if (menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
             menuDrawerLayout.closeDrawer(menuNavigationView);

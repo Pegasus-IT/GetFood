@@ -2,12 +2,20 @@ package io.getfood.modules.shopping_list;
 
 import io.getfood.models.BasePresenter;
 import io.getfood.models.BaseView;
-import io.getfood.models.ShoppingList;
 
 public interface ShoppingListContract {
 
     interface View extends BaseView<Presenter> {
+
+        /**
+         * Create item dialog
+         */
         void createItemInput();
+
+        /**
+         * Create new item
+         * @param itemName string
+         */
         void createNewListItem(String itemName);
     }
 
