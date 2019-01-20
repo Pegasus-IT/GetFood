@@ -1,4 +1,4 @@
-package io.getfood.modules.getting_started;
+package io.getfood.modules.qr_scan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,9 +18,7 @@ import io.getfood.models.SwaggerApiError;
 import io.getfood.modules.BaseActivity;
 import io.getfood.modules.home.HomeActivity;
 
-import static io.getfood.data.local.Globals.API_BASEURL;
-
-public class QRScanActivity extends BaseActivity {
+public class OldQRScanActivity extends BaseActivity {
 
     private CodeScannerView scannerView;
     private CodeScanner codeScanner;
@@ -59,7 +57,7 @@ public class QRScanActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.activity_scan_qr;
+        return R.layout.scan_qr_activity;
     }
 
     @Override
@@ -80,7 +78,7 @@ public class QRScanActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         finish();
-        QRScanActivity.this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private void validateCode(String code) {

@@ -14,6 +14,7 @@ public class ApiManager extends ApiClient {
     private static ArrayList<ApiClient> apiClients = new ArrayList<>();
 
     public static void setToken(String token) {
+        System.out.println("Updated token " + token);
         for (ApiClient apiClient : apiClients) {
             apiClient.setApiKey(token);
         }

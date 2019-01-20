@@ -1,29 +1,28 @@
-package io.getfood.modules.home;
+package io.getfood.modules.qr_scan;
 
 import android.os.Bundle;
 
-import androidx.drawerlayout.widget.DrawerLayout;
 import io.getfood.R;
 import io.getfood.data.local.Globals;
 import io.getfood.modules.BaseActivity;
 import io.getfood.util.ActivityUtils;
 
-public class HomeActivity extends BaseActivity {
+public class QRScanActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        HomeFragment homeFragment =
-                (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if (homeFragment == null) {
+        QRScanFragment qrCodeFragment =
+                (QRScanFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (qrCodeFragment == null) {
             // Create the fragment
-            homeFragment = HomeFragment.newInstance();
+            qrCodeFragment = QRScanFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), homeFragment, R.id.contentFrame);
+                    getSupportFragmentManager(), qrCodeFragment, R.id.contentFrame);
         }
 
-        new HomePresenter(homeFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
+        new QRScanPresenter(qrCodeFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
     }
 
     @Override
@@ -33,21 +32,21 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.home_activity;
+        return R.layout.scan_qr_activity;
     }
 
     @Override
     protected int getToolbarTitle() {
-        return R.string.home_title;
+        return 0;
     }
 
     @Override
     protected int getToolbarNavigationIcon() {
-        return R.drawable.ic_menu_34;
+        return 0;
     }
 
     @Override
     protected int getOptionsMenu() {
-        return R.menu.toolbar_home_menu;
+        return 0;
     }
 }
