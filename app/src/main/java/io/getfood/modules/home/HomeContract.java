@@ -11,9 +11,10 @@ public interface HomeContract {
 
     interface View extends BaseView<Presenter> {
         void setLists(ArrayList<ListModel> lists);
+        void onListCreate(ListModel listModel);
     }
 
     interface Presenter extends BasePresenter {
-
+        void createNewList(String listTitle);
     }
 }

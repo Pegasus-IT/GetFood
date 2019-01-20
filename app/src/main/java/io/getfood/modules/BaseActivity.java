@@ -56,10 +56,10 @@ public abstract class BaseActivity extends AppCompatActivity implements
         setContentView(getLayoutResourceId());
         ButterKnife.bind(this);
 
-        if(menuNavigationView != null) {
+        if (menuNavigationView != null) {
             View header = menuNavigationView.getHeaderView(0);
 
-            if(header != null) {
+            if (header != null) {
                 navEmail = header.findViewById(R.id.nav_email);
                 navName = header.findViewById(R.id.nav_name);
                 navInitials = header.findViewById(R.id.nav_initials);
@@ -70,11 +70,11 @@ public abstract class BaseActivity extends AppCompatActivity implements
         if (UserUtil.isLoggedIn(sharedPreferences)) {
             User user = UserUtil.getUser(sharedPreferences);
 
-            if(navEmail != null)
+            if (navEmail != null)
                 navEmail.setText(user.getEmail());
-            if(navName != null)
+            if (navName != null)
                 navName.setText(String.format("%s %s", user.getFirstName(), user.getLastName()));
-            if(navInitials != null)
+            if (navInitials != null)
                 navInitials.setText(user.getInitials());
         }
 
@@ -142,6 +142,9 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 openAcitivity(new Intent(this, FamilyActivity.class));
                 break;
             case R.id.nav_new_list:
+                Intent intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("openCreateList", "yes");
+                startActivity(intent);
                 break;
             case R.id.nav_logout:
                 logoutUser();
