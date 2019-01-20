@@ -63,18 +63,44 @@ public class BaseFragment extends Fragment {
     }
 
 
+    /**
+     * Open given activity
+     *
+     * @param intent intent
+     */
     public void openActivity(Intent intent) {
         startActivity(intent);
     }
 
+    /**
+     * Open given activity
+     *
+     * @param intent
+     * @param animated
+     */
     public void openActivity(Intent intent, boolean animated) {
         openActivity(intent, animated, R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
+    /**
+     * Open given activity
+     *
+     * @param intent
+     * @param enterAnimation
+     * @param exitAnimation
+     */
     public void openActivity(Intent intent, int enterAnimation, int exitAnimation) {
         openActivity(intent, true, enterAnimation, exitAnimation);
     }
 
+    /**
+     * Open given activity
+     *
+     * @param intent
+     * @param animated
+     * @param enterAnimation
+     * @param exitAnimation
+     */
     public void openActivity(Intent intent, boolean animated, int enterAnimation, int exitAnimation) {
         startActivity(intent);
 

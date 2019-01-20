@@ -12,6 +12,10 @@ public class MainActivity extends Activity {
 
     private static Context context;
 
+    /**
+     * @inheritDoc
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +27,10 @@ public class MainActivity extends Activity {
         finish();
     }
 
+    /**
+     * Main context
+     * @return
+     */
     public static Context getAppContext() {
         return MainActivity.context;
     }

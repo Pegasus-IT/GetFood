@@ -53,11 +53,22 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         return new ShoppingListFragment();
     }
 
+    /**
+     * @param presenter given presenter
+     * @inheritDoc
+     */
     @Override
     public void setPresenter(@NonNull ShoppingListContract.Presenter presenter) {
         shoppingListPresenter = checkNotNull(presenter);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     * @inheritDoc
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +85,11 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         return view;
     }
 
+    /**
+     * @param view
+     * @param savedInstanceState
+     * @inheritDoc
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         viewContainer.setBackgroundColor(selectedShoppingList.getColor());
@@ -107,12 +123,18 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         createItem.setOnClickListener(view12 -> createItemInput());
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         shoppingListPresenter.start();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void createItemInput() {
         final EditText itemName = new EditText(getContext());
@@ -132,6 +154,10 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
                 .show();
     }
 
+    /**
+     * @param itemName string
+     * @inheritDoc
+     */
     @Override
     public void createNewListItem(String itemName) {
         mHandler.post(() -> {
