@@ -3,18 +3,16 @@ package io.getfood.modules.auth.profile;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
-import io.getfood.data.local.Globals;
+import androidx.annotation.Nullable;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.UserControllerApi;
 import io.getfood.data.swagger.models.User;
-import io.getfood.data.swagger.models.UserAuthenticationRequest;
+import io.getfood.data.swagger.models.UserUpdateModel;
 import io.getfood.models.ApiManager;
-import io.getfood.modules.auth.login.LoginContract;
 import io.getfood.util.PreferenceHelper;
 import io.getfood.util.UserUtil;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static io.getfood.data.local.Globals.API_BASEURL;
 
 public class ProfilePresenter implements ProfileContract.Presenter {
 
@@ -34,6 +32,61 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     @Override
     public void start() {
         System.out.println("Start Profile Presenter");
+        this.load();
+    }
 
+    private void load() {
+        new Thread(() -> {
+            try {
+                User user = api.userControllerCurrentUser();
+                profileView.onProfileLoad(user);
+            } catch (ApiException err) {
+                profileView.onError(err);
+            }
+        }).start();
+    }
+
+    @Override
+    public void validate(String username, String firstName, String lastName) {
+        if (username.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+            profileView.setSignUpEnabled(false);
+        } else {
+            profileView.setSignUpEnabled(true);
+        }
+    }
+
+    @Override
+    public void update(String username, @Nullable String password, String firstName, String lastName) {
+        new Thread(() -> {
+            try {
+                UserUpdateModel userUpdateModel = new UserUpdateModel();
+                userUpdateModel.setEmail(username);
+                if (password != null && !password.trim().equals("")) {
+                    userUpdateModel.setPassword(password);
+                }
+                userUpdateModel.setFirstName(firstName);
+                userUpdateModel.setLastName(lastName);
+
+                User user = api.userControllerUpdate(userUpdateModel);
+                UserUtil.saveUser(user, sharedPreferences);
+                profileView.onProfileLoad(user);
+                profileView.onProfileUpdate(user);
+            } catch (ApiException err) {
+                profileView.onError(err);
+            }
+        }).start();
+    }
+
+    @Override
+    public void delete() {
+        new Thread(() -> {
+            try {
+                api.userControllerDelete();
+                PreferenceHelper.clearAll(sharedPreferences);
+                profileView.onProfileDeleted();
+            } catch (ApiException err) {
+                profileView.onError(err);
+            }
+        }).start();
     }
 }

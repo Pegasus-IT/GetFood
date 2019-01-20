@@ -24,7 +24,6 @@ import io.getfood.data.swagger.models.Family;
 import io.getfood.modules.BaseFragment;
 import io.getfood.modules.auth.login.LoginActivity;
 import io.getfood.modules.home.HomeActivity;
-import io.getfood.modules.qr_scan.OldQRScanActivity;
 import io.getfood.modules.qr_scan.QRScanActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;

@@ -19,10 +19,10 @@ import java.util.Objects;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * UserCreateUpdateModel
+ * UserUpdateModel
  */
 
-public class UserCreateUpdateModel {
+public class UserUpdateModel {
 
   @SerializedName("firstName")
   private String firstName = null;
@@ -35,7 +35,7 @@ public class UserCreateUpdateModel {
 
   @SerializedName("email")
   private String email = null;
-  public UserCreateUpdateModel firstName(String firstName) {
+  public UserUpdateModel firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -53,7 +53,7 @@ public class UserCreateUpdateModel {
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
-  public UserCreateUpdateModel lastName(String lastName) {
+  public UserUpdateModel lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -71,7 +71,7 @@ public class UserCreateUpdateModel {
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
-  public UserCreateUpdateModel password(String password) {
+  public UserUpdateModel password(String password) {
     this.password = password;
     return this;
   }
@@ -82,14 +82,14 @@ public class UserCreateUpdateModel {
   * Get password
   * @return password
   **/
-  @Schema(example = "Test123!", required = true, description = "")
+  @Schema(example = "Test123!", description = "")
   public String getPassword() {
     return password;
   }
   public void setPassword(String password) {
     this.password = password;
   }
-  public UserCreateUpdateModel email(String email) {
+  public UserUpdateModel email(String email) {
     this.email = email;
     return this;
   }
@@ -115,11 +115,11 @@ public class UserCreateUpdateModel {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserCreateUpdateModel userCreateUpdateModel = (UserCreateUpdateModel) o;
-    return Objects.equals(this.firstName, userCreateUpdateModel.firstName) &&
-        Objects.equals(this.lastName, userCreateUpdateModel.lastName) &&
-        Objects.equals(this.password, userCreateUpdateModel.password) &&
-        Objects.equals(this.email, userCreateUpdateModel.email);
+    UserUpdateModel userUpdateModel = (UserUpdateModel) o;
+    return Objects.equals(this.firstName, userUpdateModel.firstName) &&
+        Objects.equals(this.lastName, userUpdateModel.lastName) &&
+        Objects.equals(this.password, userUpdateModel.password) &&
+        Objects.equals(this.email, userUpdateModel.email);
   }
 
   @Override
@@ -130,7 +130,7 @@ public class UserCreateUpdateModel {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserCreateUpdateModel {\n");
+    sb.append("class UserUpdateModel {\n");
 
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
