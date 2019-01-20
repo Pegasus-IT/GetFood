@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,7 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
 
     FamilyUsersAdapter familyUsersAdapter;
 
+    private Handler mHandler = new Handler(Looper.getMainLooper());
     private FamilyContract.Presenter familyPresenter;
 
     public static FamilyFragment newInstance() {
@@ -81,9 +84,11 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
         qrCode.setImageBitmap(decodedByte);
         familyName.setText(family.getName());
 
-        familyUsersAdapter = new FamilyUsersAdapter(getContext(), family.getUsers());
-        familyUsersAdapter.notifyDataSetChanged();
-        gridView.setAdapter(familyUsersAdapter);
+        mHandler.post(() -> {
+            familyUsersAdapter = new FamilyUsersAdapter(getContext(), family.getUsers());
+            familyUsersAdapter.notifyDataSetChanged();
+            gridView.setAdapter(familyUsersAdapter);
+        });
     }
 
     @Override
