@@ -22,7 +22,7 @@ public class FamilyUsersAdapter extends ArrayAdapter<User> {
 
     /**
      * @param context context
-     * @param users   all family members
+     * @param users all family members
      */
     public FamilyUsersAdapter(Context context, List<User> users) {
         super(context, 0, users);
