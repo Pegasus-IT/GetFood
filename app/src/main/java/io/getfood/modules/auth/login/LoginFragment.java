@@ -26,7 +26,6 @@ import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
 import io.getfood.modules.auth.sign_up.SignUpActivity;
 import io.getfood.modules.getting_started.GettingStartedActivity;
-import io.getfood.modules.home.HomeActivity;
 import io.getfood.util.ShowKeyboard;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -87,10 +86,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
         boolean disableAutoAuthStart = false;
         Activity activity = getActivity();
-        if(activity != null) {
+        if (activity != null) {
             Bundle bundle = activity.getIntent().getExtras();
 
-            if(bundle != null) {
+            if (bundle != null) {
                 String gettingStarted = bundle.getString("disableAutoAuthStart");
                 disableAutoAuthStart = gettingStarted != null;
             }
@@ -122,7 +121,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
             @Override
             public void onAuthenticationFailedWithHelp(@Nullable String help) {
-                if(help != null) {
+                if (help != null) {
                     onError(help);
                 } else {
                     onError("Login with fingerprint failed.");
@@ -153,12 +152,20 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         return new KFingerprintManager(getContext(), Globals.BIOMETRIC_KEY);
     }
 
+    /**
+     * @inheritDoc
+     * @param user model
+     */
     @Override
     public void onLogin(User user) {
         System.out.println(user);
         openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
+    /**
+     * Navigate to getting started activity
+     * @param user model
+     */
     @Override
     public void onTokenValidated(User user) {
         System.out.println(user);

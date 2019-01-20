@@ -50,6 +50,10 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @Nullable
     public TextView navInitials;
 
+    /**
+     * Creating the activity
+     * @param savedInstanceState bundle of information of the activity it started in
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +103,10 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     protected abstract int getOptionsMenu();
 
+    /**
+     * When the default android back button has been pressed,
+     * check if the menu drawer is other if so close it and return
+     */
     @Override
     public void onBackPressed() {
         if (toolbar != null && menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
