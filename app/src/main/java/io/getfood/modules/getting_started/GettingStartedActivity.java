@@ -1,10 +1,13 @@
 package io.getfood.modules.getting_started;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import io.getfood.R;
 import io.getfood.data.local.Globals;
 import io.getfood.modules.BaseActivity;
+import io.getfood.modules.auth.login.LoginActivity;
+import io.getfood.modules.home.HomeActivity;
 import io.getfood.util.ActivityUtils;
 
 public class GettingStartedActivity extends BaseActivity {
@@ -28,6 +31,9 @@ public class GettingStartedActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         finish();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.putExtra("disableAutoAuthStart", "yes");
+        startActivity(intent);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
