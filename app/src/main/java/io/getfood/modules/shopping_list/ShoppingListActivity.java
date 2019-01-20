@@ -1,77 +1,39 @@
 package io.getfood.modules.shopping_list;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
 
 import io.getfood.R;
-import io.getfood.data.swagger.models.ListItem;
-import io.getfood.models.ShoppingList;
+import io.getfood.data.local.Globals;
 import io.getfood.modules.BaseActivity;
+import io.getfood.util.ActivityUtils;
 
 public class ShoppingListActivity extends BaseActivity {
-
-    private ShoppingList selectedShoppingList;
-    private ListView listView;
-    private FloatingActionButton createItem, cameraButton;
-    private ShoppingListAdapter shoppingListAdapter;
-
-    private ArrayList<ListItem> shoppingList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        selectedShoppingList = (ShoppingList) getIntent().getSerializableExtra("selectedShoppingListItem");
+        ShoppingListFragment shoppingListFragment =
+                (ShoppingListFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (shoppingListFragment == null) {
+            // Create the fragment
+            shoppingListFragment = ShoppingListFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), shoppingListFragment, R.id.contentFrame);
+        }
 
-        View view = findViewById(R.id.shopping_list_container);
-        listView = findViewById(R.id.shopping_listview);
-        createItem = findViewById(R.id.shopping_list_create_fab);
-        cameraButton = findViewById(R.id.shopping_list_camera_fab);
-
-        // Set view background base on Color
-        view.setBackgroundColor(selectedShoppingList.getColor());
-
-        toolbar.setTitle(selectedShoppingList.getListName());
-        toolbar.setSubtitle(selectedShoppingList.getDate());
-        toolbar.setTitleTextAppearance(this, R.style.ToolbarTextAppearance_Title_White);
-        toolbar.setSubtitleTextAppearance(this, R.style.ToolbarTextAppearance_Subtitle_White);
-
-        //TODO: Replace with real data
-        ListItem incompleteItem = new ListItem();
-        incompleteItem.setName("Item");
-        incompleteItem.setChecked(false);
-        ListItem completeItem = new ListItem();
-        completeItem.setName("Item");
-        completeItem.setChecked(true);
-
-        shoppingList.add(incompleteItem);
-        shoppingList.add(incompleteItem);
-        shoppingList.add(incompleteItem);
-        shoppingList.add(completeItem);
-        shoppingList.add(completeItem);
-        shoppingList.add(incompleteItem);
-
-        shoppingListAdapter = new ShoppingListAdapter(this, shoppingList);
-        listView.setAdapter(shoppingListAdapter);
-
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> System.out.println(i));
-        createItem.setOnClickListener(view12 -> createItemInput());
+        new ShoppingListPresenter(shoppingListFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
     }
 
-    public ShoppingListAdapter getShoppingListAdapter() {
-        return shoppingListAdapter;
+    @Override
+    public void onBackPressed() {
+        finish();
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.activity_shopping_list;
+        return R.layout.shopping_list_activity;
     }
 
     @Override
@@ -87,38 +49,5 @@ public class ShoppingListActivity extends BaseActivity {
     @Override
     protected int getOptionsMenu() {
         return R.menu.toolbar_shopping_list_menu;
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        ShoppingListActivity.this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
-
-    private void createItemInput() {
-        final EditText itemName = new EditText(this);
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.shopping_list_create_item_title)
-                .setMessage(R.string.shopping_list_create_item_description)
-                .setView(itemName)
-                .setPositiveButton("Add", (dialog, whichButton) -> {
-                    if(!itemName.getText().toString().isEmpty()) {
-                        createNewListItem(itemName.getText().toString());
-                    } else {
-                        createItemInput();
-                    }
-                })
-                .setNegativeButton("Cancel", (dialog, whichButton) -> {})
-                .show();
-    }
-
-    private void createNewListItem(String itemName) {
-        ListItem listItem = new ListItem();
-        listItem.setName(itemName);
-        listItem.setChecked(false);
-        shoppingList.add(0,listItem);
-        shoppingListAdapter.notifyDataSetChanged();
-
-        //TODO: Add item to list in API logic
     }
 }

@@ -1,21 +1,16 @@
 package io.getfood.modules.shopping_list;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -31,7 +26,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
     private int mainItemColor, disabledItemColor;
 
     public ShoppingListAdapter(Context context, ArrayList<ListItem> items) {
-        super(context, 0 , items);
+        super(context, 0, items);
 
         this.context = context;
         this.shoppingListItems = items;
@@ -47,8 +42,8 @@ public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
     public View getView(int position, View itemView, @NonNull ViewGroup parent) {
         View listItem = itemView;
 
-        if(listItem == null)
-            listItem = LayoutInflater.from(context).inflate(R.layout.item_shopping_list, parent,false);
+        if (listItem == null)
+            listItem = LayoutInflater.from(context).inflate(R.layout.item_shopping_list, parent, false);
 
         ListItem shoppingItem = shoppingListItems.get(position);
 
@@ -75,7 +70,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
         TextView titleText = listItem.findViewById(R.id.text_shopping_list_title);
         TextView valueText = listItem.findViewById(R.id.text_shopping_list_value);
 
-        if(isChecked) {
+        if (isChecked) {
             titleText.setTextColor(disabledItemColor);
             valueText.setTextColor(disabledItemColor);
             titleText.setPaintFlags(titleText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

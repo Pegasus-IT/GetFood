@@ -91,29 +91,4 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         intent.putExtra("selectedShoppingListItem", item);
         openActivity(intent, true);
     }
-
-//    @Override
-//    public void setUsernameText(String text) {
-//        usernameInput.setText(text);
-//    }
-//
-//    @Override
-//    public void setPasswordText(String text) {
-//        passwordInput.setText(text);
-//    }
-//
-//    @Override
-//    public void setFirstnameText(String text) {
-//        firstnameInput.setText(text);
-//    }
-//
-//    @Override
-//    public void setLastnameText(String text) {
-//        lastnameInput.setText(text);
-//    }
-//
-//    @Override
-//    public void setUpdateButtonEnabled(boolean state) {
-//        updateButton.setEnabled(state);
-//    }
 }
