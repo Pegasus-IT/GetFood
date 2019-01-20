@@ -1,7 +1,6 @@
 package io.getfood.modules.auth.profile;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,9 +27,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ProfileFragment extends BaseFragment implements ProfileContract.View {
 
-    private ProfileContract.Presenter profilePresenter;
-    private Handler mHandler = new Handler(Looper.getMainLooper());
-
     @BindView(R.id.user_initials_block)
     TextView userInitials;
     @BindView(R.id.profile_full_name)
@@ -48,21 +44,45 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     @BindView(R.id.delete_account)
     TextView deleteText;
 
+    private ProfileContract.Presenter profilePresenter;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
+    public static ProfileFragment newInstance() {
+        return new ProfileFragment();
+    }
+
+    /**
+     * Validate userName
+     */
     @OnTextChanged(R.id.profile_email)
     void onProfileEmailChange() {
         validate();
     }
 
+    /**
+     * Validate firstName
+     */
     @OnTextChanged(R.id.profile_firstname)
     void onProfileFirstNameChange() {
         validate();
     }
 
+    /**
+     * Validate lastName
+     */
     @OnTextChanged(R.id.profile_lastname)
     void onProfileLastNameChange() {
         validate();
     }
 
+    /**
+     * On update account button click send update information
+     */
     @OnClick(R.id.update_account)
     void onUpdateAccountClick() {
         profilePresenter.update(
@@ -73,6 +93,9 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
         );
     }
 
+    /**
+     * On account delete button click show alert dialog
+     */
     @OnClick(R.id.delete_account)
     void onDeleteAccountClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -82,15 +105,22 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 .show();
     }
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
-    }
-
+    /**
+     * @param presenter given presenter
+     * @inheritDoc
+     */
     @Override
     public void setPresenter(@NonNull ProfileContract.Presenter presenter) {
         profilePresenter = checkNotNull(presenter);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     * @inheritDoc
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,12 +130,19 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
         return view;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         profilePresenter.start();
     }
 
+    /**
+     * @param user information
+     * @inheritDoc
+     */
     @Override
     public void onProfileLoad(User user) {
         mHandler.post(() -> {
@@ -118,12 +155,19 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
         });
     }
 
+    /**
+     * @param user information
+     * @inheritDoc
+     */
     @Override
     public void onProfileUpdate(User user) {
         showSnackbar("Profile saved!", R.color.color_success);
         passwordInput.setText("");
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onProfileDeleted() {
         Intent intent = new Intent(getContext(), LoginActivity.class);
@@ -132,16 +176,23 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
         getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    /**
+     * @param state check
+     * @inheritDoc
+     */
     @Override
-    public void setSignUpEnabled(boolean state) {
+    public void setUpdateButtonEnabled(boolean state) {
         updateButton.setEnabled(state);
     }
 
+    /**
+     * Validates the username, firstName and lastName
+     */
     private void validate() {
         profilePresenter.validate(
-          usernameInput.getText().toString(),
-          firstNameInput.getText().toString(),
-          lastNameInput.getText().toString()
+                usernameInput.getText().toString(),
+                firstNameInput.getText().toString(),
+                lastNameInput.getText().toString()
         );
     }
 }

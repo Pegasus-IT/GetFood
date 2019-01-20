@@ -38,12 +38,18 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         ApiManager.add(api.getApiClient(), preferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Profile Presenter");
         this.load();
     }
 
+    /**
+     * @inheritDoc
+     */
     private void load() {
         new Thread(() -> {
             try {
@@ -55,15 +61,28 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         }).start();
     }
 
+    /**
+     * @param username  email address
+     * @param firstName firstName
+     * @param lastName  lastName
+     * @inheritDoc
+     */
     @Override
     public void validate(String username, String firstName, String lastName) {
         if (username.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
-            profileView.setSignUpEnabled(false);
+            profileView.setUpdateButtonEnabled(false);
         } else {
-            profileView.setSignUpEnabled(true);
+            profileView.setUpdateButtonEnabled(true);
         }
     }
 
+    /**
+     * @param username  email address
+     * @param password  password
+     * @param firstName firstName
+     * @param lastName  LastName
+     * @inheritDoc
+     */
     @Override
     public void update(String username, @Nullable String password, String firstName, String lastName) {
         new Thread(() -> {
@@ -86,6 +105,9 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         }).start();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void delete() {
         new Thread(() -> {
