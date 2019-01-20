@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -23,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.getfood.R;
 import io.getfood.data.swagger.models.ListItem;
+import io.getfood.models.SeriazableListItem;
 import io.getfood.models.ShoppingList;
 import io.getfood.modules.BaseFragment;
 
@@ -39,7 +41,7 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
     private ShoppingListAdapter shoppingListAdapter;
     private Toolbar toolbar;
     private RelativeLayout viewContainer;
-    private ArrayList<ListItem> shoppingList = new ArrayList<>();
+    private ArrayList<SeriazableListItem> listItems = new ArrayList<>();
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private ShoppingListContract.Presenter shoppingListPresenter;
@@ -71,35 +73,7 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        viewContainer.setBackgroundColor(selectedShoppingList.getColor());
-
-        toolbar.setTitle(selectedShoppingList.getListName());
-        toolbar.setSubtitle(selectedShoppingList.getDate());
-        toolbar.setTitleTextAppearance(getContext(), R.style.ToolbarTextAppearance_Title_White);
-        toolbar.setSubtitleTextAppearance(getContext(), R.style.ToolbarTextAppearance_Subtitle_White);
-
-        ListItem completedItem = new ListItem();
-        completedItem.setName("Item");
-        completedItem.setChecked(true);
-        ListItem incompleteItem = new ListItem();
-        incompleteItem.setName("Item");
-        incompleteItem.setChecked(false);
-
-        //TODO: Replace with real data
-        shoppingList.add(completedItem);
-        shoppingList.add(incompleteItem);
-        shoppingList.add(incompleteItem);
-        shoppingList.add(incompleteItem);
-        shoppingList.add(incompleteItem);
-        shoppingList.add(incompleteItem);
-        shoppingList.add(completedItem);
-
-        shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingList);
-        listView.setAdapter(shoppingListAdapter);
-        mHandler.post(shoppingListAdapter::notifyDataSetChanged);
-
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> System.out.println(i));
-        createItem.setOnClickListener(view12 -> createItemInput());
+        shoppingListPresenter.load(selectedShoppingList.getId());
     }
 
     @Override
@@ -108,7 +82,6 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         shoppingListPresenter.start();
     }
 
-    @Override
     public void createItemInput() {
         final EditText itemName = new EditText(getContext());
         new AlertDialog.Builder(getContext())
@@ -117,7 +90,7 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
                 .setView(itemName)
                 .setPositiveButton("Add", (dialog, whichButton) -> {
                     if (!itemName.getText().toString().isEmpty()) {
-                        createNewListItem(itemName.getText().toString());
+                        shoppingListPresenter.createNewListItem(itemName.getText().toString(), selectedShoppingList);
                     } else {
                         createItemInput();
                     }
@@ -127,14 +100,33 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
                 .show();
     }
 
-    @Override
     public void createNewListItem(String itemName) {
         mHandler.post(() -> {
-            ListItem listItem = new ListItem();
+            SeriazableListItem listItem = new SeriazableListItem();
             listItem.setName(itemName);
             listItem.setChecked(false);
-            shoppingList.add(listItem);
+            listItems.add(listItem);
+            selectedShoppingList.setItems(listItems);
             shoppingListAdapter.notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public void onLoad(ShoppingList shoppingList) {
+        mHandler.post(() -> {
+            viewContainer.setBackgroundColor(selectedShoppingList.getColor());
+            getActivity().getWindow().setStatusBarColor(selectedShoppingList.getColor());
+            toolbar.setTitle(selectedShoppingList.getListName());
+            toolbar.setSubtitle(selectedShoppingList.getDate());
+            toolbar.setTitleTextAppearance(getContext(), R.style.ToolbarTextAppearance_Title_White);
+            toolbar.setSubtitleTextAppearance(getContext(), R.style.ToolbarTextAppearance_Subtitle_White);
+            shoppingListAdapter = new ShoppingListAdapter(getContext(), listItems, selectedShoppingList, shoppingListPresenter);
+            listView.setAdapter(shoppingListAdapter);
+            listItems.clear();
+            listItems.addAll(shoppingList.getItems());
+            mHandler.post(shoppingListAdapter::notifyDataSetChanged);
+
+            createItem.setOnClickListener(view12 -> createItemInput());
         });
     }
 }

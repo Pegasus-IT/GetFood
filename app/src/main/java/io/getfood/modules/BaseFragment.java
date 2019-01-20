@@ -32,8 +32,13 @@ public class BaseFragment extends Fragment {
     }
 
     public void onError(ApiException err) {
-        SwaggerApiError swaggerApiError = SwaggerApiError.parse(err.getResponseBody());
-        onError(swaggerApiError.getMessage());
+        String body = err.getResponseBody();
+        if  (body != null && !body.trim().equals("")) {
+            SwaggerApiError swaggerApiError = SwaggerApiError.parse(body);
+            onError(swaggerApiError.getMessage());
+        } else {
+            onError(err.getMessage());
+        }
     }
 
     public LoadToast createToast(String text) {
