@@ -28,7 +28,7 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
     EditText emailInput;
     @BindView(R.id.password)
     EditText passwordInput;
-    @BindView(R.id.first_name)
+    @BindView(R.id.family_first_name)
     EditText firstnameInput;
     @BindView(R.id.last_name)
     EditText lastnameInput;
@@ -50,7 +50,7 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
         validate();
     }
 
-    @OnTextChanged(R.id.first_name)
+    @OnTextChanged(R.id.family_first_name)
     public void onFirstNameChange() {
         validate();
     }
