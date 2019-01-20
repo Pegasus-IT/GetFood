@@ -131,10 +131,12 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
 
     @Override
     public void createNewListItem(String itemName) {
-        ListItem listItem = new ListItem();
-        listItem.setName(itemName);
-        listItem.setChecked(false);
-        shoppingList.add(listItem);
-        mHandler.post(shoppingListAdapter::notifyDataSetChanged);
+        mHandler.post(() -> {
+            ListItem listItem = new ListItem();
+            listItem.setName(itemName);
+            listItem.setChecked(false);
+            shoppingList.add(listItem);
+            shoppingListAdapter.notifyDataSetChanged();
+        });
     }
 }

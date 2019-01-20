@@ -40,6 +40,9 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
     @BindView(R.id.lets_get_started_underline)
     TextView letsGetStartedUnderlineText;
 
+    @BindView(R.id.not_ready)
+    TextView notReadyYetText;
+
     private GettingStartedContract.Presenter gettingStartedPresenter;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -49,7 +52,7 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
 
     @OnClick(R.id.join_family_button)
     void onJoinFamilyClick() {
-        if(getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
         } else {
             openCamera();
@@ -95,19 +98,19 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
                 this.letsGetStartedText.setVisibility(LinearLayout.VISIBLE);
                 this.letsGetStartedUnderlineText.setVisibility(LinearLayout.VISIBLE);
                 this.gettingStartedButtons.setVisibility(LinearLayout.VISIBLE);
+                this.notReadyYetText.setVisibility(LinearLayout.VISIBLE);
             } else {
                 this.letsGetStartedText.setVisibility(LinearLayout.GONE);
                 this.letsGetStartedUnderlineText.setVisibility(LinearLayout.GONE);
                 this.gettingStartedButtons.setVisibility(LinearLayout.GONE);
+                this.notReadyYetText.setVisibility(LinearLayout.GONE);
             }
         });
     }
 
     @Override
     public void onAlreadyInFamily() {
-        Intent intent = new Intent(getContext(), HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        openActivity(new Intent(getContext(), HomeActivity.class), false);
     }
 
     @Override
@@ -127,13 +130,14 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
                 .setMessage(R.string.getting_started_create_family_description)
                 .setView(familyName)
                 .setPositiveButton("Create", (dialog, whichButton) -> {
-                    if(!familyName.getText().toString().isEmpty()) {
+                    if (!familyName.getText().toString().isEmpty()) {
                         gettingStartedPresenter.createFamilyWithName(familyName.getText().toString());
                     } else {
                         createFamilyInput();
                     }
                 })
-                .setNegativeButton("Cancel", (dialog, whichButton) -> {})
+                .setNegativeButton("Cancel", (dialog, whichButton) -> {
+                })
                 .show();
     }
 }

@@ -117,14 +117,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void setLists(ArrayList<ListModel> lists) {
-        System.out.println(lists);
-        shoppingLists.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 8, 2));
-        shoppingLists.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 18, 6));
-        shoppingLists.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 3, 1));
-        shoppingLists.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 12, 7));
-        shoppingLists.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 9, 4));
-        shoppingLists.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 22, 16));
-        mHandler.post(homeListAdapter::notifyDataSetChanged);
+        mHandler.post(() -> {
+            System.out.println(lists);
+            shoppingLists.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 8, 2));
+            shoppingLists.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 18, 6));
+            shoppingLists.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 3, 1));
+            shoppingLists.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 12, 7));
+            shoppingLists.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 9, 4));
+            shoppingLists.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 22, 16));
+            homeListAdapter.notifyDataSetChanged();
+        });
     }
 
     @Override
