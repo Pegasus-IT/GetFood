@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/user-initials-block"
+                android:id="@+id/user_initials_block"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -31,7 +31,7 @@
                 android:textSize="48sp" />
 
             <TextView
-                android:id="@+id/profile-full-name"
+                android:id="@+id/profile_full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -91,6 +91,7 @@
                 android:background="@drawable/default_card"
                 android:ems="10"
                 android:inputType="textPassword"
+                android:hint="@string/new_password"
                 android:paddingHorizontal="15dp" />
             <!-- End of Password -->
 
@@ -143,18 +144,18 @@
             <!-- End of Last name -->
 
             <Button
-                android:id="@+id/update-account"
+                android:id="@+id/update_account"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/blue_card_30"
+                android:background="@drawable/blue_button"
                 android:text="@string/profile_update_account"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite" />
 
             <TextView
-                android:id="@+id/delete-account"
+                android:id="@+id/delete_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
