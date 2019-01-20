@@ -8,6 +8,7 @@ import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.UserControllerApi;
 import io.getfood.data.swagger.models.User;
 import io.getfood.data.swagger.models.UserAuthenticationRequest;
+import io.getfood.models.ApiManager;
 import io.getfood.modules.auth.login.LoginContract;
 import io.getfood.util.PreferenceHelper;
 import io.getfood.util.UserUtil;
@@ -27,7 +28,7 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         this.sharedPreferences = checkNotNull(preferences, "sharedPreferences cannot be null");
 
         api = new UserControllerApi();
-        api.getApiClient().setBasePath(API_BASEURL);
+        ApiManager.add(api.getApiClient(), preferences);
     }
 
     @Override

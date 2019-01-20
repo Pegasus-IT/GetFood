@@ -1,11 +1,9 @@
 package io.getfood.modules.shopping_list;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import io.getfood.R;
 import io.getfood.data.local.Globals;
-import io.getfood.models.ShoppingList;
 import io.getfood.modules.BaseActivity;
 import io.getfood.util.ActivityUtils;
 

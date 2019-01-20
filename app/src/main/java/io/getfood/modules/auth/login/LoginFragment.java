@@ -1,5 +1,6 @@
 package io.getfood.modules.auth.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,7 +26,6 @@ import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
 import io.getfood.modules.auth.sign_up.SignUpActivity;
 import io.getfood.modules.getting_started.GettingStartedActivity;
-import io.getfood.modules.home.HomeActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -82,6 +82,20 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         ButterKnife.bind(this, view);
+
+        boolean disableAutoAuthStart = false;
+        Activity activity = getActivity();
+        if(activity != null) {
+            Bundle bundle = activity.getIntent().getExtras();
+
+            if(bundle != null) {
+                String gettingStarted = bundle.getString("disableAutoAuthStart");
+                disableAutoAuthStart = gettingStarted != null;
+            }
+        }
+
+        loginPresenter.setDisableAutoAuthStart(disableAutoAuthStart);
+
         return view;
     }
 
