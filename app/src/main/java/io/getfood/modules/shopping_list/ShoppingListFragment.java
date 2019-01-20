@@ -44,6 +44,11 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private ShoppingListContract.Presenter shoppingListPresenter;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static ShoppingListFragment newInstance() {
         return new ShoppingListFragment();
     }

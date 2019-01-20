@@ -46,6 +46,11 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
     private GettingStartedContract.Presenter gettingStartedPresenter;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static GettingStartedFragment newInstance() {
         return new GettingStartedFragment();
     }

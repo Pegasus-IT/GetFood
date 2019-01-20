@@ -49,6 +49,11 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private FamilyContract.Presenter familyPresenter;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static FamilyFragment newInstance() {
         return new FamilyFragment();
     }
