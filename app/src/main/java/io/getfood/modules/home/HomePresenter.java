@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.ListControllerApi;
 import io.getfood.data.swagger.models.ListCreateUpdate;
-import io.getfood.data.swagger.models.ListItemCreateUpdate;
 import io.getfood.data.swagger.models.ListModel;
 import io.getfood.models.ApiManager;
 
@@ -26,7 +25,7 @@ public class HomePresenter implements HomeContract.Presenter {
      * terms, Presenter does the job of querying your Model, updating the View while responding to
      * the user's interactions.
      *
-     * @param homeView the given view
+     * @param homeView    the given view
      * @param preferences SharedPreferences
      */
     HomePresenter(@NonNull HomeContract.View homeView, SharedPreferences preferences) {
@@ -38,12 +37,18 @@ public class HomePresenter implements HomeContract.Presenter {
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Home Presenter");
         this.load();
     }
 
+    /**
+     * Load the shopping lists
+     */
     private void load() {
         new Thread(() -> {
             try {
@@ -55,6 +60,10 @@ public class HomePresenter implements HomeContract.Presenter {
         }).start();
     }
 
+    /**
+     * @param listTitle string
+     * @inheritDoc
+     */
     @Override
     public void createNewList(String listTitle) {
         System.out.println(listTitle);
