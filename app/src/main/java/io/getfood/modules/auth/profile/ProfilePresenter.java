@@ -20,6 +20,15 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     private final ProfileContract.View profileView;
     private final UserControllerApi api;
 
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param profileView the given view
+     * @param preferences SharedPreferences
+     */
     ProfilePresenter(@NonNull ProfileContract.View profileView, SharedPreferences preferences) {
         this.profileView = checkNotNull(profileView, "profileView cannot be null");
         this.profileView.setPresenter(this);

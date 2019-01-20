@@ -40,43 +40,75 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     Button loginButton;
     @BindView(R.id.button_fingerprint)
     ImageButton fingerprintButton;
+
     private LoginContract.Presenter loginPresenter;
 
+    /**
+     * Creates a new instance
+     *
+     * @return login fragment
+     */
     public static LoginFragment newInstance() {
         return new LoginFragment();
     }
 
+    /**
+     * Check if username is valid on input change
+     */
     @OnTextChanged(R.id.username)
     public void onUsernameChange() {
         loginPresenter.checkValid(usernameInput.getText().toString(), passwordInput.getText().toString());
     }
 
+    /**
+     * Check if password is valid on input change
+     */
     @OnTextChanged(R.id.password)
     public void onPasswordChange() {
         loginPresenter.checkValid(usernameInput.getText().toString(), passwordInput.getText().toString());
     }
 
+    /**
+     * @param presenter given presenter
+     * @inheritDoc
+     */
     @Override
     public void setPresenter(@NonNull LoginContract.Presenter presenter) {
         loginPresenter = checkNotNull(presenter);
     }
 
+    /**
+     * Send credentials to login on button click
+     */
     @OnClick(R.id.button_login)
     public void onLoginButtonClick() {
         loginPresenter.login(usernameInput.getText().toString(), passwordInput.getText().toString());
     }
 
+    /**
+     * Display the fingerprint authentication
+     */
     @OnClick(R.id.button_fingerprint)
     public void onFingerprintButtonClick() {
         showFingerAuth();
     }
 
+    /**
+     * Navigate to sign up
+     */
     @OnClick(R.id.no_account)
     public void onNoAccountTextClick() {
         startActivity(new Intent(getActivity(), SignUpActivity.class));
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     * @inheritDoc
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,6 +132,9 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         return view;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void showFingerAuth() {
         createFingerprintManagerInstance().authenticate(new KFingerprintManager.AuthenticationCallback() {
@@ -142,19 +177,26 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         }, getFragmentManager());
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         loginPresenter.start();
     }
 
+    /**
+     * Creates the fingerprint instance
+     * @return instance
+     */
     private KFingerprintManager createFingerprintManagerInstance() {
         return new KFingerprintManager(getContext(), Globals.BIOMETRIC_KEY);
     }
 
     /**
-     * @inheritDoc
      * @param user model
+     * @inheritDoc
      */
     @Override
     public void onLogin(User user) {
@@ -163,8 +205,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
     /**
-     * Navigate to getting started activity
      * @param user model
+     * @inheritDoc
      */
     @Override
     public void onTokenValidated(User user) {
@@ -172,26 +214,44 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
+    /**
+     * @param text
+     * @inheritDoc
+     */
     @Override
     public void setUsernameText(String text) {
         usernameInput.setText(text);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void showFingerPrintButton() {
         fingerprintButton.setAlpha(1f);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void hideFingerPrintButton() {
         fingerprintButton.setAlpha(0f);
     }
 
+    /**
+     * @param state
+     * @inheritDoc
+     */
     @Override
     public void setLoginButtonEnabled(boolean state) {
         loginButton.setEnabled(state);
     }
 
+    /**
+     * @param state
+     * @inheritDoc
+     */
     @Override
     public void setFingerprintButtonEnabled(boolean state) {
         fingerprintButton.setEnabled(state);

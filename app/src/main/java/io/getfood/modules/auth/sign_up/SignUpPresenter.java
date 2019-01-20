@@ -18,6 +18,15 @@ public class SignUpPresenter implements SignUpContract.Presenter {
     private final SignUpContract.View signUpView;
     private final UserControllerApi api;
 
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param signUpView the given view
+     * @param preferences SharedPreferences
+     */
     SignUpPresenter(@NonNull SignUpContract.View signUpView, SharedPreferences preferences) {
         this.signUpView = checkNotNull(signUpView, "signUpView cannot be null");
         this.signUpView.setPresenter(this);
