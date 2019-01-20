@@ -79,6 +79,7 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
         familyName.setText(family.getName());
 
         familyUsersAdapter = new FamilyUsersAdapter(getContext(), family.getUsers());
+        familyUsersAdapter.notifyDataSetChanged();
         gridView.setAdapter(familyUsersAdapter);
     }
 
