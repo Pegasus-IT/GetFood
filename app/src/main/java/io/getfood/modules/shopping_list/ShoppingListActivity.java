@@ -83,6 +83,6 @@ public class ShoppingListActivity extends BaseActivity {
      */
     @Override
     protected int getOptionsMenu() {
-        return R.menu.toolbar_shopping_list_menu;
+        return 0;
     }
 }

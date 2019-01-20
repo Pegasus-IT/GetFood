@@ -15,4 +15,11 @@
         android:title="@string/shopping_list_remove_menu_button"
         android:visible="true" />
 
+    <item
+        android:id="@+id/shopping_list_menu_action_clear"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="@string/clear_finished_items"
+        android:visible="true" />
+
 </menu>
