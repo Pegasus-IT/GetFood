@@ -1,5 +1,6 @@
 package io.getfood.modules.family;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import io.getfood.R;
 import io.getfood.data.swagger.models.Family;
 import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
+import io.getfood.modules.auth.sign_up.SignUpActivity;
+import io.getfood.modules.getting_started.GettingStartedActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -83,8 +86,13 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
         gridView.setAdapter(familyUsersAdapter);
     }
 
+    @Override
+    public void onFamilyLeave(Family family) {
+        openActivity(new Intent(getActivity(), GettingStartedActivity.class), true);
+    }
+
     @OnClick(R.id.family_leave_button)
     public void onFamilyLeaveClick() {
-
+        familyPresenter.leaveFamily();
     }
 }
