@@ -46,4 +46,16 @@ public class FamilyPresenter implements FamilyContract.Presenter {
             }
         }).start();
     }
+
+    @Override
+    public void leaveFamily() {
+        new Thread(() -> {
+            try {
+                Family family = api.familyControllerLeaveActiveFamily();
+                familyView.onFamilyLeave(family);
+            } catch (ApiException err) {
+                familyView.onError(err);
+            }
+        }).start();
+    }
 }

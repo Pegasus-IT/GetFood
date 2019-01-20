@@ -18,6 +18,7 @@ import io.getfood.R;
 import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
 import io.getfood.modules.auth.login.LoginActivity;
+import io.getfood.modules.getting_started.GettingStartedActivity;
 import io.getfood.modules.home.HomeActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -101,7 +102,7 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
     @Override
     public void onRegister(User userControllerAuthenticate) {
         System.out.println(userControllerAuthenticate);
-        startActivity(new Intent(getContext(), HomeActivity.class));
+        startActivity(new Intent(getContext(), GettingStartedActivity.class));
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
