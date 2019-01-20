@@ -34,8 +34,6 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
     ListView listView;
     @BindView(R.id.shopping_list_create_fab)
     FloatingActionButton createItem;
-    @BindView(R.id.shopping_list_camera_fab)
-    FloatingActionButton cameraButton;
 
     private ShoppingList selectedShoppingList;
     private ShoppingListAdapter shoppingListAdapter;
