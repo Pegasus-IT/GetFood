@@ -27,8 +27,7 @@ public class LoginActivity extends BaseActivity {
                     getSupportFragmentManager(), loginFragment, R.id.contentFrame);
         }
 
-        Looper looper = getApplicationContext().getMainLooper();
-        new LoginPresenter(loginFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE), looper);
+        new LoginPresenter(loginFragment, getSharedPreferences(Globals.DEFAULT_PREFERENCE_SET, MODE_PRIVATE));
     }
 
     /**

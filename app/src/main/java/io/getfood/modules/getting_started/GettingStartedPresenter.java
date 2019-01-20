@@ -17,6 +17,15 @@ public class GettingStartedPresenter implements GettingStartedContract.Presenter
     private final GettingStartedContract.View gettingStartedView;
     private final FamilyControllerApi api;
 
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param gettingStartedView the given view
+     * @param preferences SharedPreferences
+     */
     GettingStartedPresenter(@NonNull GettingStartedContract.View gettingStartedView, SharedPreferences preferences) {
         this.gettingStartedView = checkNotNull(gettingStartedView, "gettingStartedView cannot be null");
         this.gettingStartedView.setPresenter(this);
