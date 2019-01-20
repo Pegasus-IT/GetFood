@@ -68,6 +68,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             ShoppingList selectedShoppingList = (ShoppingList) adapterView.getItemAtPosition(i);
             openShoppingListItem(selectedShoppingList);
         });
+        mHandler.post(homeListAdapter::notifyDataSetChanged);
         return view;
     }
 
