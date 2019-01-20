@@ -41,15 +41,31 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private HomeContract.Presenter homePresenter;
     private ArrayList<ShoppingList> shoppingLists;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
 
+    /**
+     * @inheritDoc
+     * @param presenter given presenter
+     */
     @Override
     public void setPresenter(@NonNull HomeContract.Presenter presenter) {
         homePresenter = checkNotNull(presenter);
     }
 
+    /**
+     * @inheritDoc
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +106,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         return view;
     }
 
+    /**
+     * Show create list dialog
+     */
     public void createListInput() {
         final EditText listName = new EditText(getContext());
         new AlertDialog.Builder(getContext())
@@ -108,12 +127,19 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 .show();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         homePresenter.start();
     }
 
+    /**
+     * @param lists listModel
+     * @inheritDoc
+     */
     @Override
     public void setLists(ArrayList<ListModel> lists) {
         mHandler.post(() -> {
@@ -123,6 +149,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         });
     }
 
+    /**
+     * @param listModel listModel
+     * @inheritDoc
+     */
     @Override
     public void onListCreate(ListModel listModel) {
         System.out.println("Created list");
@@ -130,6 +160,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         showSnackbar("List created!", R.color.color_success);
     }
 
+    /**
+     * Open the clicked shopping list item
+     *
+     * @param item ShoppingList
+     */
     private void openShoppingListItem(ShoppingList item) {
         Intent intent = new Intent(getContext(), ShoppingListActivity.class);
         intent.putExtra("selectedShoppingListItem", item);

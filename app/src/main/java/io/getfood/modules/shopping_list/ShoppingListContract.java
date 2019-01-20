@@ -9,6 +9,11 @@ public interface ShoppingListContract {
 
     interface View extends BaseView<Presenter> {
         void onLoad(ShoppingList shoppingList);
+
+        /**
+         * Create item dialog
+         */
+        void createItemInput();
     }
 
     interface Presenter extends BasePresenter {

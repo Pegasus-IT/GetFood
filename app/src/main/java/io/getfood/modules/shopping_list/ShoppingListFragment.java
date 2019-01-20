@@ -46,15 +46,31 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private ShoppingListContract.Presenter shoppingListPresenter;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static ShoppingListFragment newInstance() {
         return new ShoppingListFragment();
     }
 
+    /**
+     * @param presenter given presenter
+     * @inheritDoc
+     */
     @Override
     public void setPresenter(@NonNull ShoppingListContract.Presenter presenter) {
         shoppingListPresenter = checkNotNull(presenter);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     * @inheritDoc
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,17 +87,29 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         return view;
     }
 
+    /**
+     * @param view
+     * @param savedInstanceState
+     * @inheritDoc
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         shoppingListPresenter.load(selectedShoppingList.getId());
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         shoppingListPresenter.start();
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void createItemInput() {
         final EditText itemName = new EditText(getContext());
         new AlertDialog.Builder(getContext())
@@ -98,17 +126,6 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
                 .setNegativeButton("Cancel", (dialog, whichButton) -> {
                 })
                 .show();
-    }
-
-    public void createNewListItem(String itemName) {
-        mHandler.post(() -> {
-            SeriazableListItem listItem = new SeriazableListItem();
-            listItem.setName(itemName);
-            listItem.setChecked(false);
-            listItems.add(listItem);
-            selectedShoppingList.setItems(listItems);
-            shoppingListAdapter.notifyDataSetChanged();
-        });
     }
 
     @Override

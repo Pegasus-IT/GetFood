@@ -15,6 +15,15 @@ public class QRScanPresenter implements QRScanContract.Presenter {
     private final QRScanContract.View qrScanView;
     private final FamilyControllerApi api;
 
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param homeView    the given view
+     * @param preferences SharedPreferences
+     */
     QRScanPresenter(@NonNull QRScanContract.View homeView, SharedPreferences preferences) {
         this.qrScanView = checkNotNull(homeView, "qrScanView cannot be null");
         this.qrScanView.setPresenter(this);
@@ -24,12 +33,19 @@ public class QRScanPresenter implements QRScanContract.Presenter {
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Home Presenter");
 
     }
 
+    /**
+     * @param code
+     * @inheritDoc
+     */
     @Override
     public void validateCode(String code) {
         new Thread(() -> {

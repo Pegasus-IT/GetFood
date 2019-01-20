@@ -21,6 +21,15 @@ public class FamilyPresenter implements FamilyContract.Presenter {
     private final FamilyContract.View familyView;
     private final FamilyControllerApi api;
 
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param familyView the given view
+     * @param preferences SharedPreferences
+     */
     FamilyPresenter(@NonNull FamilyContract.View familyView, SharedPreferences preferences) {
         this.familyView = checkNotNull(familyView, "familyView cannot be null");
         this.familyView.setPresenter(this);
@@ -30,12 +39,18 @@ public class FamilyPresenter implements FamilyContract.Presenter {
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Family Presenter");
         this.load();
     }
 
+    /**
+     * Load the active family
+     */
     private void load() {
         new Thread(() -> {
             try {
@@ -47,6 +62,9 @@ public class FamilyPresenter implements FamilyContract.Presenter {
         }).start();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void leaveFamily() {
         new Thread(() -> {

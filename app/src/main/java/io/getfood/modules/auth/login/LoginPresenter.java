@@ -22,22 +22,33 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
-    private final Handler handler;
     private final SharedPreferences sharedPreferences;
     private final LoginContract.View loginView;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
     private final UserControllerApi api;
     private boolean autoAuthStartState = false;
 
-    LoginPresenter(@NonNull LoginContract.View loginView, SharedPreferences preferences, Looper looper) {
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param loginView the given view
+     * @param preferences SharedPreferences
+     */
+    LoginPresenter(@NonNull LoginContract.View loginView, SharedPreferences preferences) {
         this.loginView = checkNotNull(loginView, "loginView cannot be null");
         this.loginView.setPresenter(this);
         this.sharedPreferences = checkNotNull(preferences, "sharedPreferences cannot be null");
-        this.handler = new Handler(checkNotNull(looper, "looper cannot be null"));
 
         api = new UserControllerApi();
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Login Presenter");
@@ -45,7 +56,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         if (loginStatus) {
             loginView.showFingerPrintButton();
-            if(!autoAuthStartState) {
+            if (!autoAuthStartState) {
                 loginView.showFingerAuth();
             }
             loginView.setLoginButtonEnabled(true);
@@ -58,6 +69,11 @@ public class LoginPresenter implements LoginContract.Presenter {
         loginView.setLoginButtonEnabled(false);
     }
 
+    /**
+     * @param username mail input
+     * @param password password input
+     * @inheritDoc
+     */
     @Override
     public void login(String username, String password) {
         LoadToast toast = loginView.createToast("Logging in...");
@@ -69,14 +85,14 @@ public class LoginPresenter implements LoginContract.Presenter {
             try {
                 User user = api.userControllerAuthenticate(request);
                 TimeUnit.MILLISECONDS.sleep(500);
-                this.handler.post(toast::success);
+                this.mHandler.post(toast::success);
                 TimeUnit.MILLISECONDS.sleep(500);
                 loginView.onLogin(user);
                 UserUtil.saveUser(user, sharedPreferences);
             } catch (ApiException err) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(500);
-                    this.handler.post(toast::error);
+                    this.mHandler.post(toast::error);
                     TimeUnit.MILLISECONDS.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -89,6 +105,11 @@ public class LoginPresenter implements LoginContract.Presenter {
         }).start();
     }
 
+    /**
+     * @param username mail input
+     * @param password password input
+     * @inheritDoc
+     */
     @Override
     public void checkValid(String username, String password) {
         if (username.isEmpty() || password.isEmpty()) {
@@ -98,6 +119,9 @@ public class LoginPresenter implements LoginContract.Presenter {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public void validateStoredToken() {
         ApiManager.setToken(UserUtil.getToken(sharedPreferences));
         LoadToast toast = loginView.createToast("Logging in...");
@@ -107,14 +131,14 @@ public class LoginPresenter implements LoginContract.Presenter {
                 User user = api.userControllerCurrentUser();
                 if (user != null) {
                     TimeUnit.MILLISECONDS.sleep(500);
-                    this.handler.post(toast::success);
+                    this.mHandler.post(toast::success);
                     TimeUnit.MILLISECONDS.sleep(500);
                     loginView.onTokenValidated(user);
                 } else {
                     TimeUnit.MILLISECONDS.sleep(500);
                     loginView.onError("Token expired!");
                     loginView.setUsernameText("");
-                    this.handler.post(toast::error);
+                    this.mHandler.post(toast::error);
                 }
             } catch (ApiException err) {
                 try {
@@ -122,7 +146,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                this.handler.post(toast::error);
+                this.mHandler.post(toast::error);
                 System.out.println(err.getCode());
                 if (err.getCode() != 401) {
                     loginView.onError(err);
@@ -140,6 +164,10 @@ public class LoginPresenter implements LoginContract.Presenter {
         }).start();
     }
 
+    /**
+     * @param autoAuthStartState check for autoAuth
+     * @inheritDoc
+     */
     @Override
     public void setDisableAutoAuthStart(boolean autoAuthStartState) {
         this.autoAuthStartState = autoAuthStartState;
