@@ -3,7 +3,6 @@ package io.getfood.modules.home;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -69,7 +68,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             }
         }
 
-        if ( openCreateList ) {
+        if (openCreateList) {
             createListInput();
         }
 
@@ -118,13 +117,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void setLists(ArrayList<ListModel> lists) {
         mHandler.post(() -> {
-            System.out.println(lists);
-            shoppingLists.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 8, 2));
-            shoppingLists.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 18, 6));
-            shoppingLists.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 3, 1));
-            shoppingLists.add(new ShoppingList("Feest", "15 Jan", Color.parseColor("#427CFB"), 12, 7));
-            shoppingLists.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 9, 4));
-            shoppingLists.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 22, 16));
+            shoppingLists.clear();
+            shoppingLists.addAll(ShoppingList.parse(lists));
             homeListAdapter.notifyDataSetChanged();
         });
     }

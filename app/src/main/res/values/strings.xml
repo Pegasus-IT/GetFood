@@ -35,7 +35,6 @@
     <!-- Home Page -->
     <string name="home_title">My Lists</string>
     <string name="home_list_item_date">Created on</string>
-    <string name="home_list_item_sharing_message">You are not sharing this list.</string>
     <string name="home_create_list">Create new list</string>
     <string name="home_create_list_description">Please fill in the name of the list</string>
 

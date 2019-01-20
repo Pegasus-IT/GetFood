@@ -10,31 +10,34 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import io.getfood.R;
 import io.getfood.data.swagger.models.ListItem;
+import io.getfood.models.SeriazableListItem;
+import io.getfood.models.ShoppingList;
 
 
-public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
+public class ShoppingListAdapter extends ArrayAdapter<SeriazableListItem> {
 
     private Context context;
-    private List<ListItem> shoppingListItems;
+    private List<SeriazableListItem> shoppingListItems;
+    private ShoppingListContract.Presenter presenter;
+    private ShoppingList shoppingList;
 
     private int mainItemColor, disabledItemColor;
 
-    public ShoppingListAdapter(Context context, ArrayList<ListItem> items) {
-        super(context, 0, items);
+    public ShoppingListAdapter(Context context, ArrayList<SeriazableListItem> listItems, ShoppingList shoppingList, ShoppingListContract.Presenter presenter) {
+        super(context, 0, listItems);
 
         this.context = context;
-        this.shoppingListItems = items;
+        this.shoppingListItems = listItems;
+        this.presenter = presenter;
+        this.shoppingList = shoppingList;
 
         this.mainItemColor = context.getResources().getColor(R.color.getfood_main_blue);
         this.disabledItemColor = context.getResources().getColor(R.color.colorBlack);
-
-//        Collections.sort(this.shoppingListItems, (o1, o2) -> o2.isChecked().compareTo(o1.isChecked()));
     }
 
     @NonNull
@@ -54,19 +57,21 @@ public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
         valueText.setText("?");
 
         CheckBox checkBox = listItem.findViewById(R.id.checkbox_shopping_list);
-        checkBox.setChecked(shoppingItem.isChecked());
+        boolean isChecked = shoppingItem.isChecked();
+        checkBox.setChecked(isChecked);
 
         View finalListItem = listItem;
-
-        listItem.setOnClickListener(view -> checkBox.setChecked(!checkBox.isChecked()));
-        checkBox.setOnCheckedChangeListener((checkbox, isChecked) -> updateSingleItem(finalListItem, isChecked));
-
-        updateSingleItem(finalListItem, shoppingItem.isChecked());
+        listItem.setOnClickListener((listView) -> {
+            checkBox.setChecked(!shoppingItem.isChecked());
+            updateSingleItem(shoppingItem, finalListItem, checkBox.isChecked(), true);
+        });
+        checkBox.setOnClickListener((checkbox) -> updateSingleItem(shoppingItem, finalListItem, checkBox.isChecked(), true));
+        updateSingleItem(shoppingItem, finalListItem, shoppingItem.isChecked(), false);
 
         return listItem;
     }
 
-    private void updateSingleItem(View listItem, boolean isChecked) {
+    private void updateSingleItem(ListItem shoppingItem, View listItem, boolean isChecked, boolean update) {
         TextView titleText = listItem.findViewById(R.id.text_shopping_list_title);
         TextView valueText = listItem.findViewById(R.id.text_shopping_list_value);
 
@@ -80,6 +85,14 @@ public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
             titleText.setPaintFlags(0);
         }
 
-        //TODO: Update item in API logic
+        if(update && isChecked != shoppingItem.isChecked()) {
+            System.out.println("Should update!");
+            System.out.println(isChecked);
+            System.out.println(shoppingItem.isChecked());
+
+            shoppingItem.setChecked(isChecked);
+            presenter.setMarked(shoppingItem, shoppingList);
+        }
+        shoppingItem.setChecked(isChecked);
     }
 }
