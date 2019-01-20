@@ -39,12 +39,18 @@ public class FamilyPresenter implements FamilyContract.Presenter {
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Family Presenter");
         this.load();
     }
 
+    /**
+     * Load the active family
+     */
     private void load() {
         new Thread(() -> {
             try {
@@ -56,6 +62,9 @@ public class FamilyPresenter implements FamilyContract.Presenter {
         }).start();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void leaveFamily() {
         new Thread(() -> {
