@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -79,13 +78,21 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         toolbar.setTitleTextAppearance(getContext(), R.style.ToolbarTextAppearance_Title_White);
         toolbar.setSubtitleTextAppearance(getContext(), R.style.ToolbarTextAppearance_Subtitle_White);
 
+        ListItem completedItem = new ListItem();
+        completedItem.setName("Item");
+        completedItem.setChecked(true);
+        ListItem incompleteItem = new ListItem();
+        incompleteItem.setName("Item");
+        incompleteItem.setChecked(false);
+
         //TODO: Replace with real data
-        shoppingList.add(new ListItem("Item 01", false));
-        shoppingList.add(new ListItem("Item 02", false));
-        shoppingList.add(new ListItem("Item 03", true));
-        shoppingList.add(new ListItem("Item 04", false));
-        shoppingList.add(new ListItem("Item 05", false));
-        shoppingList.add(new ListItem("Item 06", true));
+        shoppingList.add(incompleteItem);
+        shoppingList.add(incompleteItem);
+        shoppingList.add(completedItem);
+        shoppingList.add(incompleteItem);
+        shoppingList.add(incompleteItem);
+        shoppingList.add(completedItem);
+        shoppingList.add(completedItem);
 
         shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingList);
         listView.setAdapter(shoppingListAdapter);
@@ -121,9 +128,10 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
 
     @Override
     public void createNewListItem(String itemName) {
-        shoppingList.add(0, new ListItem(itemName, false));
+        ListItem listItem = new ListItem();
+        listItem.setName(itemName);
+        listItem.setChecked(false);
+        shoppingList.add(listItem);
         shoppingListAdapter.notifyDataSetChanged();
-
-        //TODO: Add item to list in API logic
     }
 }

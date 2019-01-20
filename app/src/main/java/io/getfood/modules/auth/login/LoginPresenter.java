@@ -26,6 +26,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     private final SharedPreferences sharedPreferences;
     private final LoginContract.View loginView;
     private final UserControllerApi api;
+    private boolean autoAuthStartState = false;
 
     LoginPresenter(@NonNull LoginContract.View loginView, SharedPreferences preferences, Looper looper) {
         this.loginView = checkNotNull(loginView, "loginView cannot be null");
@@ -44,7 +45,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         if (loginStatus) {
             loginView.showFingerPrintButton();
-            loginView.showFingerAuth();
+            if(!autoAuthStartState) {
+                loginView.showFingerAuth();
+            }
             loginView.setLoginButtonEnabled(true);
             loginView.setUsernameText(PreferenceHelper.read(this.sharedPreferences, Globals.PrefKeys.LOGIN_USERNAME, ""));
         } else {
@@ -64,13 +67,20 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         new Thread(() -> {
             try {
+                User user = api.userControllerAuthenticate(request);
                 TimeUnit.MILLISECONDS.sleep(500);
                 this.handler.post(toast::success);
                 TimeUnit.MILLISECONDS.sleep(500);
-                User user = api.userControllerAuthenticate(request);
                 loginView.onLogin(user);
                 UserUtil.saveUser(user, sharedPreferences);
             } catch (ApiException err) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    this.handler.post(toast::error);
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(err.getResponseBody());
                 loginView.onError(err);
             } catch (Exception e) {
@@ -128,5 +138,10 @@ public class LoginPresenter implements LoginContract.Presenter {
                 loginView.onError(e.getMessage());
             }
         }).start();
+    }
+
+    @Override
+    public void setDisableAutoAuthStart(boolean autoAuthStartState) {
+        this.autoAuthStartState = autoAuthStartState;
     }
 }

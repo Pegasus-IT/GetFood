@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import io.getfood.data.swagger.api.UserControllerApi;
+import io.getfood.models.ApiManager;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static io.getfood.data.local.Globals.API_BASEURL;
@@ -20,7 +21,7 @@ public class FamilyPresenter implements FamilyContract.Presenter {
         this.sharedPreferences = checkNotNull(preferences, "sharedPreferences cannot be null");
 
         api = new UserControllerApi();
-        api.getApiClient().setBasePath(API_BASEURL);
+        ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
     @Override

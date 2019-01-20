@@ -30,6 +30,8 @@ public interface LoginContract {
         void checkValid(String username, String password);
 
         void validateStoredToken();
+
+        void setDisableAutoAuthStart(boolean autoAuthStartState);
     }
 
 }
