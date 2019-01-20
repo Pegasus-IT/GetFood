@@ -53,8 +53,6 @@ public class ShoppingListAdapter extends ArrayAdapter<SeriazableListItem> {
         TextView titleText = listItem.findViewById(R.id.text_shopping_list_title);
         titleText.setText(shoppingItem.getName());
 
-        TextView valueText = listItem.findViewById(R.id.text_shopping_list_value);
-        valueText.setText("?");
 
         CheckBox checkBox = listItem.findViewById(R.id.checkbox_shopping_list);
         boolean isChecked = shoppingItem.isChecked();
@@ -73,15 +71,12 @@ public class ShoppingListAdapter extends ArrayAdapter<SeriazableListItem> {
 
     private void updateSingleItem(ListItem shoppingItem, View listItem, boolean isChecked, boolean update) {
         TextView titleText = listItem.findViewById(R.id.text_shopping_list_title);
-        TextView valueText = listItem.findViewById(R.id.text_shopping_list_value);
 
         if (isChecked) {
             titleText.setTextColor(disabledItemColor);
-            valueText.setTextColor(disabledItemColor);
             titleText.setPaintFlags(titleText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             titleText.setTextColor(mainItemColor);
-            valueText.setTextColor(mainItemColor);
             titleText.setPaintFlags(0);
         }
 
