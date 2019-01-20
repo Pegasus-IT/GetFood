@@ -16,6 +16,7 @@ import io.getfood.models.SwaggerApiError;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class BaseFragment extends Fragment {
+
     public void showSnackbar(String text, int color) {
         View parentLayout = getActivity().findViewById(android.R.id.content);
         Snackbar.make(parentLayout, text, Snackbar.LENGTH_LONG)

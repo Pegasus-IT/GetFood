@@ -3,6 +3,8 @@ package io.getfood.modules.shopping_list;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +43,8 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
     private RelativeLayout viewContainer;
     private ArrayList<ListItem> shoppingList = new ArrayList<>();
 
+    private Handler mHandler = new Handler(Looper.getMainLooper());
     private ShoppingListContract.Presenter shoppingListPresenter;
-
 
     public static ShoppingListFragment newInstance() {
         return new ShoppingListFragment();
@@ -94,8 +96,9 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         shoppingList.add(incompleteItem);
         shoppingList.add(completedItem);
 
-            shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingList);
-            listView.setAdapter(shoppingListAdapter);
+        shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingList);
+        listView.setAdapter(shoppingListAdapter);
+        mHandler.post(shoppingListAdapter::notifyDataSetChanged);
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> System.out.println(i));
         createItem.setOnClickListener(view12 -> createItemInput());
@@ -132,6 +135,6 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         listItem.setName(itemName);
         listItem.setChecked(false);
         shoppingList.add(listItem);
-        shoppingListAdapter.notifyDataSetChanged();
+        mHandler.post(shoppingListAdapter::notifyDataSetChanged);
     }
 }

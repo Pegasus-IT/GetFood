@@ -93,7 +93,7 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
 
     @Override
     public void onFamilyLeave(Family family) {
-        openActivity(new Intent(getActivity(), GettingStartedActivity.class), true);
+        openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
     @OnClick(R.id.family_leave_button)

@@ -102,8 +102,7 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
     @Override
     public void onRegister(User userControllerAuthenticate) {
         System.out.println(userControllerAuthenticate);
-        startActivity(new Intent(getContext(), GettingStartedActivity.class));
-        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
     @Override

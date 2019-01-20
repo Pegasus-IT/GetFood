@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,12 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
 
     @BindView(R.id.getting_started_buttons)
     LinearLayout gettingStartedButtons;
+
+    @BindView(R.id.lets_get_started)
+    TextView letsGetStartedText;
+
+    @BindView(R.id.lets_get_started_underline)
+    TextView letsGetStartedUnderlineText;
 
     private GettingStartedContract.Presenter gettingStartedPresenter;
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -85,8 +92,12 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
     public void setButtonsVisible(boolean state) {
         mHandler.post(() -> {
             if (state) {
+                this.letsGetStartedText.setVisibility(LinearLayout.VISIBLE);
+                this.letsGetStartedUnderlineText.setVisibility(LinearLayout.VISIBLE);
                 this.gettingStartedButtons.setVisibility(LinearLayout.VISIBLE);
             } else {
+                this.letsGetStartedText.setVisibility(LinearLayout.GONE);
+                this.letsGetStartedUnderlineText.setVisibility(LinearLayout.GONE);
                 this.gettingStartedButtons.setVisibility(LinearLayout.GONE);
             }
         });
@@ -94,7 +105,9 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
 
     @Override
     public void onAlreadyInFamily() {
-        openActivity(new Intent(getContext(), HomeActivity.class), false);
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override
