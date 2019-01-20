@@ -20,6 +20,15 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     private final ProfileContract.View profileView;
     private final UserControllerApi api;
 
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param profileView the given view
+     * @param preferences SharedPreferences
+     */
     ProfilePresenter(@NonNull ProfileContract.View profileView, SharedPreferences preferences) {
         this.profileView = checkNotNull(profileView, "profileView cannot be null");
         this.profileView.setPresenter(this);
@@ -29,12 +38,18 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         ApiManager.add(api.getApiClient(), preferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Profile Presenter");
         this.load();
     }
 
+    /**
+     * @inheritDoc
+     */
     private void load() {
         new Thread(() -> {
             try {
@@ -46,15 +61,28 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         }).start();
     }
 
+    /**
+     * @param username  email address
+     * @param firstName firstName
+     * @param lastName  lastName
+     * @inheritDoc
+     */
     @Override
     public void validate(String username, String firstName, String lastName) {
         if (username.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
-            profileView.setSignUpEnabled(false);
+            profileView.setUpdateButtonEnabled(false);
         } else {
-            profileView.setSignUpEnabled(true);
+            profileView.setUpdateButtonEnabled(true);
         }
     }
 
+    /**
+     * @param username  email address
+     * @param password  password
+     * @param firstName firstName
+     * @param lastName  LastName
+     * @inheritDoc
+     */
     @Override
     public void update(String username, @Nullable String password, String firstName, String lastName) {
         new Thread(() -> {
@@ -77,6 +105,9 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         }).start();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void delete() {
         new Thread(() -> {

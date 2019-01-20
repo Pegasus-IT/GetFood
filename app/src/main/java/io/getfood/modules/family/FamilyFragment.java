@@ -14,8 +14,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
@@ -23,9 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.getfood.R;
 import io.getfood.data.swagger.models.Family;
-import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
-import io.getfood.modules.auth.sign_up.SignUpActivity;
 import io.getfood.modules.getting_started.GettingStartedActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -49,15 +45,31 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private FamilyContract.Presenter familyPresenter;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static FamilyFragment newInstance() {
         return new FamilyFragment();
     }
 
+    /**
+     * @param presenter given presenter
+     * @inheritDoc
+     */
     @Override
     public void setPresenter(@NonNull FamilyContract.Presenter presenter) {
         familyPresenter = checkNotNull(presenter);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     * @inheritDoc
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,12 +79,19 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
         return view;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         familyPresenter.start();
     }
 
+    /**
+     * @param family family
+     * @inheritDoc
+     */
     @Override
     public void onFamilyLoad(Family family) {
         String base64String = family.getQrCode();
@@ -91,11 +110,18 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
         });
     }
 
+    /**
+     * @param family family
+     * @inheritDoc
+     */
     @Override
     public void onFamilyLeave(Family family) {
         openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
+    /**
+     * On family leave button click
+     */
     @OnClick(R.id.family_leave_button)
     public void onFamilyLeaveClick() {
         familyPresenter.leaveFamily();

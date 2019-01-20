@@ -19,7 +19,6 @@ import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
 import io.getfood.modules.auth.login.LoginActivity;
 import io.getfood.modules.getting_started.GettingStartedActivity;
-import io.getfood.modules.home.HomeActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -37,30 +36,50 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
     Button registerButton;
     private SignUpContract.Presenter signUpPresenter;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static SignUpFragment newInstance() {
         return new SignUpFragment();
     }
 
+    /**
+     * Validate email
+     */
     @OnTextChanged(R.id.email)
     public void onEmailChange() {
         validate();
     }
 
+    /**
+     * Validate password
+     */
     @OnTextChanged(R.id.password)
     public void onPasswordChange() {
         validate();
     }
 
+    /**
+     * Validate firstName
+     */
     @OnTextChanged(R.id.first_name)
     public void onFirstNameChange() {
         validate();
     }
 
+    /**
+     * Validate lastName
+     */
     @OnTextChanged(R.id.last_name)
     public void onLastNameChange() {
         validate();
     }
 
+    /**
+     * Navigate to the login activity
+     */
     @OnClick(R.id.to_login)
     public void onToLoginButtonPressed() {
         Intent intent = new Intent(getContext(), LoginActivity.class);
@@ -69,6 +88,9 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
         getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    /**
+     * Validates the given credentials
+     */
     @OnClick(R.id.register)
     public void onRegisterButtonClick() {
         this.signUpPresenter.register(
@@ -79,17 +101,31 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
         );
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         signUpPresenter.start();
     }
 
+    /**
+     * @param presenter given presenter
+     * @inheritDoc
+     */
     @Override
     public void setPresenter(@NonNull SignUpContract.Presenter presenter) {
         signUpPresenter = checkNotNull(presenter);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     * @inheritDoc
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,17 +135,28 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
         return view;
     }
 
+    /**
+     * @param userControllerAuthenticate user
+     * @inheritDoc
+     */
     @Override
     public void onRegister(User userControllerAuthenticate) {
         System.out.println(userControllerAuthenticate);
         openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
+    /**
+     * @param state check
+     * @inheritDoc
+     */
     @Override
     public void setRegisterButtonEnabled(boolean state) {
         this.registerButton.setEnabled(state);
     }
 
+    /**
+     * Validates the username, password, firstName and lastName
+     */
     private void validate() {
         this.signUpPresenter.validate(
                 emailInput.getText().toString(),

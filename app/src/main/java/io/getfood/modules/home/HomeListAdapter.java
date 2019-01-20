@@ -21,6 +21,10 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
     private Context context;
     private List<ShoppingList> shoppingLists;
 
+    /**
+     * @param context context
+     * @param list all ShoppingLists
+     */
     public HomeListAdapter(Context context, ArrayList<ShoppingList> list) {
         super(context, 0 , list);
 
@@ -28,6 +32,13 @@ public class HomeListAdapter extends ArrayAdapter<ShoppingList> {
         this.shoppingLists = list;
     }
 
+    /**
+     * @inheritDoc
+     * @param position
+     * @param itemView
+     * @param parent
+     * @return
+     */
     @NonNull
     @Override
     public View getView(int position, View itemView, @NonNull ViewGroup parent) {

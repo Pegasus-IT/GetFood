@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.ListControllerApi;
 import io.getfood.data.swagger.models.ListCreateUpdate;
-import io.getfood.data.swagger.models.ListItemCreateUpdate;
 import io.getfood.data.swagger.models.ListModel;
 import io.getfood.models.ApiManager;
 
@@ -20,6 +19,15 @@ public class HomePresenter implements HomeContract.Presenter {
     private final HomeContract.View homeView;
     private final ListControllerApi api;
 
+    /**
+     * Presenter is the middleman or mediator between View and Model which hold responsibilities
+     * of everything which has to deal with presentation logic in your application. In general
+     * terms, Presenter does the job of querying your Model, updating the View while responding to
+     * the user's interactions.
+     *
+     * @param homeView    the given view
+     * @param preferences SharedPreferences
+     */
     HomePresenter(@NonNull HomeContract.View homeView, SharedPreferences preferences) {
         this.homeView = checkNotNull(homeView, "homeView cannot be null");
         this.homeView.setPresenter(this);
@@ -29,12 +37,18 @@ public class HomePresenter implements HomeContract.Presenter {
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start Home Presenter");
         this.load();
     }
 
+    /**
+     * Load the shopping lists
+     */
     private void load() {
         new Thread(() -> {
             try {
@@ -46,6 +60,10 @@ public class HomePresenter implements HomeContract.Presenter {
         }).start();
     }
 
+    /**
+     * @param listTitle string
+     * @inheritDoc
+     */
     @Override
     public void createNewList(String listTitle) {
         System.out.println(listTitle);

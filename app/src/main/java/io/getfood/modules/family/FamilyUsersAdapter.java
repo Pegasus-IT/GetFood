@@ -20,6 +20,10 @@ public class FamilyUsersAdapter extends ArrayAdapter<User> {
     private Context context;
     private ArrayList<User> users;
 
+    /**
+     * @param context context
+     * @param users all family members
+     */
     public FamilyUsersAdapter(Context context, List<User> users) {
         super(context, 0, users);
 
@@ -27,6 +31,13 @@ public class FamilyUsersAdapter extends ArrayAdapter<User> {
         this.users = new ArrayList<>(users);
     }
 
+    /**
+     * @param position
+     * @param itemView
+     * @param parent
+     * @return
+     * @inheritDoc
+     */
     @NonNull
     @Override
     public View getView(int position, View itemView, @NonNull ViewGroup parent) {

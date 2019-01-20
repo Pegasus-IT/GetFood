@@ -46,10 +46,18 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
     private GettingStartedContract.Presenter gettingStartedPresenter;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static GettingStartedFragment newInstance() {
         return new GettingStartedFragment();
     }
 
+    /**
+     * Open the camera to scan the family QR code
+     */
     @OnClick(R.id.join_family_button)
     void onJoinFamilyClick() {
         if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -59,11 +67,17 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
         }
     }
 
+    /**
+     * Open the create family dialog
+     */
     @OnClick(R.id.create_family_button)
     void onCreateFamilyClick() {
         createFamilyInput();
     }
 
+    /**
+     * Navigate back to the login activity
+     */
     @OnClick(R.id.not_ready)
     void onNotReadyYetClick() {
         Intent intent = new Intent(getContext(), LoginActivity.class);
@@ -71,11 +85,22 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
         openActivity(intent, R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    /**
+     * @param presenter given presenter
+     * @inheritDoc
+     */
     @Override
     public void setPresenter(@NonNull GettingStartedContract.Presenter presenter) {
         gettingStartedPresenter = checkNotNull(presenter);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     * @inheritDoc
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,12 +110,19 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
         return view;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onResume() {
         super.onResume();
         gettingStartedPresenter.start();
     }
 
+    /**
+     * @param state state
+     * @inheritDoc
+     */
     @Override
     public void setButtonsVisible(boolean state) {
         mHandler.post(() -> {
@@ -108,11 +140,18 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
         });
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void onAlreadyInFamily() {
         openActivity(new Intent(getContext(), HomeActivity.class), false);
     }
 
+    /**
+     * @param familyControllerCreate family
+     * @inheritDoc
+     */
     @Override
     public void onFamilyJoined(Family familyControllerCreate) {
         System.out.println(familyControllerCreate.getName());
@@ -123,6 +162,9 @@ public class GettingStartedFragment extends BaseFragment implements GettingStart
         openActivity(new Intent(getActivity(), QRScanActivity.class), false);
     }
 
+    /**
+     * Creates the create family dialog
+     */
     public void createFamilyInput() {
         final EditText familyName = new EditText(getContext());
         new AlertDialog.Builder(getContext())
