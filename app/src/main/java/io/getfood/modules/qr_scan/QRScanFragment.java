@@ -12,8 +12,10 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.zxing.BarcodeFormat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,6 +64,9 @@ public class QRScanFragment extends BaseFragment implements QRScanContract.View 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         codeScanner = new CodeScanner(getActivity(), scannerView);
+        ArrayList<BarcodeFormat> barcodeFormats = new ArrayList<>();
+        barcodeFormats.add(BarcodeFormat.QR_CODE);
+        codeScanner.setFormats(barcodeFormats);
         codeScanner.setDecodeCallback(result -> {
             if(result.getText().startsWith("getfood")) {
                 qrScanPresenter.validateCode(result.getText().split(":")[2]);

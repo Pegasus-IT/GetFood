@@ -26,6 +26,7 @@ import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
 import io.getfood.modules.auth.sign_up.SignUpActivity;
 import io.getfood.modules.getting_started.GettingStartedActivity;
+import io.getfood.util.ShowKeyboard;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -115,18 +116,28 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
             @Override
             public void onFingerprintNotRecognized() {
+                onError("Fingerprint not recognized.");
             }
 
             @Override
             public void onAuthenticationFailedWithHelp(@Nullable String help) {
+                if(help != null) {
+                    onError(help);
+                } else {
+                    onError("Login with fingerprint failed.");
+                }
             }
 
             @Override
             public void onFingerprintNotAvailable() {
+                onError("Fingerprint not available!");
             }
 
             @Override
             public void onCancelled() {
+                passwordInput.setFocusableInTouchMode(true);
+                passwordInput.requestFocus();
+                passwordInput.postDelayed(new ShowKeyboard(passwordInput, getActivity()), 300);
             }
         }, getFragmentManager());
     }

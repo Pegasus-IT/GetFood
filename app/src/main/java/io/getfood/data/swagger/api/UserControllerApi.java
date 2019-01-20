@@ -31,7 +31,8 @@ import io.getfood.data.swagger.ProgressRequestBody;
 import io.getfood.data.swagger.ProgressResponseBody;
 import io.getfood.data.swagger.models.User;
 import io.getfood.data.swagger.models.UserAuthenticationRequest;
-import io.getfood.data.swagger.models.UserCreateUpdateModel;
+import io.getfood.data.swagger.models.UserCreateModel;
+import io.getfood.data.swagger.models.UserUpdateModel;
 
 public class UserControllerApi {
     private ApiClient apiClient;
@@ -412,7 +413,7 @@ public class UserControllerApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call userControllerRegisterCall(UserCreateUpdateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call userControllerRegisterCall(UserCreateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -454,7 +455,7 @@ public class UserControllerApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call userControllerRegisterValidateBeforeCall(UserCreateUpdateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call userControllerRegisterValidateBeforeCall(UserCreateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 
         com.squareup.okhttp.Call call = userControllerRegisterCall(body, progressListener, progressRequestListener);
         return call;
@@ -472,7 +473,7 @@ public class UserControllerApi {
      * @return User
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public User userControllerRegister(UserCreateUpdateModel body) throws ApiException {
+    public User userControllerRegister(UserCreateModel body) throws ApiException {
         ApiResponse<User> resp = userControllerRegisterWithHttpInfo(body);
         return resp.getData();
     }
@@ -484,7 +485,7 @@ public class UserControllerApi {
      * @return ApiResponse&lt;User&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<User> userControllerRegisterWithHttpInfo(UserCreateUpdateModel body) throws ApiException {
+    public ApiResponse<User> userControllerRegisterWithHttpInfo(UserCreateModel body) throws ApiException {
         com.squareup.okhttp.Call call = userControllerRegisterValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<User>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -498,7 +499,7 @@ public class UserControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call userControllerRegisterAsync(UserCreateUpdateModel body, final ApiCallback<User> callback) throws ApiException {
+    public com.squareup.okhttp.Call userControllerRegisterAsync(UserCreateModel body, final ApiCallback<User> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -532,7 +533,7 @@ public class UserControllerApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call userControllerUpdateCall(UserCreateUpdateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call userControllerUpdateCall(UserUpdateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -574,7 +575,7 @@ public class UserControllerApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call userControllerUpdateValidateBeforeCall(UserCreateUpdateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call userControllerUpdateValidateBeforeCall(UserUpdateModel body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = userControllerUpdateCall(body, progressListener, progressRequestListener);
         return call;
@@ -592,7 +593,7 @@ public class UserControllerApi {
      * @return User
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public User userControllerUpdate(UserCreateUpdateModel body) throws ApiException {
+    public User userControllerUpdate(UserUpdateModel body) throws ApiException {
         ApiResponse<User> resp = userControllerUpdateWithHttpInfo(body);
         return resp.getData();
     }
@@ -604,7 +605,7 @@ public class UserControllerApi {
      * @return ApiResponse&lt;User&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<User> userControllerUpdateWithHttpInfo(UserCreateUpdateModel body) throws ApiException {
+    public ApiResponse<User> userControllerUpdateWithHttpInfo(UserUpdateModel body) throws ApiException {
         com.squareup.okhttp.Call call = userControllerUpdateValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<User>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -618,7 +619,7 @@ public class UserControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call userControllerUpdateAsync(UserCreateUpdateModel body, final ApiCallback<User> callback) throws ApiException {
+    public com.squareup.okhttp.Call userControllerUpdateAsync(UserUpdateModel body, final ApiCallback<User> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
