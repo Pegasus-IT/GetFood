@@ -42,6 +42,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private HomeContract.Presenter homePresenter;
     private ArrayList<ShoppingList> shoppingLists;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }

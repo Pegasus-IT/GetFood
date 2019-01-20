@@ -17,6 +17,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class BaseFragment extends Fragment {
 
+    /**
+     * Show a Snackbar with the given text and color
+     * @param text for the Snackbar
+     * @param color for the button
+     */
     public void showSnackbar(String text, int color) {
         View parentLayout = getActivity().findViewById(android.R.id.content);
         Snackbar.make(parentLayout, text, Snackbar.LENGTH_LONG)
@@ -27,15 +32,28 @@ public class BaseFragment extends Fragment {
                 .show();
     }
 
+    /**
+     * @inheritDoc
+     * @param error
+     */
     public void onError(String error) {
         showSnackbar(error, android.R.color.holo_red_dark);
     }
 
+    /**
+     * @inheritDoc
+     * @param err
+     */
     public void onError(ApiException err) {
         SwaggerApiError swaggerApiError = SwaggerApiError.parse(err.getResponseBody());
         onError(swaggerApiError.getMessage());
     }
 
+    /**
+     * @inheritDoc
+     * @param text
+     * @return
+     */
     public LoadToast createToast(String text) {
         LoadToast toast = new LoadToast(checkNotNull(getContext(), "Context is required."));
         toast.setText(text);

@@ -43,6 +43,11 @@ public class QRScanFragment extends BaseFragment implements QRScanContract.View 
     CodeScannerView scannerView;
     CodeScanner codeScanner;
 
+    /**
+     * Creates a new instance
+     *
+     * @return instance
+     */
     public static QRScanFragment newInstance() {
         return new QRScanFragment();
     }
