@@ -36,8 +36,10 @@
     <string name="home_title">My Lists</string>
     <string name="home_list_item_date">Created on</string>
     <string name="home_list_item_sharing_message">You are not sharing this list.</string>
+    <string name="home_create_list">Create new list</string>
+    <string name="home_create_list_description">Please fill in the name of the list</string>
 
-    <!-- Shoppping List Page -->
+    <!-- Shopping List Page -->
     <string name="shopping_list_title">My Shopping List</string>
     <string name="shopping_list_edit_menu_button">Edit</string>
     <string name="shopping_list_remove_menu_button">Delete</string>

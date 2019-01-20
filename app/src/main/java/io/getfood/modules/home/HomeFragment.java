@@ -1,5 +1,7 @@
 package io.getfood.modules.home;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,8 +10,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.HeaderViewListAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -57,6 +58,21 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         ButterKnife.bind(this, view);
 
+        boolean openCreateList = false;
+        Activity activity = getActivity();
+        if (activity != null) {
+            Bundle bundle = activity.getIntent().getExtras();
+
+            if (bundle != null) {
+                String openCreateListString = bundle.getString("openCreateList");
+                openCreateList = openCreateListString != null;
+            }
+        }
+
+        if ( openCreateList ) {
+            createListInput();
+        }
+
         View topPadding = new View(getContext());
         topPadding.setMinimumHeight(20);
 
@@ -69,7 +85,28 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             openShoppingListItem(selectedShoppingList);
         });
         mHandler.post(homeListAdapter::notifyDataSetChanged);
+
+        createListButton.setOnClickListener(homeView -> createListInput());
+
         return view;
+    }
+
+    public void createListInput() {
+        final EditText listName = new EditText(getContext());
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.home_create_list)
+                .setMessage(R.string.home_create_list_description)
+                .setView(listName)
+                .setPositiveButton("Create", (dialog, whichButton) -> {
+                    if (!listName.getText().toString().isEmpty()) {
+                        homePresenter.createNewList(listName.getText().toString());
+                    } else {
+                        createListInput();
+                    }
+                })
+                .setNegativeButton("Cancel", (dialog, whichButton) -> {
+                })
+                .show();
     }
 
     @Override
@@ -88,6 +125,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         shoppingLists.add(new ShoppingList("Week lijst", "15 Jan", Color.parseColor("#00D157"), 9, 4));
         shoppingLists.add(new ShoppingList("Weekend", "15 Jan", Color.parseColor("#FFBB00"), 22, 16));
         mHandler.post(homeListAdapter::notifyDataSetChanged);
+    }
+
+    @Override
+    public void onListCreate(ListModel listModel) {
+        System.out.println("Created list");
+        System.out.println(listModel.getTitle());
+        showSnackbar("List created!", R.color.color_success);
     }
 
     private void openShoppingListItem(ShoppingList item) {
