@@ -35,6 +35,9 @@ public class GettingStartedPresenter implements GettingStartedContract.Presenter
         ApiManager.add(api.getApiClient(), sharedPreferences);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start() {
         System.out.println("Start GettingStarted Presenter");
@@ -59,6 +62,10 @@ public class GettingStartedPresenter implements GettingStartedContract.Presenter
         }).start();
     }
 
+    /**
+     * @inheritDoc
+     * @param familyName
+     */
     @Override
     public void createFamilyWithName(String familyName) {
         FamilyCreateUpdate familyCreateUpdate = new FamilyCreateUpdate();
