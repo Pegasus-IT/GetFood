@@ -121,6 +121,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     @Override
     public void onProfileUpdate(User user) {
         showSnackbar("Profile saved!", R.color.color_success);
+        passwordInput.setText("");
     }
 
     @Override

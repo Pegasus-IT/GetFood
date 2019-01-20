@@ -26,6 +26,7 @@ import io.getfood.data.swagger.models.User;
 import io.getfood.modules.BaseFragment;
 import io.getfood.modules.auth.sign_up.SignUpActivity;
 import io.getfood.modules.getting_started.GettingStartedActivity;
+import io.getfood.modules.home.HomeActivity;
 import io.getfood.util.ShowKeyboard;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -155,15 +156,13 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public void onLogin(User user) {
         System.out.println(user);
-        startActivity(new Intent(getContext(), GettingStartedActivity.class));
-        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
     @Override
     public void onTokenValidated(User user) {
         System.out.println(user);
-        startActivity(new Intent(getContext(), GettingStartedActivity.class));
-        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        openActivity(new Intent(getContext(), GettingStartedActivity.class), false);
     }
 
     @Override
