@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.ListControllerApi;
+import io.getfood.data.swagger.models.ListCreateUpdate;
+import io.getfood.data.swagger.models.ListItemCreateUpdate;
 import io.getfood.data.swagger.models.ListModel;
 import io.getfood.models.ApiManager;
 
@@ -38,6 +40,23 @@ public class HomePresenter implements HomeContract.Presenter {
             try {
                 ArrayList<ListModel> lists = new ArrayList<>(api.listControllerGetLists());
                 homeView.setLists(lists);
+            } catch (ApiException err) {
+                homeView.onError(err);
+            }
+        }).start();
+    }
+
+    @Override
+    public void createNewList(String listTitle) {
+        System.out.println(listTitle);
+        ListCreateUpdate listCreateUpdate = new ListCreateUpdate();
+        listCreateUpdate.setTitle(listTitle);
+
+        new Thread(() -> {
+            try {
+                ListModel list = api.listControllerCreate(listCreateUpdate);
+                load();
+                homeView.onListCreate(list);
             } catch (ApiException err) {
                 homeView.onError(err);
             }
