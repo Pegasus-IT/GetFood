@@ -62,7 +62,9 @@ public class SignUpFragment extends BaseFragment implements SignUpContract.View 
 
     @OnClick(R.id.to_login)
     public void onToLoginButtonPressed() {
-        startActivity(new Intent(getContext(), LoginActivity.class));
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        intent.putExtra("disableAutoAuthStart", "yes");
+        startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 

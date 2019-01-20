@@ -29,8 +29,8 @@ import io.getfood.data.swagger.Configuration;
 import io.getfood.data.swagger.Pair;
 import io.getfood.data.swagger.ProgressRequestBody;
 import io.getfood.data.swagger.ProgressResponseBody;
-import io.getfood.data.swagger.models.ListColor;
 import io.getfood.data.swagger.models.ListCreateUpdate;
+import io.getfood.data.swagger.models.ListModel;
 
 public class ListControllerApi {
     private ApiClient apiClient;
@@ -116,11 +116,11 @@ public class ListControllerApi {
      * Create a new list
      *
      * @param body  (optional)
-     * @return List
+     * @return ListModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List listControllerCreate(ListCreateUpdate body) throws ApiException {
-        ApiResponse<List> resp = listControllerCreateWithHttpInfo(body);
+    public ListModel listControllerCreate(ListCreateUpdate body) throws ApiException {
+        ApiResponse<ListModel> resp = listControllerCreateWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -128,12 +128,12 @@ public class ListControllerApi {
      * Create a new list
      *
      * @param body  (optional)
-     * @return ApiResponse&lt;List&gt;
+     * @return ApiResponse&lt;ListModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List> listControllerCreateWithHttpInfo(ListCreateUpdate body) throws ApiException {
+    public ApiResponse<ListModel> listControllerCreateWithHttpInfo(ListCreateUpdate body) throws ApiException {
         com.squareup.okhttp.Call call = listControllerCreateValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -145,7 +145,7 @@ public class ListControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listControllerCreateAsync(ListCreateUpdate body, final ApiCallback<List> callback) throws ApiException {
+    public com.squareup.okhttp.Call listControllerCreateAsync(ListCreateUpdate body, final ApiCallback<ListModel> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -167,7 +167,7 @@ public class ListControllerApi {
         }
 
         com.squareup.okhttp.Call call = listControllerCreateValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -241,11 +241,11 @@ public class ListControllerApi {
      * Deletes a list
      *
      * @param listId  (required)
-     * @return List
+     * @return ListModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List listControllerDelete(String listId) throws ApiException {
-        ApiResponse<List> resp = listControllerDeleteWithHttpInfo(listId);
+    public ListModel listControllerDelete(String listId) throws ApiException {
+        ApiResponse<ListModel> resp = listControllerDeleteWithHttpInfo(listId);
         return resp.getData();
     }
 
@@ -253,12 +253,12 @@ public class ListControllerApi {
      * Deletes a list
      *
      * @param listId  (required)
-     * @return ApiResponse&lt;List&gt;
+     * @return ApiResponse&lt;ListModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List> listControllerDeleteWithHttpInfo(String listId) throws ApiException {
+    public ApiResponse<ListModel> listControllerDeleteWithHttpInfo(String listId) throws ApiException {
         com.squareup.okhttp.Call call = listControllerDeleteValidateBeforeCall(listId, null, null);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -270,7 +270,7 @@ public class ListControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listControllerDeleteAsync(String listId, final ApiCallback<List> callback) throws ApiException {
+    public com.squareup.okhttp.Call listControllerDeleteAsync(String listId, final ApiCallback<ListModel> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -292,7 +292,7 @@ public class ListControllerApi {
         }
 
         com.squareup.okhttp.Call call = listControllerDeleteValidateBeforeCall(listId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -366,11 +366,11 @@ public class ListControllerApi {
      * Get a list
      *
      * @param listId  (required)
-     * @return List
+     * @return ListModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List listControllerGet(String listId) throws ApiException {
-        ApiResponse<List> resp = listControllerGetWithHttpInfo(listId);
+    public ListModel listControllerGet(String listId) throws ApiException {
+        ApiResponse<ListModel> resp = listControllerGetWithHttpInfo(listId);
         return resp.getData();
     }
 
@@ -378,12 +378,12 @@ public class ListControllerApi {
      * Get a list
      *
      * @param listId  (required)
-     * @return ApiResponse&lt;List&gt;
+     * @return ApiResponse&lt;ListModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List> listControllerGetWithHttpInfo(String listId) throws ApiException {
+    public ApiResponse<ListModel> listControllerGetWithHttpInfo(String listId) throws ApiException {
         com.squareup.okhttp.Call call = listControllerGetValidateBeforeCall(listId, null, null);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -395,7 +395,7 @@ public class ListControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listControllerGetAsync(String listId, final ApiCallback<List> callback) throws ApiException {
+    public com.squareup.okhttp.Call listControllerGetAsync(String listId, final ApiCallback<ListModel> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -417,7 +417,7 @@ public class ListControllerApi {
         }
 
         com.squareup.okhttp.Call call = listControllerGetValidateBeforeCall(listId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -484,23 +484,23 @@ public class ListControllerApi {
     /**
      * Receives the available colors for the list
      *
-     * @return List&lt;ListColor&gt;
+     * @return List&lt;ListModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List<ListColor> listControllerGetColors() throws ApiException {
-        ApiResponse<List<ListColor>> resp = listControllerGetColorsWithHttpInfo();
+    public List<ListModel> listControllerGetColors() throws ApiException {
+        ApiResponse<List<ListModel>> resp = listControllerGetColorsWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Receives the available colors for the list
      *
-     * @return ApiResponse&lt;List&lt;ListColor&gt;&gt;
+     * @return ApiResponse&lt;List&lt;ListModel&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List<ListColor>> listControllerGetColorsWithHttpInfo() throws ApiException {
+    public ApiResponse<List<ListModel>> listControllerGetColorsWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = listControllerGetColorsValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<List<ListColor>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<ListModel>>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -511,7 +511,7 @@ public class ListControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listControllerGetColorsAsync(final ApiCallback<List<ListColor>> callback) throws ApiException {
+    public com.squareup.okhttp.Call listControllerGetColorsAsync(final ApiCallback<List<ListModel>> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -533,7 +533,7 @@ public class ListControllerApi {
         }
 
         com.squareup.okhttp.Call call = listControllerGetColorsValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List<ListColor>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<ListModel>>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -600,23 +600,23 @@ public class ListControllerApi {
     /**
      * Receives the lists the current user has access to
      *
-     * @return List&lt;List&gt;
+     * @return List&lt;ListModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List<List> listControllerGetLists() throws ApiException {
-        ApiResponse<List<List>> resp = listControllerGetListsWithHttpInfo();
+    public List<ListModel> listControllerGetLists() throws ApiException {
+        ApiResponse<List<ListModel>> resp = listControllerGetListsWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Receives the lists the current user has access to
      *
-     * @return ApiResponse&lt;List&lt;List&gt;&gt;
+     * @return ApiResponse&lt;List&lt;ListModel&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List<List>> listControllerGetListsWithHttpInfo() throws ApiException {
+    public ApiResponse<List<ListModel>> listControllerGetListsWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = listControllerGetListsValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<List<List>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<ListModel>>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -627,7 +627,7 @@ public class ListControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listControllerGetListsAsync(final ApiCallback<List<List>> callback) throws ApiException {
+    public com.squareup.okhttp.Call listControllerGetListsAsync(final ApiCallback<List<ListModel>> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -649,7 +649,7 @@ public class ListControllerApi {
         }
 
         com.squareup.okhttp.Call call = listControllerGetListsValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List<List>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<ListModel>>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -725,11 +725,11 @@ public class ListControllerApi {
      * 
      * @param listId  (required)
      * @param body  (optional)
-     * @return List
+     * @return ListModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List listControllerUpdate(String listId, ListCreateUpdate body) throws ApiException {
-        ApiResponse<List> resp = listControllerUpdateWithHttpInfo(listId, body);
+    public ListModel listControllerUpdate(String listId, ListCreateUpdate body) throws ApiException {
+        ApiResponse<ListModel> resp = listControllerUpdateWithHttpInfo(listId, body);
         return resp.getData();
     }
 
@@ -738,12 +738,12 @@ public class ListControllerApi {
      * 
      * @param listId  (required)
      * @param body  (optional)
-     * @return ApiResponse&lt;List&gt;
+     * @return ApiResponse&lt;ListModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List> listControllerUpdateWithHttpInfo(String listId, ListCreateUpdate body) throws ApiException {
+    public ApiResponse<ListModel> listControllerUpdateWithHttpInfo(String listId, ListCreateUpdate body) throws ApiException {
         com.squareup.okhttp.Call call = listControllerUpdateValidateBeforeCall(listId, body, null, null);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -756,7 +756,7 @@ public class ListControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listControllerUpdateAsync(String listId, ListCreateUpdate body, final ApiCallback<List> callback) throws ApiException {
+    public com.squareup.okhttp.Call listControllerUpdateAsync(String listId, ListCreateUpdate body, final ApiCallback<ListModel> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -778,7 +778,7 @@ public class ListControllerApi {
         }
 
         com.squareup.okhttp.Call call = listControllerUpdateValidateBeforeCall(listId, body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

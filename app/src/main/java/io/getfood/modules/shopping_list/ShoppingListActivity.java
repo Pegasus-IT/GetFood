@@ -44,18 +44,29 @@ public class ShoppingListActivity extends BaseActivity {
         toolbar.setSubtitleTextAppearance(this, R.style.ToolbarTextAppearance_Subtitle_White);
 
         //TODO: Replace with real data
-        shoppingList.add(new ListItem("Item 01", false));
-        shoppingList.add(new ListItem("Item 02", false));
-        shoppingList.add(new ListItem("Item 03", true));
-        shoppingList.add(new ListItem("Item 04", false));
-        shoppingList.add(new ListItem("Item 05", false));
-        shoppingList.add(new ListItem("Item 06", true));
+        ListItem incompleteItem = new ListItem();
+        incompleteItem.setName("Item");
+        incompleteItem.setChecked(false);
+        ListItem completeItem = new ListItem();
+        completeItem.setName("Item");
+        completeItem.setChecked(true);
+
+        shoppingList.add(incompleteItem);
+        shoppingList.add(incompleteItem);
+        shoppingList.add(incompleteItem);
+        shoppingList.add(completeItem);
+        shoppingList.add(completeItem);
+        shoppingList.add(incompleteItem);
 
         shoppingListAdapter = new ShoppingListAdapter(this, shoppingList);
         listView.setAdapter(shoppingListAdapter);
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> System.out.println(i));
         createItem.setOnClickListener(view12 -> createItemInput());
+    }
+
+    public ShoppingListAdapter getShoppingListAdapter() {
+        return shoppingListAdapter;
     }
 
     @Override
@@ -102,7 +113,10 @@ public class ShoppingListActivity extends BaseActivity {
     }
 
     private void createNewListItem(String itemName) {
-        shoppingList.add(0, new ListItem(itemName, false));
+        ListItem listItem = new ListItem();
+        listItem.setName(itemName);
+        listItem.setChecked(false);
+        shoppingList.add(0,listItem);
         shoppingListAdapter.notifyDataSetChanged();
 
         //TODO: Add item to list in API logic
