@@ -56,5 +56,6 @@
 
     <string name="general_title">Title</string>
     <string name="create_list_prompt">Enter your recipe title:</string>
+    <string name="let_others_scan_the_qr_code_to_join_family">(show this qr code to a family member to join)</string>
 
 </resources>

@@ -34,7 +34,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ListItem> {
         this.mainItemColor = context.getResources().getColor(R.color.getfood_main_blue);
         this.disabledItemColor = context.getResources().getColor(R.color.colorBlack);
 
-        Collections.sort(this.shoppingListItems, (o1, o2) -> o1.isChecked().compareTo(o2.isChecked()));
+//        Collections.sort(this.shoppingListItems, (o1, o2) -> o2.isChecked().compareTo(o1.isChecked()));
     }
 
     @NonNull

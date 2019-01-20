@@ -86,16 +86,16 @@ public class ShoppingListFragment extends BaseFragment implements ShoppingListCo
         incompleteItem.setChecked(false);
 
         //TODO: Replace with real data
-        shoppingList.add(incompleteItem);
-        shoppingList.add(incompleteItem);
         shoppingList.add(completedItem);
         shoppingList.add(incompleteItem);
         shoppingList.add(incompleteItem);
-        shoppingList.add(completedItem);
+        shoppingList.add(incompleteItem);
+        shoppingList.add(incompleteItem);
+        shoppingList.add(incompleteItem);
         shoppingList.add(completedItem);
 
-        shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingList);
-        listView.setAdapter(shoppingListAdapter);
+            shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingList);
+            listView.setAdapter(shoppingListAdapter);
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> System.out.println(i));
         createItem.setOnClickListener(view12 -> createItemInput());
