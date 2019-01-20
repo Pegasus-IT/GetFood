@@ -48,6 +48,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected int getOptionsMenu() {
-        return R.menu.toolbar_home_menu;
+        return 0;
     }
 }
