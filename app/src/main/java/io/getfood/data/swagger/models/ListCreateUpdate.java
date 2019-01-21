@@ -26,9 +26,6 @@ public class ListCreateUpdate {
 
   @SerializedName("title")
   private String title = null;
-
-  @SerializedName("color")
-  private String color = null;
   public ListCreateUpdate title(String title) {
     this.title = title;
     return this;
@@ -47,24 +44,6 @@ public class ListCreateUpdate {
   public void setTitle(String title) {
     this.title = title;
   }
-  public ListCreateUpdate color(String color) {
-    this.color = color;
-    return this;
-  }
-
-  
-
-  /**
-  * Get color
-  * @return color
-  **/
-  @Schema(example = "#1abc9c", required = true, description = "")
-  public String getColor() {
-    return color;
-  }
-  public void setColor(String color) {
-    this.color = color;
-  }
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,13 +53,12 @@ public class ListCreateUpdate {
       return false;
     }
     ListCreateUpdate listCreateUpdate = (ListCreateUpdate) o;
-    return Objects.equals(this.title, listCreateUpdate.title) &&
-        Objects.equals(this.color, listCreateUpdate.color);
+    return Objects.equals(this.title, listCreateUpdate.title);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(title, color);
+    return Objects.hash(title);
   }
 
   @Override
@@ -89,7 +67,6 @@ public class ListCreateUpdate {
     sb.append("class ListCreateUpdate {\n");
 
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
-    sb.append("    color: ").append(toIndentedString(color)).append("\n");
     sb.append("}");
     return sb.toString();
   }

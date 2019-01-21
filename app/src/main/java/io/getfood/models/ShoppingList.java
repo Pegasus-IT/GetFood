@@ -7,14 +7,8 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.text.DateFormat;
 import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import androidx.annotation.Nullable;
 import io.getfood.data.swagger.models.ListItem;
@@ -55,23 +49,32 @@ public class ShoppingList implements Serializable {
     /**
      * Shopping List Items (which are serializable because ShoppingList is also Serializable)
      */
-    private ArrayList<SeriazableListItem> items;
+    private ArrayList<SerializableListItem> items;
+
+    /**
+     * The id of the user this shopping list is created by, this will be used to check whether or not the user can edit/delete this list
+     */
+    private String createdBy;
 
     /**
      * Creates an Shopping list model
+     * @param _id the id of the list
      * @param listName title
      * @param date created date
      * @param color background color
      * @param totalItems amount of items
      * @param completedItems amount of completed items
+     * @param createdBy id of user this list is created by
+     * @param items all items in the Shopping List
      */
-    public ShoppingList(@Nullable String _id, String listName, String date, int color, int totalItems, int completedItems, ArrayList<SeriazableListItem> items) {
+    public ShoppingList(@Nullable String _id, String listName, String date, int color, int totalItems, int completedItems, String createdBy, ArrayList<SerializableListItem> items) {
         this._id = _id;
         this.listName = listName;
         this.date = date;
         this.color = color;
         this.totalItems = totalItems;
         this.completedItems = completedItems;
+        this.createdBy = createdBy;
         this.items = items;
     }
 
@@ -174,10 +177,26 @@ public class ShoppingList implements Serializable {
     }
 
     /**
+     * Finds the id of the user this Shopping List is created by
+     * @return user id
+     */
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    /**
+     * Set the creator of this list (user id)
+     * @param createdBy user id
+     */
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
      * All items in the Shopping List
      * @return all shopping list items
      */
-    public ArrayList<SeriazableListItem> getItems() {
+    public ArrayList<SerializableListItem> getItems() {
         return items;
     }
 
@@ -185,7 +204,7 @@ public class ShoppingList implements Serializable {
      * Set the items currently in the Shopping List
      * @param items shopping list items
      */
-    public void setItems(ArrayList<SeriazableListItem> items) {
+    public void setItems(ArrayList<SerializableListItem> items) {
         this.items = items;
     }
 
@@ -220,22 +239,22 @@ public class ShoppingList implements Serializable {
                 .appendYear(4, 4)
                 .toFormatter();
 
-        ArrayList<SeriazableListItem> seriazableListItems = new ArrayList<>();
+        ArrayList<SerializableListItem> serializableListItems = new ArrayList<>();
 
         int completedCount = 0;
         for (ListItem listItem : listModel.getItems()) {
-            SeriazableListItem seriazableListItem = new SeriazableListItem();
-            seriazableListItem.setId(listItem.getId());
-            seriazableListItem.setName(listItem.getName());
-            seriazableListItem.setParentId(listItem.getParentId());
-            seriazableListItem.setChecked(listItem.isChecked());
-            seriazableListItem.setCheckedAt(listItem.getCheckedAt());
+            SerializableListItem serializableListItem = new SerializableListItem();
+            serializableListItem.setId(listItem.getId());
+            serializableListItem.setName(listItem.getName());
+            serializableListItem.setParentId(listItem.getParentId());
+            serializableListItem.setChecked(listItem.isChecked());
+            serializableListItem.setCheckedAt(listItem.getCheckedAt());
 
             if(listItem.isChecked()) {
                 completedCount++;
             }
 
-            seriazableListItems.add(seriazableListItem);
+            serializableListItems.add(serializableListItem);
         }
 
         return new ShoppingList(
@@ -243,9 +262,10 @@ public class ShoppingList implements Serializable {
                 listModel.getTitle(),
                 dateTime.toString(formatter),
                 Color.parseColor(listModel.getColor()),
-                seriazableListItems.size(),
+                serializableListItems.size(),
                 completedCount,
-                seriazableListItems
+                listModel.getCreatedBy().getId(),
+                serializableListItems
         );
     }
 }
