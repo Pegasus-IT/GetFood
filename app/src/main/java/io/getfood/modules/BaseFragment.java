@@ -1,8 +1,9 @@
 package io.getfood.modules;
 
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -18,8 +19,39 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class BaseFragment extends Fragment {
 
     /**
+     * Access the menu that is created if the getOptionsMenu is not null
+     */
+    public Menu menu;
+
+    /**
+     * Gets the toolbar menu options
+     * For example:
+     * R.menu.toolbar_shopping_list_menu
+     */
+    protected int getOptionsMenu() {
+        return 0;
+    }
+
+
+    /**
+     * @param menu
+     * @return
+     * @inheritDoc
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        this.menu = menu;
+        System.out.println(getOptionsMenu());
+        if (getOptionsMenu() != 0) {
+            inflater.inflate(getOptionsMenu(), menu);
+            super.onCreateOptionsMenu(menu,inflater);
+        }
+    }
+
+    /**
      * Show a Snackbar with the given text and color
-     * @param text for the Snackbar
+     *
+     * @param text  for the Snackbar
      * @param color for the button
      */
     public void showSnackbar(String text, int color) {
@@ -33,20 +65,21 @@ public class BaseFragment extends Fragment {
     }
 
     /**
-     * @inheritDoc
      * @param error
+     * @inheritDoc
      */
     public void onError(String error) {
         showSnackbar(error, android.R.color.holo_red_dark);
     }
 
     /**
-     * @inheritDoc
      * @param err
+     * @inheritDoc
      */
     public void onError(ApiException err) {
         String body = err.getResponseBody();
-        if  (body != null && !body.trim().equals("")) {
+        if (body != null && !body.trim().equals("")) {
+            System.out.println(body);
             SwaggerApiError swaggerApiError = SwaggerApiError.parse(body);
             onError(swaggerApiError.getMessage());
         } else {
@@ -55,9 +88,9 @@ public class BaseFragment extends Fragment {
     }
 
     /**
-     * @inheritDoc
      * @param text
      * @return
+     * @inheritDoc
      */
     public LoadToast createToast(String text) {
         LoadToast toast = new LoadToast(checkNotNull(getContext(), "Context is required."));

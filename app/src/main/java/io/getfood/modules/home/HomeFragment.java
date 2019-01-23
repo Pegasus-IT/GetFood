@@ -113,7 +113,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         final EditText listName = new EditText(getContext());
         new AlertDialog.Builder(getContext())
                 .setTitle(R.string.home_create_list)
-                .setMessage(R.string.home_create_list_description)
+                .setMessage(R.string.home_list_description)
                 .setView(listName)
                 .setPositiveButton("Create", (dialog, whichButton) -> {
                     if (!listName.getText().toString().isEmpty()) {
@@ -122,8 +122,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                         createListInput();
                     }
                 })
-                .setNegativeButton("Cancel", (dialog, whichButton) -> {
-                })
+                .setNegativeButton("Cancel", (dialog, whichButton) -> dialog.cancel())
                 .show();
     }
 

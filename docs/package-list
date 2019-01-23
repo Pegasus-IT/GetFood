@@ -1,0 +1,17 @@
+io.getfood
+io.getfood.data.local
+io.getfood.data.swagger
+io.getfood.data.swagger.api
+io.getfood.data.swagger.auth
+io.getfood.data.swagger.models
+io.getfood.models
+io.getfood.modules
+io.getfood.modules.auth.login
+io.getfood.modules.auth.profile
+io.getfood.modules.auth.sign_up
+io.getfood.modules.family
+io.getfood.modules.getting_started
+io.getfood.modules.home
+io.getfood.modules.qr_scan
+io.getfood.modules.shopping_list
+io.getfood.util

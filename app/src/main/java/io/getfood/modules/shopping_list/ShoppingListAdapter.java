@@ -15,20 +15,20 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import io.getfood.R;
 import io.getfood.data.swagger.models.ListItem;
-import io.getfood.models.SeriazableListItem;
+import io.getfood.models.SerializableListItem;
 import io.getfood.models.ShoppingList;
 
 
-public class ShoppingListAdapter extends ArrayAdapter<SeriazableListItem> {
+public class ShoppingListAdapter extends ArrayAdapter<SerializableListItem> {
 
     private Context context;
-    private List<SeriazableListItem> shoppingListItems;
+    private List<SerializableListItem> shoppingListItems;
     private ShoppingListContract.Presenter presenter;
     private ShoppingList shoppingList;
 
     private int mainItemColor, disabledItemColor;
 
-    public ShoppingListAdapter(Context context, ArrayList<SeriazableListItem> listItems, ShoppingList shoppingList, ShoppingListContract.Presenter presenter) {
+    public ShoppingListAdapter(Context context, ArrayList<SerializableListItem> listItems, ShoppingList shoppingList, ShoppingListContract.Presenter presenter) {
         super(context, 0, listItems);
 
         this.context = context;

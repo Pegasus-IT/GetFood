@@ -5,7 +5,8 @@
     android:id="@+id/shopping_list_fragment_container"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp">
 
     <ListView
         android:id="@+id/shopping_listview"

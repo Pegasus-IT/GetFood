@@ -2,15 +2,20 @@ package io.getfood.modules.shopping_list;
 
 import android.content.SharedPreferences;
 
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import androidx.annotation.NonNull;
 import io.getfood.data.swagger.ApiException;
 import io.getfood.data.swagger.api.ListControllerApi;
 import io.getfood.data.swagger.api.ListItemControllerApi;
-import io.getfood.data.swagger.api.UserControllerApi;
+import io.getfood.data.swagger.models.ListCreateUpdate;
 import io.getfood.data.swagger.models.ListItem;
 import io.getfood.data.swagger.models.ListItemCreateUpdate;
 import io.getfood.data.swagger.models.ListModel;
-import io.getfood.data.swagger.models.User;
+import io.getfood.models.SerializableListItem;
 import io.getfood.models.ShoppingList;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -57,6 +62,57 @@ public class ShoppingListPresenter implements ShoppingListContract.Presenter {
             try {
                 ListModel listModel = listControllerApi.listControllerGet(id);
                 shoppingListView.onLoad(ShoppingList.parse(listModel));
+            } catch (ApiException err) {
+                shoppingListView.onError(err);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateList(ShoppingList shoppingList) {
+        new Thread(() -> {
+            try {
+                ListCreateUpdate listCreateUpdate = new ListCreateUpdate();
+                listCreateUpdate.setTitle(shoppingList.getListName());
+                ListModel listModel = listControllerApi.listControllerUpdate(shoppingList.getId(), listCreateUpdate);
+                shoppingListView.onLoad(ShoppingList.parse(listModel));
+            } catch (ApiException err) {
+                shoppingListView.onError(err);
+            }
+        }).start();
+    }
+
+    @Override
+    public void delete(ShoppingList shoppingList) {
+        new Thread(() -> {
+            try {
+                boolean isDeleted = listControllerApi.listControllerDelete(shoppingList.getId());
+
+                if (isDeleted) {
+                    shoppingListView.onDelete();
+                } else {
+                    shoppingListView.onError("Failed deleting the list.");
+                }
+            } catch (ApiException err) {
+                if (err.getCode() == 200) {
+                    shoppingListView.onDelete();
+                } else {
+                    shoppingListView.onError(err);
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void deleteCheckedItems(ShoppingList shoppingList, List<SerializableListItem> serializableListItems) {
+        new Thread(() -> {
+            try {
+                for (SerializableListItem item : serializableListItems) {
+                    if (item.isChecked()) {
+                        listItemControllerApi.listItemControllerDelete(shoppingList.getId(), item.getId());
+                    }
+                }
+                this.load(shoppingList.getId());
             } catch (ApiException err) {
                 shoppingListView.onError(err);
             }

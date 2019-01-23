@@ -241,11 +241,11 @@ public class ListControllerApi {
      * Deletes a list
      *
      * @param listId  (required)
-     * @return ListModel
+     * @return Boolean
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ListModel listControllerDelete(String listId) throws ApiException {
-        ApiResponse<ListModel> resp = listControllerDeleteWithHttpInfo(listId);
+    public Boolean listControllerDelete(String listId) throws ApiException {
+        ApiResponse<Boolean> resp = listControllerDeleteWithHttpInfo(listId);
         return resp.getData();
     }
 
@@ -253,12 +253,12 @@ public class ListControllerApi {
      * Deletes a list
      *
      * @param listId  (required)
-     * @return ApiResponse&lt;ListModel&gt;
+     * @return ApiResponse&lt;Boolean&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ListModel> listControllerDeleteWithHttpInfo(String listId) throws ApiException {
+    public ApiResponse<Boolean> listControllerDeleteWithHttpInfo(String listId) throws ApiException {
         com.squareup.okhttp.Call call = listControllerDeleteValidateBeforeCall(listId, null, null);
-        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
+        Type localVarReturnType = new TypeToken<Boolean>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -270,7 +270,7 @@ public class ListControllerApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listControllerDeleteAsync(String listId, final ApiCallback<ListModel> callback) throws ApiException {
+    public com.squareup.okhttp.Call listControllerDeleteAsync(String listId, final ApiCallback<Boolean> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -292,7 +292,7 @@ public class ListControllerApi {
         }
 
         com.squareup.okhttp.Call call = listControllerDeleteValidateBeforeCall(listId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<ListModel>(){}.getType();
+        Type localVarReturnType = new TypeToken<Boolean>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
