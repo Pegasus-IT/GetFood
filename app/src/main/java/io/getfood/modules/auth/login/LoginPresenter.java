@@ -29,6 +29,14 @@ public class LoginPresenter implements LoginContract.Presenter {
     private boolean autoAuthStartState = false;
 
     /**
+     * Get Presenter API (for testing)
+     * @return User Controller API
+     */
+    public UserControllerApi getApi() {
+        return api;
+    }
+
+    /**
      * Presenter is the middleman or mediator between View and Model which hold responsibilities
      * of everything which has to deal with presentation logic in your application. In general
      * terms, Presenter does the job of querying your Model, updating the View while responding to
@@ -37,7 +45,7 @@ public class LoginPresenter implements LoginContract.Presenter {
      * @param loginView the given view
      * @param preferences SharedPreferences
      */
-    LoginPresenter(@NonNull LoginContract.View loginView, SharedPreferences preferences) {
+    public LoginPresenter(@NonNull LoginContract.View loginView, SharedPreferences preferences) {
         this.loginView = checkNotNull(loginView, "loginView cannot be null");
         this.loginView.setPresenter(this);
         this.sharedPreferences = checkNotNull(preferences, "sharedPreferences cannot be null");

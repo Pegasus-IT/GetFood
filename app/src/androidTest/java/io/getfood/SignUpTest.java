@@ -1,60 +1,96 @@
 package io.getfood;
 
-import android.content.Context;
-import android.content.Intent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
-import org.junit.Before;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
-import io.getfood.modules.auth.sign_up.SignUpActivity;
-import io.getfood.util.PreferenceHelper;
+import androidx.test.runner.AndroidJUnit4;
+import io.getfood.modules.MainActivity;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.clearText;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
-import static org.hamcrest.Matchers.not;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
+@LargeTest
+@RunWith(AndroidJUnit4.class)
 public class SignUpTest {
 
-    private Intent intent;
-
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
     private String testUsername = "test@test.com";
     private String testPassword = "test";
     private String testFirtname = "Test";
     private String testLastname = "Test";
 
-    @Rule
-    public ActivityTestRule<SignUpActivity> signUpActivity =
-            new ActivityTestRule<>(SignUpActivity.class, true, false);
+    private static Matcher<View> childAtPosition(
+            final Matcher<View> parentMatcher, final int position) {
 
-    @Before
-    public void setUp() {
-        Context targetContext = getInstrumentation().getTargetContext();
-        PreferenceHelper.clearAll(targetContext);
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
 
-        signUpActivity.launchActivity(intent);
+            @Override
+            public boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                return parent instanceof ViewGroup && parentMatcher.matches(parent)
+                        && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
     }
 
     @Test
-    public void fillInSignUpInfo() {
-        onView(withId(R.id.register)).check(matches(not(isEnabled())));
+    public void signUpActivityTest() {
+        onView(withId(R.id.no_account)).perform(scrollTo(), click());
+        pressBack();
+        onView(withId(R.id.no_account)).perform(scrollTo(), click());
+
+        onView(withId(R.id.email)).perform(scrollTo(), click());
         fillInFieldInfo(R.id.email, testUsername);
-        onView(withId(R.id.register)).check(matches(not(isEnabled())));
         fillInFieldInfo(R.id.password, testPassword);
-        onView(withId(R.id.register)).check(matches(not(isEnabled())));
         fillInFieldInfo(R.id.first_name, testFirtname);
-        onView(withId(R.id.register)).check(matches(not(isEnabled())));
         fillInFieldInfo(R.id.last_name, testLastname);
+
+        onView(withId(R.id.register)).perform(scrollTo(), click());
+
+        pauseTestFor(1000);
+
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.snackbar_action), withText("CLOSE"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("com.google.android.material.snackbar.Snackbar$SnackbarLayout")),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatButton2.perform(click());
+
+        onView(withId(R.id.to_login)).perform(click());
     }
 
     private void fillInFieldInfo(int id, String value) {
-        onView(withId(id)).perform(clearText(), typeText(value));
+        onView(withId(id)).perform(scrollTo(), clearText(), typeText(value));
         pauseTestFor(200);
     }
 

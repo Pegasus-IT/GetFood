@@ -6,7 +6,7 @@ import io.getfood.models.BaseView;
 
 public interface LoginContract {
 
-    interface View extends BaseView<Presenter> {
+    public interface View extends BaseView<Presenter> {
 
         /**
          * Navigate to getting started activity
@@ -50,7 +50,7 @@ public interface LoginContract {
         void setFingerprintButtonEnabled(boolean state);
     }
 
-    interface Presenter extends BasePresenter {
+    public interface Presenter extends BasePresenter {
 
         /**
          * Login the user with the given credentials
