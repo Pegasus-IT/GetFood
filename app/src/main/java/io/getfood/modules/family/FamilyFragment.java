@@ -100,10 +100,9 @@ public class FamilyFragment extends BaseFragment implements FamilyContract.View 
         byte[] decodedString = android.util.Base64.decode(base64Image, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        qrCode.setImageBitmap(decodedByte);
-        familyName.setText(family.getName());
-
         mHandler.post(() -> {
+            qrCode.setImageBitmap(decodedByte);
+            familyName.setText(family.getName());
             familyUsersAdapter = new FamilyUsersAdapter(getContext(), family.getUsers());
             familyUsersAdapter.notifyDataSetChanged();
             gridView.setAdapter(familyUsersAdapter);
